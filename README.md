@@ -14,7 +14,7 @@ Reporte de Seguimiento
 
 
 :gear: Entorno Mínimo
-Requisitos: Lista de herramientas/configuraciones necesarias: Node.js v16+, Postgres, Intellij, Java .
+Requisitos: Lista de herramientas/configuraciones necesarias: Node.js , React , Postgres, Intellij, Java .
 
 
 :date: Última actualización: [5/4/2025]
