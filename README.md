@@ -2,15 +2,18 @@ Proyecto Conectar-Salud
 
 :pushpin: Recursos clave
 Product Backlog
-[:link: Enlace al Product Backlog]([URL_DEL_BACKLOG](https://trello.com/b/x6sDK6kP/kick-off-y-sprint-0))
+[:link: Enlace al Product Backlog](https://trello.com/b/x6sDK6kP/kick-off-y-sprint-0)
 (Contiene el MVP definido, incidencias pendientes de estimación)
 
 Repositorio del Producto
-[:link: Enlace al Repositorio]([URL_DEL_REPOSITORIO](https://github.com/nicotorboli/Conectar-Salud.git))
+[:link: Enlace al Repositorio](https://github.com/nicotorboli/Conectar-Salud.git)
 (Código fuente, documentación técnica y estructura inicial del proyecto)
 
+USM
+[:link: USM y detalles](https://excalidraw.com/#room=9de359a3f3730bdbe3f0,eoX4Ktof_eh7BGi-6UnukQ)
+
 Reporte de Seguimiento
-[:link: Enlace al Reporte]([URL_DEL_REPORTE](https://trello.com/w/conectarsalud))
+[:link: Enlace al Reporte](https://trello.com/w/conectarsalud)
 
 
 :gear: Entorno Mínimo
