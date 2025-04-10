@@ -10,10 +10,10 @@ Repositorio del Producto
 (Código fuente, documentación técnica y estructura inicial del proyecto)
 
 USM
-[:link: USM y detalles](https://excalidraw.com/#room=9de359a3f3730bdbe3f0,eoX4Ktof_eh7BGi-6UnukQ)
+[:link: USM y detalles]()
 
 Reporte de Seguimiento
-[:link: Enlace al Reporte](https://trello.com/w/conectarsalud)
+[:link: Enlace al Reporte]()
 
 
 :gear: Entorno Mínimo
