@@ -2,7 +2,7 @@ Proyecto Conectar-Salud
 
 :pushpin: Recursos clave
 Product Backlog
-[:link: Enlace al Product Backlog](https://trello.com/b/x6sDK6kP/kick-off-y-sprint-0)
+[:link: Enlace al Product Backlog]([https://trello.com/b/x6sDK6kP/kick-off-y-sprint-0](https://laracardozo.atlassian.net/jira/software/projects/SCRUM/boards/1/backlog?atlOrigin=eyJpIjoiZmJhOGI4NDYyNjViNDZjMTkyZWYzMDFmN2RkMmIwMjQiLCJwIjoiaiJ9))
 (Contiene el MVP definido, incidencias pendientes de estimación)
 
 Repositorio del Producto
