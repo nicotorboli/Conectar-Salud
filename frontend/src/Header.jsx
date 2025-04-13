@@ -1,11 +1,15 @@
 import CSLogo from "./assets/CSLogo(mini).png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-function Header({ children }) {
-  const [pathname, _] = useState(window.location.pathname);
-  console.log(pathname);
+function Header() {
+  const [pathname, setPathname] = useState()
+  const location = useLocation()
+
+  useEffect(() => {
+    setPathname(location.pathname)
+  }, [location])
 
   return (
     <div >

@@ -1,98 +1,108 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import "./RegistroMedico.css"
+import { useState } from "react";
+import "./RegistroMedico.css";
 
 export function RegistroMedico() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
     email: "",
-    password: "",
+    contraseña: "",
     especialidad: "",
     descripcion: "",
     ubicacion: "",
     precioConsulta: "",
-    matricula: "",
-    whatsapp: "",
-    telefono: "",
-  })
-  const [errors, setErrors] = useState({})
+    matriculaProfesional: "",
+    nroWhatsapp: "",
+    nroLinea: "",
+  });
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
-    })
-  }
+    });
+  };
 
   const validateForm = () => {
-    const newErrors = {}
+    const newErrors = {};
 
     if (formData.nombre.length < 2) {
-      newErrors.nombre = "El nombre debe tener al menos 2 caracteres."
+      newErrors.nombre = "El nombre debe tener al menos 2 caracteres.";
     }
 
     if (formData.apellido.length < 2) {
-      newErrors.apellido = "El apellido debe tener al menos 2 caracteres."
+      newErrors.apellido = "El apellido debe tener al menos 2 caracteres.";
     }
 
     if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      newErrors.email = "Por favor ingrese un email válido."
+      newErrors.email = "Por favor ingrese un email válido.";
     }
 
-    if (formData.password.length < 8) {
-      newErrors.password = "La contraseña debe tener al menos 8 caracteres."
+    if (formData.contraseña.length < 8) {
+      newErrors.contraseña = "La contraseña debe tener al menos 8 caracteres.";
     }
 
     if (!formData.especialidad) {
-      newErrors.especialidad = "Por favor seleccione una especialidad."
+      newErrors.especialidad = "Por favor seleccione una especialidad.";
     }
 
     if (formData.ubicacion.length < 5) {
-      newErrors.ubicacion = "Por favor ingrese una ubicación válida."
+      newErrors.ubicacion = "Por favor ingrese una ubicación válida.";
     }
 
     if (!formData.precioConsulta) {
-      newErrors.precioConsulta = "Por favor ingrese el precio de la consulta."
+      newErrors.precioConsulta = "Por favor ingrese el precio de la consulta.";
     }
 
-    if (formData.matricula.length < 3) {
-      newErrors.matricula = "Por favor ingrese su número de matrícula profesional."
+    if (formData.matriculaProfesional.length < 3) {
+      newErrors.matriculaProfesional =
+        "Por favor ingrese su número de matrícula profesional.";
     }
 
-    if (formData.whatsapp.length < 8) {
-      newErrors.whatsapp = "Por favor ingrese un número de WhatsApp válido."
+    if (formData.nroWhatsapp.length < 8) {
+      newErrors.nroWhatsapp = "Por favor ingrese un número de WhatsApp válido.";
     }
 
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
 
-    if (!validateForm()) {
-      return
-    }
+    e.preventDefault();
 
-    setIsLoading(true)
+    // if (!validateForm()) {
+    //   return;
+    // }
+
+    setIsLoading(true);
 
     // Simulación de envío de datos
-    setTimeout(() => {
-      console.log(formData)
-      setIsLoading(false)
-      alert("Registro exitoso. Su cuenta ha sido creada correctamente.")
-    }, 1000)
-  }
+    const response = await fetch("http://localhost:8080/register/medico", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+      
+    });
+    const data = await response.json();
+    console.log(data);
+    
+  };
 
   return (
     <div className="registro-medico-card">
       <div className="registro-medico-header">
         <h2 className="registro-medico-title">Crear cuenta médica</h2>
-        <p className="registro-medico-description">Complete el formulario para registrarse como profesional médico.</p>
+        <p className="registro-medico-description">
+          Complete el formulario para registrarse como profesional médico.
+        </p>
       </div>
       <div className="registro-medico-content">
         <form onSubmit={handleSubmit} className="registro-medico-form">
@@ -119,7 +129,9 @@ export function RegistroMedico() {
                 value={formData.apellido}
                 onChange={handleChange}
               />
-              {errors.apellido && <p className="form-error">{errors.apellido}</p>}
+              {errors.apellido && (
+                <p className="form-error">{errors.apellido}</p>
+              )}
             </div>
           </div>
 
@@ -155,12 +167,14 @@ export function RegistroMedico() {
               <input
                 type="text"
                 name="whatsapp"
-                placeholder="Ej: +5491155555555"
+                placeholder="Ej: +54 9 11 5555-5555"
                 className="form-input"
                 value={formData.whatsapp}
                 onChange={handleChange}
               />
-              {errors.whatsapp && <p className="form-error">{errors.whatsapp}</p>}
+              {errors.whatsapp && (
+                <p className="form-error">{errors.whatsapp}</p>
+              )}
             </div>
             <div className="form-group">
               <label className="form-label">Teléfono (opcional)</label>
@@ -177,7 +191,12 @@ export function RegistroMedico() {
 
           <div className="form-group">
             <label className="form-label">Especialidad</label>
-            <select name="especialidad" className="form-select" value={formData.especialidad} onChange={handleChange}>
+            <select
+              name="especialidad"
+              className="form-select"
+              value={formData.especialidad}
+              onChange={handleChange}
+            >
               <option value="">Seleccione una especialidad</option>
               <option value="medicina_general">Medicina General</option>
               <option value="cardiologia">Cardiología</option>
@@ -190,7 +209,9 @@ export function RegistroMedico() {
               <option value="traumatologia">Traumatología</option>
               <option value="otra">Otra</option>
             </select>
-            {errors.especialidad && <p className="form-error">{errors.especialidad}</p>}
+            {errors.especialidad && (
+              <p className="form-error">{errors.especialidad}</p>
+            )}
           </div>
 
           <div className="form-group">
@@ -203,8 +224,12 @@ export function RegistroMedico() {
               value={formData.matricula}
               onChange={handleChange}
             />
-            <p className="form-description">Ingrese su número de matrícula profesional</p>
-            {errors.matricula && <p className="form-error">{errors.matricula}</p>}
+            <p className="form-description">
+              Ingrese su número de matrícula profesional
+            </p>
+            {errors.matricula && (
+              <p className="form-error">{errors.matricula}</p>
+            )}
           </div>
 
           <div className="form-row">
@@ -218,7 +243,9 @@ export function RegistroMedico() {
                 value={formData.precioConsulta}
                 onChange={handleChange}
               />
-              {errors.precioConsulta && <p className="form-error">{errors.precioConsulta}</p>}
+              {errors.precioConsulta && (
+                <p className="form-error">{errors.precioConsulta}</p>
+              )}
             </div>
             <div className="form-group">
               <label className="form-label">Ubicación</label>
@@ -230,12 +257,16 @@ export function RegistroMedico() {
                 value={formData.ubicacion}
                 onChange={handleChange}
               />
-              {errors.ubicacion && <p className="form-error">{errors.ubicacion}</p>}
+              {errors.ubicacion && (
+                <p className="form-error">{errors.ubicacion}</p>
+              )}
             </div>
           </div>
 
           <div className="form-group">
-            <label className="form-label">Descripción profesional (opcional)</label>
+            <label className="form-label">
+              Descripción profesional (opcional)
+            </label>
             <textarea
               name="descripcion"
               placeholder="Describa su experiencia, especificaciones para la consulta, etc..."
@@ -243,7 +274,9 @@ export function RegistroMedico() {
               value={formData.descripcion}
               onChange={handleChange}
             ></textarea>
-            <p className="form-description">Esta información será visible en su perfil público</p>
+            <p className="form-description">
+              Esta información será visible en su perfil público
+            </p>
           </div>
 
           <button type="submit" className="submit-button" disabled={isLoading}>
@@ -260,7 +293,7 @@ export function RegistroMedico() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default RegistroMedico;
