@@ -1,0 +1,16 @@
+.cs-logo {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    background-color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .cs-logo-text {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: white;
+  }
+  
