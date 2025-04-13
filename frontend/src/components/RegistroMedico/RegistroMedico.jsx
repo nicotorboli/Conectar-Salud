@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import "./RegistroMedico.css";
+import { useNavigate } from "react-router-dom";
 
 export function RegistroMedico() {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +20,7 @@ export function RegistroMedico() {
     nroLinea: "",
   });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -73,7 +75,6 @@ export function RegistroMedico() {
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
 
     // if (!validateForm()) {
@@ -82,18 +83,17 @@ export function RegistroMedico() {
 
     setIsLoading(true);
 
-    // Simulación de envío de datos
-    const response = await fetch("http://localhost:8080/register/medico", {
+    const response = await fetch("http://localhost:8080/auth/register/medico", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-      
     });
-    const data = await response.json();
-    console.log(data);
-    
+
+    if (response.ok) { 
+      navigate("/")
+    }
   };
 
   return (
@@ -152,13 +152,15 @@ export function RegistroMedico() {
             <label className="form-label">Contraseña</label>
             <input
               type="password"
-              name="password"
+              name="contraseña"
               className="form-input"
-              value={formData.password}
+              value={formData.contraseña}
               onChange={handleChange}
             />
             <p className="form-description">Mínimo 8 caracteres</p>
-            {errors.password && <p className="form-error">{errors.password}</p>}
+            {errors.contraseña && (
+              <p className="form-error">{errors.contraseña}</p>
+            )}
           </div>
 
           <div className="form-row">
@@ -166,24 +168,24 @@ export function RegistroMedico() {
               <label className="form-label">WhatsApp</label>
               <input
                 type="text"
-                name="whatsapp"
+                name="nroWhatsapp"
                 placeholder="Ej: +54 9 11 5555-5555"
                 className="form-input"
-                value={formData.whatsapp}
+                value={formData.nroWhatsapp}
                 onChange={handleChange}
               />
-              {errors.whatsapp && (
-                <p className="form-error">{errors.whatsapp}</p>
+              {errors.nroWhatsapp && (
+                <p className="form-error">{errors.nroWhatsapp}</p>
               )}
             </div>
             <div className="form-group">
               <label className="form-label">Teléfono (opcional)</label>
               <input
                 type="text"
-                name="telefono"
+                name="nroLinea"
                 placeholder="Ej: 011 4242-4242"
                 className="form-input"
-                value={formData.telefono}
+                value={formData.nroLinea}
                 onChange={handleChange}
               />
             </div>
@@ -218,17 +220,17 @@ export function RegistroMedico() {
             <label className="form-label">Matrícula profesional</label>
             <input
               type="text"
-              name="matricula"
+              name="matriculaProfesional"
               placeholder="Ej: MP-12345"
               className="form-input"
-              value={formData.matricula}
+              value={formData.matriculaProfesional}
               onChange={handleChange}
             />
             <p className="form-description">
               Ingrese su número de matrícula profesional
             </p>
-            {errors.matricula && (
-              <p className="form-error">{errors.matricula}</p>
+            {errors.matriculaProfesional && (
+              <p className="form-error">{errors.matriculaProfesional}</p>
             )}
           </div>
 
