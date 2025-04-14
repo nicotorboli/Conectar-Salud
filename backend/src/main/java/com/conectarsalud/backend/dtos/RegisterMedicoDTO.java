@@ -2,9 +2,7 @@ package com.conectarsalud.backend.dtos;
 
 import com.conectarsalud.backend.model.Medico;
 import com.conectarsalud.backend.model.Rol;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 public record RegisterMedicoDTO(
@@ -16,7 +14,7 @@ public record RegisterMedicoDTO(
         @NotEmpty String contraseña,
         @NotEmpty String especialidad,
         @NotEmpty String matriculaProfesional,
-        @NotNull Double precioConsulta,
+        @NotNull @Positive(message = "El precio debe ser mayor a 0") Double precioConsulta,
         @NotEmpty String ubicacion,
         String descripcion
 ) {

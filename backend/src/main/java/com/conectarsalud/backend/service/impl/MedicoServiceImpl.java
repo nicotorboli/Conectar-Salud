@@ -6,6 +6,7 @@ import com.conectarsalud.backend.service.MedicoService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MedicoServiceImpl implements MedicoService {
@@ -18,5 +19,10 @@ public class MedicoServiceImpl implements MedicoService {
 
     public List<Medico> obtenerTodosLosMedicos() {
         return medicoRepository.findAll();
+    }
+
+    @Override
+    public Optional<Medico> findByMatriculaProfesional(String matriculaProfesional) {
+        return medicoRepository.findByMatriculaProfesional(matriculaProfesional);
     }
 }

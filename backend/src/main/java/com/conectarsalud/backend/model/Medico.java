@@ -17,6 +17,7 @@ public class Medico extends Usuario{
 
     private String especialidad;
 
+    @Column(unique = true)
     private String matriculaProfesional;
 
     private Double precioConsulta;
