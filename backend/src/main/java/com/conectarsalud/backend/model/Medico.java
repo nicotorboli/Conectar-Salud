@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@NoArgsConstructor @Getter @Setter
+@Getter @Setter
 public class Medico extends Usuario{
 
     private String nombre;
@@ -40,6 +40,10 @@ public class Medico extends Usuario{
         this.contraseña = contraseña;
         this.rol = Rol.MEDICO;
     }
+
+    public Medico() {}
+
+
 
 }
 
