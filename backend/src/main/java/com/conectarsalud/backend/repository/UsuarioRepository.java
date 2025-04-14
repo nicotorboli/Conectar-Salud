@@ -1,6 +1,5 @@
 package com.conectarsalud.backend.repository;
 
-import com.conectarsalud.backend.model.Medico;
 import com.conectarsalud.backend.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
