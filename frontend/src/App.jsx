@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css"
 import Layout from "./Layout.jsx"
 import RegistroMedico from "./components/RegistroMedico/RegistroMedico";
+import MedicosPage from "./components/MedicosPage/MedicosPage.jsx"
 
 const App = () => {
   return (
@@ -10,7 +11,7 @@ const App = () => {
           <Route path="/" element={<Layout />}>
           {/* <Route path="/" element={<RegistroMedico />}> */}
             {/* <Route index element={<HomePage />} /> */}
-            {/* <Route path="/medicos" element={<MedicosPage />} /> */}
+            <Route path="/medicos" element={<MedicosPage />} />
             {/* <Route path="/login" element={<LoginForm />} /> */}
             <Route path="/login" element={<RegistroMedico/>} />
           </Route>
