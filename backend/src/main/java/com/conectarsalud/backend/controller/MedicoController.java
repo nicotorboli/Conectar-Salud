@@ -1,6 +1,7 @@
 package com.conectarsalud.backend.controller;
 
 import com.conectarsalud.backend.dtos.MedicoDTO;
+import com.conectarsalud.backend.model.Especialidades;
 import com.conectarsalud.backend.model.Medico;
 import com.conectarsalud.backend.service.MedicoService;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/medicos")
@@ -46,5 +51,18 @@ public class MedicoController {
         return medicoService.obtenerTodosPorEspecialidad(especialidad).stream()
                 .map(MedicoDTO::desdeModelo)
                 .toList();
+    }
+
+    @GetMapping("/especialidades")
+    public  List<Map<String, String>> todasEspecialidades(){
+         List<Map<String, String>> especialidades = Arrays.stream(Especialidades.values())
+                .map(esp -> {
+                    Map<String, String> espMap = new HashMap<>();
+                    espMap.put("valor", esp.name()); // Ej: "CARDIOLOGIA"
+                    espMap.put("display", esp.getNombreDisplay()); // Ej: "Cardiología"
+                    return espMap;
+                })
+                .collect(Collectors.toList());
+         return especialidades;
     }
 }
