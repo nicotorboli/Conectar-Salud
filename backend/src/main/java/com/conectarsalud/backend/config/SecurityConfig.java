@@ -33,6 +33,7 @@ public class SecurityConfig {
                         authRequest
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/medicos").permitAll()
+                                .requestMatchers("/medicos/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager ->

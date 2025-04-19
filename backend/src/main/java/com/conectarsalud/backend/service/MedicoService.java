@@ -10,4 +10,7 @@ public interface MedicoService {
     public List<Medico> obtenerTodosLosMedicos();
 
     Optional<Medico> findByMatriculaProfesional(String matriculaProfesional);
+    List<Medico> obtenerTodosLosMedicosPorNombre(String nombre);
+    List<Medico> obtenerTodosPorEspecialidad(String especialidad);
+
 }
