@@ -25,4 +25,13 @@ public class MedicoServiceImpl implements MedicoService {
     public Optional<Medico> findByMatriculaProfesional(String matriculaProfesional) {
         return medicoRepository.findByMatriculaProfesional(matriculaProfesional);
     }
+
+    public List<Medico> obtenerTodosLosMedicosPorNombre(String nombre){
+        return medicoRepository.findByNombreOrApellido(nombre, nombre);
+    }
+    // averiguar tanto por nombre o apellido
+    public List<Medico> obtenerTodosPorEspecialidad(String especialidad){
+        return  medicoRepository.findByEspecialidad(especialidad);
+    }
+
 }
