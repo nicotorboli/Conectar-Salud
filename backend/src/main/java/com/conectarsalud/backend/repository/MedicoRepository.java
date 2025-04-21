@@ -19,5 +19,5 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
             "LOWER(m.apellido) LIKE LOWER(CONCAT('%', :textoBusqueda, '%'))")
     List<Medico> buscarPorNombreCompleto(@Param("textoBusqueda") String textoBusqueda);
 
-    List<Medico> findByEspecialidad(String nombre);
+    List<Medico> findByEspecialidadContainingIgnoreCase(String especialidad);
 }
