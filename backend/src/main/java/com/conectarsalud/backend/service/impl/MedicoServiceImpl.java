@@ -27,7 +27,7 @@ public class MedicoServiceImpl implements MedicoService {
     }
 
     public List<Medico> obtenerTodosLosMedicosPorNombre(String nombre){
-        return medicoRepository.findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(nombre, nombre);
+        return medicoRepository.buscarPorNombreCompleto( nombre);
     }
     // averiguar tanto por nombre o apellido
     public List<Medico> obtenerTodosPorEspecialidad(String especialidad){
