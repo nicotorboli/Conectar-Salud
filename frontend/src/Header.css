@@ -1,12 +1,10 @@
 .header {
   background-color: white;
   border-bottom: 1px solid #e5e7eb;
-}
-
-.header-container {
   display: flex;
-  align-items: center;
   height: 64px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo-container {
