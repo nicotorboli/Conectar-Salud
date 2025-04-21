@@ -2,10 +2,13 @@ import CSLogo from "./assets/CSLogo(mini).png";
 import { useEffect, useState } from "react";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
+import SearchBar from "./components/search/SearchBar.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [pathname, setPathname] = useState()
   const location = useLocation()
+  const navigate = useNavigate();
 
   useEffect(() => {
     setPathname(location.pathname)
@@ -14,11 +17,17 @@ function Header() {
   return (
     <div >
       <header className="header">
-        <div className="container header-container">
           <div className="logo-container">
             <img src={CSLogo} />
             <span className="app-title">ConectarSalud</span>
           </div>
+
+          <SearchBar onSearch={({ searchText, searchOption }) => {
+            if (searchText && searchOption) {
+              navigate(`/login`)
+              navigate(`/medicos?caracteristica=${searchOption.toLowerCase()}&filter=${searchText}`);
+            }
+          }} />
           <nav className="main-nav">
             <Link to={'/'}
               href="/"
@@ -39,7 +48,6 @@ function Header() {
               Iniciar Sesión
             </Link>
           </nav>
-        </div>
       </header>
     </div>
   );
