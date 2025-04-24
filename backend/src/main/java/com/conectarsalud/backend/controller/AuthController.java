@@ -1,6 +1,7 @@
 package com.conectarsalud.backend.controller;
 
 import com.conectarsalud.backend.dtos.AuthResponse;
+import com.conectarsalud.backend.dtos.LoginRequestDTO;
 import com.conectarsalud.backend.dtos.RegisterMedicoDTO;
 import com.conectarsalud.backend.model.Medico;
 import com.conectarsalud.backend.service.AuthService;
@@ -22,8 +23,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login() {
-        return null;
+    public  ResponseEntity<AuthResponse> logearMedico(@RequestBody @Valid LoginRequestDTO request) {
+        return ResponseEntity.ok(authService.loginMedico(request));
     }
 
     @PostMapping("/register/medico")
