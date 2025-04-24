@@ -4,7 +4,7 @@ import "./LoginForm.css";
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: "",
-    contraseña: "",
+    password: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -17,7 +17,7 @@ const LoginForm = () => {
 const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const response = await fetch("http://localhost:8080/auth/login/medico", {
+    const response = await fetch("http://localhost:8080/auth/login", {
         method: "POST",
         headers: {
            "Content-Type": "application/json",
@@ -54,16 +54,16 @@ const handleSubmit = async (e) => {
           </div>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="contraseña">Contraseña</label>
+            <label className="form-label" htmlFor="password">Contraseña</label>
             <input
               type="password"
-              name="contraseña"
-              id="contraseña"
+              name="password"
+              id="password"
               className="form-input"
-              value={formData.contraseña}
+              value={formData.password}
               onChange={handleChange}
             />
-            {errors.contraseña && <p className="form-error">{errors.contraseña}</p>}
+            {errors.password && <p className="form-error">{errors.password}</p>}
           </div>
 
           <button type="submit" className="submit-button">
