@@ -1,6 +1,6 @@
 "use client";
-
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "./RegistroMedico.css";
 import { useNavigate } from "react-router-dom";
 
@@ -20,7 +20,14 @@ export function RegistroMedico() {
     nroLinea: "",
   });
   const [errors, setErrors] = useState({});
+  const [especialidades, setEspecialidades] = useState([]);
   const navigate = useNavigate()
+
+  useEffect(() => {
+    fetch("http://localhost:8080/medicos/especialidades") 
+      .then((res) => res.json())
+      .then((data) => setEspecialidades(data))
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -200,22 +207,16 @@ export function RegistroMedico() {
               onChange={handleChange}
             >
               <option value="">Seleccione una especialidad</option>
-              <option value="medicina_general">Medicina General</option>
-              <option value="cardiologia">Cardiología</option>
-              <option value="dermatologia">Dermatología</option>
-              <option value="neurologia">Neurología</option>
-              <option value="pediatria">Pediatría</option>
-              <option value="psiquiatria">Psiquiatría</option>
-              <option value="ginecologia">Ginecología</option>
-              <option value="oftalmologia">Oftalmología</option>
-              <option value="traumatologia">Traumatología</option>
-              <option value="otra">Otra</option>
+              {especialidades.map((esp) => (
+                <option key={esp.valor} value={esp.valor}>
+                  {esp.display}
+                </option>
+              ))}
             </select>
             {errors.especialidad && (
               <p className="form-error">{errors.especialidad}</p>
             )}
           </div>
-
           <div className="form-group">
             <label className="form-label">Matrícula profesional</label>
             <input
@@ -289,9 +290,9 @@ export function RegistroMedico() {
       <div className="registro-medico-footer">
         <div className="login-link">
           ¿Ya tiene una cuenta?{" "}
-          <a href="/login" className="login-link-text">
+          <Link to="/login" className="login-link-text">
             Iniciar sesión
-          </a>
+          </Link>
         </div>
       </div>
     </div>
