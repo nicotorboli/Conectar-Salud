@@ -1,0 +1,15 @@
+.perfil-container {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .logout-button {
+    background-color: #e53935;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  

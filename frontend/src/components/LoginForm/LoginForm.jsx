@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
-
+import { AuthContext } from "../../context/AuthContext";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -15,31 +15,33 @@ const LoginForm = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const { login } = useContext(AuthContext)
 
-
-const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    try {
-
-      const response = await fetch("http://localhost:8080/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-          });
-      const data = await response.json();
+  const handleSubmit = async (e) => {
+      e.preventDefault();
       
-      
-      if (!response.ok) {
-       throw new Error(data.message || "Error al registrar");
+      try {
+
+        const response = await fetch("http://localhost:8080/auth/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+            });
+        const data = await response.json();
+        
+
+        if (!response.ok) {
+        throw new Error(data.message || "Error al registrar");
+        }
+        
+        login(data.token);
+        navigate("/")
+      } catch (error) {
+        setErrors({ general: error.message });
       }
-      navigate("/")
-    } catch (error) {
-      setErrors({ general: error.message });
     }
-  }
   
   return (
     <div className="registro-medico-card">

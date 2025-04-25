@@ -1,9 +1,10 @@
 "use client";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./RegistroMedico.css";
 import { useNavigate } from "react-router-dom";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { AuthContext } from "../../context/AuthContext";
 
 export function RegistroMedico() {
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +26,7 @@ export function RegistroMedico() {
   });
   const [especialidades, setEspecialidades] = useState([]);
   const navigate = useNavigate()
+  const { login } = useContext(AuthContext)
 
   useEffect(() => {
     fetch("http://localhost:8080/medicos/especialidades") 
@@ -58,6 +60,8 @@ export function RegistroMedico() {
       if (!response.ok) {
         throw new Error(data.message || "Error al registrar");
       }
+
+      login(data.token); 
       navigate("/")
     } catch (error) {
       setErrors({ general: error.message });

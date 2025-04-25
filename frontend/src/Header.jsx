@@ -1,14 +1,17 @@
 import CSLogo from "./assets/CSLogo(mini).png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
 import SearchBar from "./components/search/SearchBar.jsx";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./context/AuthContext.jsx";
 
 function Header() {
   const [pathname, setPathname] = useState()
   const location = useLocation()
   const navigate = useNavigate();
+
+  const { isAuthenticated } = useContext(AuthContext); 
 
   useEffect(() => {
     setPathname(location.pathname)
@@ -43,12 +46,22 @@ function Header() {
             >
               Médicos
             </Link>
-            <Link to={'/login'}
-              href="/login"
-              className={`nav-link ${pathname === "/login" ? "active" : ""}`}
-            >
-              Iniciar Sesión
-            </Link>
+
+            {isAuthenticated ? (
+              <Link
+                to={"/perfil"}
+                className={`nav-link ${pathname === "/perfil" ? "active" : ""}`}
+              >
+                Mi Perfil
+              </Link>
+            ) : (
+              <Link
+                to={"/login"}
+                className={`nav-link ${pathname === "/login" ? "active" : ""}`}
+              >
+                Iniciar Sesión
+              </Link>
+            )}
           </nav>
       </header>
     </div>
