@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
 
 const LoginForm = () => {
@@ -8,7 +9,7 @@ const LoginForm = () => {
   });
 
   const [errors, setErrors] = useState({});
-
+  const navigate = useNavigate()
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
