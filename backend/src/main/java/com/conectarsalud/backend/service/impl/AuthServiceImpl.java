@@ -52,20 +52,13 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse loginMedico(LoginRequestDTO request) {
-        try {
 
-            // Primero verificamos si el usuario existe
-            usuarioRepository.findByEmail(request.email())
-                    .orElseThrow(()->
-                         new UsuarioNoEncontrado("Este mail no se encuentra registrado"));
+        usuarioRepository.findByEmail(request.email())
+                .orElseThrow(()-> new UsuarioNoEncontrado("Este mail no se encuentra registrado"));
 
-
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
-            UserDetails user = usuarioRepository.findByEmail(request.email()).orElseThrow();
-            String token = jwtService.getToken(user);
-            return AuthResponse.builder().token(token).build();
-        }catch (UsuarioNoEncontrado e) {
-            throw e; // Será manejado por el GlobalExceptionHandler
-        }
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
+        UserDetails user = usuarioRepository.findByEmail(request.email()).orElseThrow();
+        String token = jwtService.getToken(user);
+        return AuthResponse.builder().token(token).build();
     }
 }

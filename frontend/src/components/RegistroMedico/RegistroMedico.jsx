@@ -53,12 +53,12 @@ export function RegistroMedico() {
       });
   
       const data = await response.json();
-      navigate("/")
+      
 
       if (!response.ok) {
         throw new Error(data.message || "Error al registrar");
       }
-  
+      navigate("/")
     } catch (error) {
       setErrors({ general: error.message });
     } finally {
