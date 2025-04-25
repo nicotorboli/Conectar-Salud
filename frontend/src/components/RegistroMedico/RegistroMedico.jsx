@@ -53,7 +53,8 @@ export function RegistroMedico() {
       });
   
       const data = await response.json();
-  
+      navigate("/")
+
       if (!response.ok) {
         throw new Error(data.message || "Error al registrar");
       }
@@ -195,17 +196,15 @@ export function RegistroMedico() {
             <div className="form-group">
               <label className="form-label">Precio de consulta</label>
               <input
-                type="text"
+                type="number"
                 name="precioConsulta"
                 placeholder="Ej: $5000"
                 className="form-input"
                 value={formData.precioConsulta}
                 onChange={handleChange}
+                min="1"
                 required
               />
-              {errors.precioConsulta && (
-                <p className="form-error">{errors.precioConsulta}</p>
-              )}
             </div>
             <div className="form-group">
               <label className="form-label">Ubicación</label>
