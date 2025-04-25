@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { AuthContext } from "../../context/AuthContext";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -8,29 +10,39 @@ const LoginForm = () => {
     password: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({general: null,});
   const navigate = useNavigate()
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const { login } = useContext(AuthContext)
 
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      
+      try {
 
-const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    const response = await fetch("http://localhost:8080/auth/login", {
-        method: "POST",
-        headers: {
-           "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-        });
-    
-    if (response.ok) { 
-      navigate("/")
+        const response = await fetch("http://localhost:8080/auth/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+            });
+        const data = await response.json();
+        
+
+        if (!response.ok) {
+        throw new Error(data.message || "Error al registrar");
+        }
+        
+        login(data.token);
+        navigate("/")
+      } catch (error) {
+        setErrors({ general: error.message });
+      }
     }
-  };
-
+  
   return (
     <div className="registro-medico-card">
       <div className="registro-medico-header">
@@ -51,7 +63,6 @@ const handleSubmit = async (e) => {
               value={formData.email}
               onChange={handleChange}
             />
-            {errors.email && <p className="form-error">{errors.email}</p>}
           </div>
 
           <div className="form-group">
@@ -64,7 +75,7 @@ const handleSubmit = async (e) => {
               value={formData.password}
               onChange={handleChange}
             />
-            {errors.password && <p className="form-error">{errors.password}</p>}
+          {errors.general && <ErrorMessage message={errors.general} />}
           </div>
 
           <button type="submit" className="submit-button">
