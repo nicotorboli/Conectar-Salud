@@ -101,6 +101,10 @@
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.2s;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .submit-button:hover {
