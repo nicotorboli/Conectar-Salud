@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css"
-import Layout from "./Layout.jsx"
+import Layout from "./components/Layoutt/Layout.jsx";
 import RegistroMedico from "./components/RegistroMedico/RegistroMedico";
 import MedicosPage from "./components/MedicosPage/MedicosPage.jsx"
 import LoginForm from "./components/LoginForm/LoginForm.jsx";

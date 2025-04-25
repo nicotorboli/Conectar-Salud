@@ -1,10 +1,10 @@
-import CSLogo from "./assets/CSLogo(mini).png";
+import CSLogo from "../../assets/CSLogo(mini).png";
 import { useEffect, useState, useContext } from "react";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
-import SearchBar from "./components/search/SearchBar.jsx";
+import SearchBar from "../search/SearchBar.jsx";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "./context/AuthContext.jsx";
+import { AuthContext } from "../../context/AuthContext.jsx";
 
 function Header() {
   const [pathname, setPathname] = useState()
