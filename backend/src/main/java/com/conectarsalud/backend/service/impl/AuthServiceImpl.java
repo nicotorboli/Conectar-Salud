@@ -7,6 +7,7 @@ import com.conectarsalud.backend.repository.UsuarioRepository;
 import com.conectarsalud.backend.service.AuthService;
 import com.conectarsalud.backend.service.JwtService;
 import com.conectarsalud.backend.service.MedicoService;
+import com.conectarsalud.backend.service.exceptions.UsuarioNoEncontrado;
 import com.conectarsalud.backend.service.exceptions.UsuarioYaExistenteException;
 import org.apache.coyote.Request;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -52,13 +53,19 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthResponse loginMedico(LoginRequestDTO request) {
         try {
+
+            // Primero verificamos si el usuario existe
+            usuarioRepository.findByEmail(request.email())
+                    .orElseThrow(()->
+                         new UsuarioNoEncontrado("Este mail no se encuentra registrado"));
+
+
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
             UserDetails user = usuarioRepository.findByEmail(request.email()).orElseThrow();
             String token = jwtService.getToken(user);
             return AuthResponse.builder().token(token).build();
-        }catch (BadCredentialsException e) {
-            // Esta excepción será capturada por el GlobalExceptionHandler
-            throw e;
+        }catch (UsuarioNoEncontrado e) {
+            throw e; // Será manejado por el GlobalExceptionHandler
         }
     }
 }
