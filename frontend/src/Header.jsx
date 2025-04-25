@@ -22,12 +22,14 @@ function Header() {
             <span className="app-title">ConectarSalud</span>
           </div>
 
+          <div className="filtro">
           <SearchBar onSearch={({ searchText, searchOption }) => {
             if (searchText && searchOption) {
               navigate(`/login`)
               navigate(`/medicos?caracteristica=${searchOption.toLowerCase()}&filter=${searchText}`);
             }
           }} />
+          </div>
           <nav className="main-nav">
             <Link to={'/'}
               href="/"

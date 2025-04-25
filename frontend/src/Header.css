@@ -6,13 +6,19 @@
   height: 64px;
   justify-content: space-between;
   align-items: center;
+  padding: 16px;
+
 }
 
+.filtro{
+    padding: 100px;
+}
 
 .logo-container {
   display: flex;
   align-items: center;
   gap: 2px;
+  margin-left: 10px;
 }
 
 .logo-container img {
@@ -31,6 +37,9 @@
   display: flex;
   gap: 16px;
   margin-right: 10px;
+  text-align: center;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .nav-link {

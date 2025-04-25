@@ -11,3 +11,10 @@
   margin-bottom: 24px;
   text-align: center;
 }
+
+.footer-container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 16px 0;
+        margin-left: 25px;
+        }
