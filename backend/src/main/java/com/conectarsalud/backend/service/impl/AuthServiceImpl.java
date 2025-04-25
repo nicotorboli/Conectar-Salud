@@ -11,6 +11,7 @@ import com.conectarsalud.backend.service.exceptions.UsuarioYaExistenteException;
 import org.apache.coyote.Request;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -50,9 +51,14 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse loginMedico(LoginRequestDTO request) {
-        authenticationManager.authenticate( new UsernamePasswordAuthenticationToken(request.email(),request.password()));
-        UserDetails user = usuarioRepository.findByEmail(request.email()).orElseThrow();
-        String token = jwtService.getToken(user);
-        return AuthResponse.builder().token(token).build();
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
+            UserDetails user = usuarioRepository.findByEmail(request.email()).orElseThrow();
+            String token = jwtService.getToken(user);
+            return AuthResponse.builder().token(token).build();
+        }catch (BadCredentialsException e) {
+            // Esta excepción será capturada por el GlobalExceptionHandler
+            throw e;
+        }
     }
 }
