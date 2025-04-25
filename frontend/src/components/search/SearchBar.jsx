@@ -46,16 +46,6 @@ import { useState } from "react";
             />
             <span className="name">Especialidad</span>
           </label>
-          <label className="radio">
-            <input
-              type="radio"
-              name="radio"
-              value="Matricula"
-              checked={searchOption === "Matricula"}
-              onChange={(e) => setSearchOption(e.target.value)}
-            />
-            <span className="name">Matricula</span>
-          </label>
         </div>
         <button onClick={handleSearch}>
           Buscar
