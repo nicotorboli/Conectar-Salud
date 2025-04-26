@@ -22,7 +22,14 @@ const MedicoCard = ({ medico }) => {
                         <p><strong>📩 Email:</strong> {medico.email}</p>
                         <p><strong>📲 WhatsApp:</strong> {medico.nroWhatsapp}</p>
                         <p><strong>📞 Línea:</strong> {medico.nroLinea}</p>
-                        <p><strong>📃 Descripción:</strong> {medico.descripcion || "No disponible"}</p>
+                        <p>
+                            <strong>📃 Descripción:</strong>{" "}
+                            {medico.descripcion ? (
+                                <span>{medico.descripcion}</span>
+                            ) : (
+                                <span style={{ color: "#aaa" }}>Sin descripción</span>
+                            )}
+                        </p>
                     </div>
             )}
         </div>
