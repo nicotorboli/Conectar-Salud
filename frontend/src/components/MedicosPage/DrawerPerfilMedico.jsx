@@ -1,4 +1,5 @@
 import React from "react";
+import WhatsApp from '../../assets/WhatsApp.png';
 import "./DrawerPerfilMedico.css";
 
 const DrawerPerfilMedico = ({ medico, onClose }) => {
@@ -43,7 +44,7 @@ const DrawerPerfilMedico = ({ medico, onClose }) => {
                           rel="noopener noreferrer"
                           className="whatsapp-link"
                         >
-                            <img src="/assets/WhatsApp.png" alt="WhatsApp" className="contact-icon" />
+                            <img src={WhatsApp} alt="WhatsApp" className="contact-icon" />
                             {medico.nroWhatsapp}
                         </a>
                     </div>

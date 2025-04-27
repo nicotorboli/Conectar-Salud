@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MedicoCard from "./MedicoCard.jsx";
-import DrawerPerfilMedico from "./DrawerPerfilMedico.jsx"; // vamos a crear esto
+import DrawerPerfilMedico from "./DrawerPerfilMedico.jsx";
 import "./MedicosPage.css";
 import { useSearchParams } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const MedicosPage = () => {
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
     const [searchParams] = useSearchParams();
-    const [medicoSeleccionado, setMedicoSeleccionado] = useState(null); // <<< nuevo estado
+    const [medicoSeleccionado, setMedicoSeleccionado] = useState(null);
     const caracteristica = searchParams.get("caracteristica") || "";
     const filter = searchParams.get("filter") || "";
 
@@ -50,7 +50,7 @@ const MedicosPage = () => {
                         <MedicoCard
                             key={index}
                             medico={medico}
-                            onVerPerfil={() => setMedicoSeleccionado(medico)} // <<< le pasamos la función
+                            onVerPerfil={() => setMedicoSeleccionado(medico)}
                         />
                     ))}
                     {medicoSeleccionado && (
