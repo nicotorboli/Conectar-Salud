@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MedicoCard from "./MedicoCard.jsx";
+import DrawerPerfilMedico from "./DrawerPerfilMedico.jsx"; // vamos a crear esto
 import "./MedicosPage.css";
 import { useSearchParams } from "react-router-dom";
 
@@ -8,6 +9,7 @@ const MedicosPage = () => {
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
     const [searchParams] = useSearchParams();
+    const [medicoSeleccionado, setMedicoSeleccionado] = useState(null); // <<< nuevo estado
     const caracteristica = searchParams.get("caracteristica") || "";
     const filter = searchParams.get("filter") || "";
 
@@ -44,10 +46,20 @@ const MedicosPage = () => {
 
     return (
         <div className="medicos-container">
-            {medicos.map((medico, index) => (
-                <MedicoCard key={index} medico={medico} />
-            ))}
-        </div>
+                    {medicos.map((medico, index) => (
+                        <MedicoCard
+                            key={index}
+                            medico={medico}
+                            onVerPerfil={() => setMedicoSeleccionado(medico)} // <<< le pasamos la función
+                        />
+                    ))}
+                    {medicoSeleccionado && (
+                        <DrawerPerfilMedico
+                            medico={medicoSeleccionado}
+                            onClose={() => setMedicoSeleccionado(null)}
+                        />
+                    )}
+                </div>
     );
 };
 

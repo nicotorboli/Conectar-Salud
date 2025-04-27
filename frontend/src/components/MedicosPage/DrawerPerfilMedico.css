@@ -1,0 +1,125 @@
+.drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: flex-end;
+    z-index: 999;
+}
+
+.drawer {
+    background-color: #fff;
+    width: 350px;
+    height: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+    animation: slideIn 0.3s ease forwards;
+    position: relative;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+.close-button {
+    position: absolute;
+    top: 6px;
+    right: 0px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #007bff;
+    cursor: pointer;
+    border-left:5px;
+    padding:0.9em;
+}
+
+.drawer-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.avatar-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #eee;
+    margin-right: 16px;
+}
+
+.medico-nombre {
+    font-size: 22px;
+    margin: 0;
+}
+
+.medico-especialidad {
+    font-size: 16px;
+    color: #007bff;
+    margin-top: 4px;
+}
+
+.drawer-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    color: #333;
+}
+
+.descripcion h4 {
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: #007bff;
+}
+
+.descripcion p {
+    font-size: 15px;
+    line-height: 1.4;
+    color: #555;
+}
+
+.contact-buttons {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.whatsapp-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #007bff;
+    background-color: transparent;
+    border: 1px solid #007bff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.whatsapp-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.contact-icon {
+    width: 24px;
+    height: 24px;
+}
