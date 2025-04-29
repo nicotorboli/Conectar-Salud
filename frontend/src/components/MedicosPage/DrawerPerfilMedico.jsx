@@ -39,7 +39,7 @@ const DrawerPerfilMedico = ({ medico, onClose }) => {
                     </div>
                     <div className="contact-buttons">
                         <a
-                          href={`https://wa.me/${medico.nroWhatsapp}`}
+                          href={`https://wa.me/${medico.nroWhatsapp}?text=${encodeURIComponent('Hola, te encontré en Conectar Salud y me gustaría más información')}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="whatsapp-link"
