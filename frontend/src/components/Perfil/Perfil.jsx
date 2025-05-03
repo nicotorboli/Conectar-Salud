@@ -11,6 +11,7 @@ const Perfil = () => {
   const [error, setError] = useState(null)
   const [editable, setEditable] = useState(false)
   const { logout } = useContext(AuthContext)
+  const [especialidades, setEspecialidades] = useState([])
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -23,6 +24,19 @@ const Perfil = () => {
       editarPerfil(medico)
     }
     setEditable(!editable)
+  }
+
+  useEffect(() => {
+    fetch('http://localhost:8080/medicos/especialidades')
+      .then((res) => res.json())
+      .then((data) => setEspecialidades(data))
+  }, [])
+
+  const handleChange = (e) => {
+    setMedico({
+      ...medico,
+      especialidad: e.target.value,
+    })
   }
 
   useEffect(() => {
@@ -55,7 +69,27 @@ const Perfil = () => {
             {medico.apellido}
           </h2>
         </div>
-        <p className='perfil-medico-especialidad'>{medico.especialidad}</p>
+        {editable ? (
+          <select
+            name='especialidad'
+            className='perfil-medico-especialidad'
+            value={medico.especialidad}
+            onChange={handleChange}
+          >
+            <option value=''>
+              {medico.especialidad
+                ? medico.especialidad
+                : 'Seleccione una especialidad Perfil'}
+            </option>
+            {especialidades.map((esp) => (
+              <option key={esp.valor} value={esp.valor}>
+                {esp.display}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <p className='perfil-medico-especialidad'>{medico.especialidad}</p>
+        )}
       </div>
       <div className='perfil-body'>
         <div className='perfil-info-item'>
