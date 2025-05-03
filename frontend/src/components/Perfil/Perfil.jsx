@@ -21,10 +21,16 @@ const Perfil = () => {
 
   const handleEdit = () => {
     if (editable) {
-      editarPerfil(medico)
+      const confirmacion = window.confirm('¿Estás seguro de que querés guardar los cambios?')
+      if (confirmacion) {
+        editarPerfil(medico)
+        setEditable(false)
+      }
+    } else {
+      setEditable(true)
     }
-    setEditable(!editable)
   }
+  
 
   useEffect(() => {
     fetch('http://localhost:8080/medicos/especialidades')
