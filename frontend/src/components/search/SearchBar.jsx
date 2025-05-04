@@ -24,9 +24,7 @@ const SearchBar = ({ onSearch }) => {
   };
 
   const handleEspecialidadClick = (especialidad) => {
-    // Usar la propiedad display para mostrar en el input
     setSearchText(especialidad.display || especialidad.nombreDisplay || "");
-    // Usar la propiedad valor para la búsqueda
     setEspecialidadSeleccionada(especialidad.valor || especialidad.id || "");
     setShowDropdown(false);
   };
@@ -55,7 +53,6 @@ const SearchBar = ({ onSearch }) => {
     }
   };
 
-  // Filtrar especialidades basado en el texto de búsqueda
   const especialidadesFiltradas = searchOption === "Especialidad" && searchText
     ? especialidades.filter(esp => {
         const displayText = esp.display || esp.nombreDisplay || "";
@@ -89,7 +86,6 @@ const SearchBar = ({ onSearch }) => {
                   className="dropdown-item"
                   onClick={() => handleEspecialidadClick(especialidad)}
                 >
-                  {/* Usar la propiedad display para mostrar en el dropdown */}
                   {especialidad.display || especialidad.nombreDisplay || ""}
                 </div>
               ))

@@ -1,15 +1,116 @@
 .perfil-container {
-    padding: 2rem;
-    text-align: center;
-  }
-  
-  .logout-button {
-    background-color: #e53935;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+  max-width: 90%;
+  margin: 0 auto;
+  width: 100%; /* esto permite que tome el ancho completo disponible */
+  background-color: #fff;
+  padding: 24px;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+  gap: 16px;
+  box-sizing: border-box;
+  position: relative; 
+}
+
+.perfil-edit-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.perfil-edit-button:hover {
+  background-color: #0056b3;
+}
+
+.perfil-header {
+  display: flex;
+  align-items: center;
+}
+
+.perfil-avatar-placeholder {
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  background: #eee;
+  margin-right: 30px;
+}
+
+.perfil-avatar-nombreCompleto {
+  display: flex;
+  gap: 8px;
+}
+
+.perfil-medico-nombre {
+  font-size: 38px;
+  margin: 0;
+}
+
+.perfil-medico-apellido{
+  font-size: 38px;
+  margin: 0;
+}
+
+.perfil-medico-especialidad {
+  text-transform: uppercase;
+  font-size: 22px;
+  color: #007bff;
+  margin-top: 4px;
+  position: absolute;
+  margin-left: 350px;
+  margin-top: 77px;
+}
+
+.perfil-body {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+.perfil-info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  color: #333;
+}
+
+.perfil-descripcion h4 {
+  margin-top: 18px;
+  margin-bottom: 8px;
+  font-size: 22px;
+  color: #007bff;
+}
+
+.perfil-descripcion p {
+  font-size: 18px;
+  line-height: 1.4;
+  color: #555;
+  font-style: italic;
+}
+
+.perfil-contact-buttons {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.perfil-logout-button {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 80px
+}
