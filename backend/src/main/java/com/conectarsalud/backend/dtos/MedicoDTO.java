@@ -3,6 +3,7 @@ package com.conectarsalud.backend.dtos;
 import com.conectarsalud.backend.model.Medico;
 
 public record MedicoDTO(
+        Long id,
         String nombre,
         String apellido,
         String email,
@@ -16,6 +17,7 @@ public record MedicoDTO(
 ) {
     public static MedicoDTO desdeModelo(Medico medico) {
         return new MedicoDTO(
+                medico.getId(),
                 medico.getNombre(),
                 medico.getApellido(),
                 medico.getEmail(),
@@ -28,4 +30,10 @@ public record MedicoDTO(
                 medico.getDescripcion());
     }
 
+    public Medico aModelo(String contra){
+        Medico medico = new Medico(nombre,  apellido,  email,  nroWhatsapp,  nroLinea,  especialidad,
+                matriculaProfesional,  precioConsulta,  ubicacion,  descripcion,contra);
+        medico.setId(this.id);
+        return  medico;
+    }
 }

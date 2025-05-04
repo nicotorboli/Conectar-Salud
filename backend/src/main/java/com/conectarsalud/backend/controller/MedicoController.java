@@ -31,6 +31,14 @@ public class MedicoController {
 
     }
 
+    @PutMapping
+    public void actualizarMedico(@RequestBody MedicoDTO med){
+        String contra = medicoService.findByMatriculaProfesional(med.matriculaProfesional()).get().getPassword();
+        medicoService.actualizar(med.aModelo(contra));
+    }
+
+
+
     @GetMapping("/matricula/{matricula}")
     public MedicoDTO medicoDeMatricula(@PathVariable String matricula){
         return  MedicoDTO.desdeModelo(medicoService.findByMatriculaProfesional(matricula).get());

@@ -15,5 +15,6 @@ public interface MedicoService {
 
     List<Medico> obtenerTodosLosMedicosPorNombre(String nombre);
     List<Medico> obtenerTodosPorEspecialidad(String especialidad);
+    void actualizar(Medico med);
 
 }
