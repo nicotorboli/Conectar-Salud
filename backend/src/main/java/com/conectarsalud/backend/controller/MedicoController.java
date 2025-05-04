@@ -70,4 +70,9 @@ public class MedicoController {
                 .collect(Collectors.toList());
          return especialidades;
     }
+
+    @DeleteMapping("/matricula/{matricula}")
+    public void deleteMedico (@PathVariable String matricula){
+        medicoService.deleteByMatriculaProfesional(matricula);
+    }
 }

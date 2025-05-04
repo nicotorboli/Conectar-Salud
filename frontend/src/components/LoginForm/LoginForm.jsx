@@ -36,7 +36,9 @@ const LoginForm = () => {
         throw new Error(data.message || "Error al registrar");
         }
         console.log(data)
+
         login(data.token, data.matricula);
+
         navigate("/")
       } catch (error) {
         setErrors({ general: error.message });
