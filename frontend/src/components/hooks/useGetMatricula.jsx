@@ -1,7 +1,8 @@
-import { useState } from 'react'
-
+import { useState , useContext} from 'react'
+import { AuthContext } from "../../context/AuthContext";
 const useGetMatricula = () => {
-  const [matricula, setMatricula] = useState(localStorage.getItem("matricula"))
+
+  const {matricula} = useContext(AuthContext);
 
 //   fetch(`http://localhost:8080/api/medicos/matricula`)
 //     .then((response) => response.json())

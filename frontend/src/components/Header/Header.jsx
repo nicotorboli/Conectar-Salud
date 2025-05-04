@@ -11,7 +11,7 @@ function Header() {
   const [pathname, setPathname] = useState()
   const location = useLocation()
   const navigate = useNavigate()
-  const { matricula } = useGetMatricula()
+
 
   const { isAuthenticated } = useContext(AuthContext)
 
@@ -56,8 +56,9 @@ function Header() {
           </Link>
 
           {isAuthenticated ? (
+
             <Link
-              to={`/perfil/${matricula}`}
+              to={`/perfil/${localStorage.matricula}`}
               className={`nav-link ${pathname === '/perfil' ? 'active' : ''}`}
             >
               Mi Perfil
