@@ -5,10 +5,7 @@ import com.conectarsalud.backend.model.Especialidades;
 import com.conectarsalud.backend.model.Medico;
 import com.conectarsalud.backend.service.MedicoService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -64,5 +61,10 @@ public class MedicoController {
                 })
                 .collect(Collectors.toList());
          return especialidades;
+    }
+
+    @DeleteMapping("/matricula/{matricula}")
+    public void deleteMedico (String matricula){
+        medicoService.deleteByMatriculaProfesional(matricula);
     }
 }

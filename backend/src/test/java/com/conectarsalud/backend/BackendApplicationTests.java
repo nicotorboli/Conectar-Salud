@@ -12,9 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class BackendApplicationTests {
 	@Autowired
 	private MedicoService medicoService;
-/*	@Test
+ 	@Test
 	void contextLoads() {
 	}
+	/*
 	@Test
 	void funcionalidadesNuevas(){
 
@@ -24,6 +25,8 @@ class BackendApplicationTests {
 		assertEquals(1 , medicoService.obtenerTodosPorEspecialidad("pediatria").size());
 		assertEquals(0,  medicoService.obtenerTodosPorEspecialidad("algo").size());
 	}
-*/
+
+	 */
+
 }
 
