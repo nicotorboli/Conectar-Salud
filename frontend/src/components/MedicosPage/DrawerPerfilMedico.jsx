@@ -1,5 +1,6 @@
 import React from "react";
 import WhatsApp from '../../assets/WhatsApp.png';
+import placeholder from '../../assets/PlaceHolder.png';
 import "./DrawerPerfilMedico.css";
 
 const DrawerPerfilMedico = ({ medico, onClose }) => {
@@ -10,7 +11,19 @@ const DrawerPerfilMedico = ({ medico, onClose }) => {
             <div className="drawer" onClick={(e) => e.stopPropagation()}>
                 <button className="close-button" onClick={onClose}>×</button>
                 <div className="drawer-header">
-                    <div className="avatar-placeholder"></div>
+                    {medico.fotoPerfil ? (
+                                            <img
+                                                src={`data:image/jpeg;base64,${medico.fotoPerfil}`}
+                                                alt={`${medico.nombre} ${medico.apellido}`}
+                                                className="avatar-imagen"
+                                                onError={(e) => {
+                                                    e.target.onerror = null;
+                                                    e.target.src = '/images/PlaceHolder.png';
+                                                }}
+                                            />
+                                        ) : (
+                                            <div className="avatar-placeholder"></div>
+                                        )}
                     <div>
                         <h2 className="medico-nombre">{medico.nombre} {medico.apellido}</h2>
                         <p className="medico-especialidad">{medico.especialidad}</p>

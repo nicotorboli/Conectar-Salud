@@ -13,7 +13,8 @@ public record MedicoDTO(
         String matriculaProfesional,
         Double precioConsulta,
         String ubicacion,
-        String descripcion
+        String descripcion,
+        byte[] fotoPerfil
 ) {
     public static MedicoDTO desdeModelo(Medico medico) {
         return new MedicoDTO(
@@ -27,12 +28,13 @@ public record MedicoDTO(
                 medico.getMatriculaProfesional(),
                 medico.getPrecioConsulta(),
                 medico.getUbicacion(),
-                medico.getDescripcion());
+                medico.getDescripcion(),
+                medico.getFotoPerfil());
     }
 
     public Medico aModelo(String contra){
         Medico medico = new Medico(nombre,  apellido,  email,  nroWhatsapp,  nroLinea,  especialidad,
-                matriculaProfesional,  precioConsulta,  ubicacion,  descripcion,contra);
+                matriculaProfesional,  precioConsulta,  ubicacion,  descripcion,contra,this.fotoPerfil);
         medico.setId(this.id);
         return  medico;
     }

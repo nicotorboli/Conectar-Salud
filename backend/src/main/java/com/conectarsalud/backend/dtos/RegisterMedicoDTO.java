@@ -4,6 +4,9 @@ import com.conectarsalud.backend.model.Medico;
 import com.conectarsalud.backend.model.Rol;
 import jakarta.validation.constraints.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 public record RegisterMedicoDTO(
         @NotEmpty String nombre,
@@ -16,10 +19,11 @@ public record RegisterMedicoDTO(
         @NotEmpty String matriculaProfesional,
         @NotNull @Positive(message = "El precio debe ser mayor a 0") Double precioConsulta,
         @NotEmpty String ubicacion,
-        String descripcion
+        String descripcion,
+        MultipartFile fotoPerfil
 ) {
 
-    public Medico aModelo(PasswordEncoder passwordEncoder) {
+    public Medico aModelo(PasswordEncoder passwordEncoder,MultipartFile fotoPerfil) throws IOException {
         return new Medico(
                 this.nombre,
                 this.apellido,
@@ -31,7 +35,8 @@ public record RegisterMedicoDTO(
                 this.precioConsulta,
                 this.ubicacion,
                 this.descripcion,
-                passwordEncoder.encode(this.contraseña)
+                passwordEncoder.encode(this.contraseña),
+                fotoPerfil != null ? fotoPerfil.getBytes() : null
         );
     }
 

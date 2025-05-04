@@ -7,6 +7,10 @@ import lombok.*;
 @Getter @Setter
 public class Medico extends Usuario{
 
+    @Lob
+    @Column(name = "foto_perfil", columnDefinition="LONGBLOB")
+    private byte[] fotoPerfil;
+
     private String nombre;
 
     private String apellido;
@@ -29,7 +33,7 @@ public class Medico extends Usuario{
     private  Long id;
 
     public Medico(String nombre, String apellido, String email, String nroWhatsapp, String nroLinea, String especialidad,
-                  String matriculaProfesional, Double precioConsulta, String ubicacion, String descripcion, String contraseña) {
+                  String matriculaProfesional, Double precioConsulta, String ubicacion, String descripcion, String contraseña, byte[] fotoPerfil) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -42,6 +46,7 @@ public class Medico extends Usuario{
         this.descripcion = descripcion;
         this.contraseña = contraseña;
         this.rol = Rol.MEDICO;
+        this.fotoPerfil = fotoPerfil;
     }
 
     public Medico() {}
