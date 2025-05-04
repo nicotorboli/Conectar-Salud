@@ -23,7 +23,13 @@ const Perfil = () => {
     if (editable) {
       const confirmacion = window.confirm('¿Estás seguro de que querés guardar los cambios?')
       if (confirmacion) {
-        editarPerfil(medico)
+          const medicoABase = {
+              ...medico,
+              nombre: document.querySelector(".perfil-medico-nombre").innerHTML,
+              apellido:document.querySelector(".perfil-medico-apellido").innerHTML,
+              email:document.querySelector(".perfil-info-item-email").innerHTML
+              }
+        editarPerfil(medicoABase)
         setEditable(false)
       }
     } else {
@@ -44,6 +50,7 @@ const Perfil = () => {
       especialidad: e.target.value,
     })
   }
+
 
   useEffect(() => {
     const fetchMedico = async () => {
@@ -68,10 +75,10 @@ const Perfil = () => {
       <div className='perfil-header'>
         <div className='perfil-avatar-placeholder'></div>
         <div className='perfil-avatar-nombreCompleto'>
-          <h2 className='perfil-medico-nombre' contentEditable={editable}>
+          <h2 className='perfil-medico-nombre' contentEditable={editable} >
             {medico.nombre}
           </h2>
-          <h2 className='perfil-medico-apellido' contentEditable={editable}>
+          <h2 className='perfil-medico-apellido' contentEditable={editable} >
             {medico.apellido}
           </h2>
         </div>
@@ -112,7 +119,7 @@ const Perfil = () => {
         </div>
         <div className='perfil-info-item'>
           <span>📩</span>
-          <p contentEditable={editable}>{medico.email}</p>
+          <p className="perfil-info-item-email" contentEditable={editable}>{medico.email}</p>
         </div>
         <div className='perfil-info-item'>
           <span>📞</span>

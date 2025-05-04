@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 const useGetMatricula = () => {
-  const [matricula, setMatricula] = useState('MP-1515')
+  const [matricula, setMatricula] = useState(localStorage.getItem("matricula"))
 
 //   fetch(`http://localhost:8080/api/medicos/matricula`)
 //     .then((response) => response.json())
