@@ -26,6 +26,8 @@ public class Medico extends Usuario{
 
     private String descripcion; // opcional
 
+    private  Long id;
+
     public Medico(String nombre, String apellido, String email, String nroWhatsapp, String nroLinea, String especialidad,
                   String matriculaProfesional, Double precioConsulta, String ubicacion, String descripcion, String contraseña) {
         this.nombre = nombre;

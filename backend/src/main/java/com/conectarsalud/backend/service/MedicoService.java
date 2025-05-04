@@ -12,5 +12,6 @@ public interface MedicoService {
     Optional<Medico> findByMatriculaProfesional(String matriculaProfesional);
     List<Medico> obtenerTodosLosMedicosPorNombre(String nombre);
     List<Medico> obtenerTodosPorEspecialidad(String especialidad);
+    void actualizar(Medico med);
 
 }
