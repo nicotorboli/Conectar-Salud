@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class MedicoServiceImpl implements MedicoService {
 
     private final MedicoRepository medicoRepository;
@@ -31,12 +32,12 @@ public class MedicoServiceImpl implements MedicoService {
     public Optional<Medico> findByMatriculaProfesional(String matriculaProfesional) {
         return medicoRepository.findByMatriculaProfesional(matriculaProfesional);
     }
-    @Transactional
+
     @Override
     public void deleteByMatriculaProfesional(String matriculaProfesional) {
         Medico medico = medicoRepository.findByMatriculaProfesional(matriculaProfesional).get();
         Usuario usuario = usuarioRepository.findByEmail(medico.getEmail()).get();
-        medicoRepository.delete(medico.getId());
+        medicoRepository.delete(medico);
         usuarioRepository.delete(usuario);
     }
     public List<Medico> obtenerTodosLosMedicosPorNombre(String nombre){

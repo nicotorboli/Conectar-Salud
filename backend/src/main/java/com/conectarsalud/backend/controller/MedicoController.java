@@ -72,7 +72,7 @@ public class MedicoController {
     }
 
     @DeleteMapping("/matricula/{matricula}")
-    public void deleteMedico (String matricula){
+    public void deleteMedico (@PathVariable String matricula){
         medicoService.deleteByMatriculaProfesional(matricula);
     }
 }
