@@ -5,10 +5,7 @@ import com.conectarsalud.backend.model.Especialidades;
 import com.conectarsalud.backend.model.Medico;
 import com.conectarsalud.backend.service.MedicoService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -33,6 +30,14 @@ public class MedicoController {
                 .toList();
 
     }
+
+    @PutMapping
+    public void actualizarMedico(@RequestBody MedicoDTO med){
+        String contra = medicoService.findByMatriculaProfesional(med.matriculaProfesional()).get().getPassword();
+        medicoService.actualizar(med.aModelo(contra));
+    }
+
+
 
     @GetMapping("/matricula/{matricula}")
     public MedicoDTO medicoDeMatricula(@PathVariable String matricula){

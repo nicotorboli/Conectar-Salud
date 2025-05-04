@@ -34,4 +34,8 @@ public class MedicoServiceImpl implements MedicoService {
         return  medicoRepository.findByEspecialidadContainingIgnoreCase(especialidad);
     }
 
+    public void actualizar(Medico med){
+        medicoRepository.save(med);
+    }
+
 }
