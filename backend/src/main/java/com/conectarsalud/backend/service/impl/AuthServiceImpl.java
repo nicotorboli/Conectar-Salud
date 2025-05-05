@@ -47,7 +47,7 @@ public class AuthServiceImpl implements AuthService {
                 });
 
         usuarioRepository.save(medico);
-        return new AuthResponse(jwtService.getToken(medico));
+        return new AuthResponse(jwtService.getToken(medico), medico.getMatriculaProfesional());
     }
 
     @Override
@@ -59,6 +59,7 @@ public class AuthServiceImpl implements AuthService {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
         UserDetails user = usuarioRepository.findByEmail(request.email()).orElseThrow();
         String token = jwtService.getToken(user);
-        return AuthResponse.builder().token(token).build();
+        Medico med = medicoService.findByEmail(request.email());
+        return AuthResponse.builder().token(token).matricula(med.getMatriculaProfesional()).build();
     }
 }

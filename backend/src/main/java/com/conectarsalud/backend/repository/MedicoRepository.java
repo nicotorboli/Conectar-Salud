@@ -8,9 +8,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
-
+@Transactional
 public interface MedicoRepository extends JpaRepository<Medico, Long> {
-    @Transactional
+
     Optional<Medico> findByMatriculaProfesional(String matriculaProfesional);
 
     List<Medico> findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(String nombre, String apellido);
@@ -22,4 +22,6 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
     List<Medico> buscarPorNombreCompleto(@Param("textoBusqueda") String textoBusqueda);
 
     List<Medico> findByEspecialidadContainingIgnoreCase(String especialidad);
+
+    Medico findByEmail(String email);
 }
