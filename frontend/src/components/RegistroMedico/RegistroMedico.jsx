@@ -61,7 +61,7 @@ export function RegistroMedico() {
         throw new Error(data.message || "Error al registrar");
       }
 
-      login(data.token); 
+      login(data.token, data.matricula); 
       navigate("/")
     } catch (error) {
       setErrors({ general: error.message });
