@@ -52,4 +52,8 @@ public class MedicoServiceImpl implements MedicoService {
         medicoRepository.save(med);
     }
 
+    public  Medico findByEmail(String email){
+        return medicoRepository.findByEmail(email);
+    }
+
 }
