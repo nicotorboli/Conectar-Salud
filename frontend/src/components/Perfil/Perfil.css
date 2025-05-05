@@ -13,7 +13,7 @@
 .perfil-edit-button {
   position: absolute;
   top: 24px;
-  right: 24px;
+  right: 74px;
   background-color: #007bff;
   color: white;
   border: none;
@@ -26,6 +26,30 @@
 
 .perfil-edit-button:hover {
   background-color: #0056b3;
+}
+
+.perfil-delete-account-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  background-color: #e53935;
+  padding: 0px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.perfil-delete-account-button:hover {
+  background-color: #c62828;
+}
+
+.perfil-delete-account-button img {
+  width: 24px;
+  height: 24px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .perfil-header {

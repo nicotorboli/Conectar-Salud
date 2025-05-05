@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import { useNavigate, useParams } from 'react-router-dom'
 import WhatsApp from '../../assets/WhatsApp.png'
+import TrashIcon from '../../assets/trash.png'
 import './Perfil.css'
 import editarPerfil from '../../service/editarPerfil'
 
@@ -37,6 +38,24 @@ const Perfil = () => {
     }
   }
   
+  const handleDelete = () => {
+    const confirmacion = window.confirm('¿Estás seguro de que querés eliminar tu cuenta?')
+    if (confirmacion) {
+      fetch(`http://localhost:8080/medicos/matricula/${matricula}`, {
+        method: 'DELETE',
+      })
+        .then((res) => {
+          if (res.ok) {
+            alert('Cuenta eliminada con éxito')
+            logout()
+            navigate('/')
+          } else {
+            alert('Error al eliminar la cuenta')
+          }
+        })
+        .catch((err) => console.error(err))
+    }
+  }
 
   useEffect(() => {
     fetch('http://localhost:8080/medicos/especialidades')
@@ -50,7 +69,6 @@ const Perfil = () => {
       especialidad: e.target.value,
     })
   }
-
 
   useEffect(() => {
     const fetchMedico = async () => {
@@ -71,6 +89,9 @@ const Perfil = () => {
     <div className='perfil-container'>
       <button className='perfil-edit-button' onClick={handleEdit}>
         {editable ? 'Guardar Cambios' : 'Editar Perfil'}
+      </button>
+      <button className='perfil-delete-account-button'>
+        <img src={TrashIcon} alt='Eliminar cuenta' onClick={handleDelete}/>
       </button>
       <div className='perfil-header'>
         <div className='perfil-avatar-placeholder'></div>
