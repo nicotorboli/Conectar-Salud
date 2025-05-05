@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import { useNavigate, useParams } from 'react-router-dom'
 import WhatsApp from '../../assets/WhatsApp.png'
+import TrashIcon from '../../assets/trash.png'
 import './Perfil.css'
 import editarPerfil from '../../service/editarPerfil'
 
@@ -72,6 +73,9 @@ const Perfil = () => {
       <button className='perfil-edit-button' onClick={handleEdit}>
         {editable ? 'Guardar Cambios' : 'Editar Perfil'}
       </button>
+      {/* <button className='perfil-delete-account-button'>
+        <img className='erfil-delete-account-img' src={TrashIcon} alt='Eliminar cuenta' />
+      </button> */}
       <div className='perfil-header'>
         <div className='perfil-avatar-placeholder'></div>
         <div className='perfil-avatar-nombreCompleto'>

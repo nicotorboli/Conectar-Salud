@@ -28,6 +28,19 @@
   background-color: #0056b3;
 }
 
+.perfil-delete-account-button {
+  background-color: #e53935;
+}
+
+.perfil-delete-account-button:hover {
+  background-color: #c62828;
+}
+
+.perfil-delete-account-img {
+  width: 2px;
+  height: 2px;
+}
+
 .perfil-header {
   display: flex;
   align-items: center;
