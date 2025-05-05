@@ -138,4 +138,46 @@
       grid-template-columns: 1fr;
     }
   }
+
+  /* Estilos para la subida de imagen */
+  .image-upload-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+  }
+
+  .image-preview, .image-placeholder {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px dashed #007bff;
+  }
+
+  .image-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f5f5f5;
+      font-size: 40px;
+  }
+
+  .image-input {
+      display: none;
+  }
+
+  .image-upload-button {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  }
+
+  .image-upload-button:hover {
+      background-color: #0056b3;
+  }
   

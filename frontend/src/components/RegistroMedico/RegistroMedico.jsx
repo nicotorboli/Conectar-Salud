@@ -20,13 +20,16 @@ export function RegistroMedico() {
     matriculaProfesional: "",
     nroWhatsapp: "",
     nroLinea: "",
+    fotoPerfil: null,
   });
   const [errors, setErrors] = useState({
     general: null,
   });
   const [especialidades, setEspecialidades] = useState([]);
-  const navigate = useNavigate()
-  const { login } = useContext(AuthContext)
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
+  const [previewImage, setPreviewImage] = useState(null);
+
 
   useEffect(() => {
     fetch("http://localhost:8080/medicos/especialidades") 
@@ -42,33 +45,64 @@ export function RegistroMedico() {
     });
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
-      setIsLoading(true);
-  
-      const response = await fetch("http://localhost:8080/auth/register/medico", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-  
-      const data = await response.json();
-      
+        setIsLoading(true);
 
-      if (!response.ok) {
-        throw new Error(data.message || "Error al registrar");
-      }
+        // 1. Preparar los datos del médico como JSON
+        const medicoData = {
+            nombre: formData.nombre,
+            apellido: formData.apellido,
+            email: formData.email,
+            nroWhatsapp: formData.nroWhatsapp,
+            nroLinea: formData.nroLinea || "",
+            contraseña: formData.contraseña,
+            especialidad: formData.especialidad,
+            matriculaProfesional: formData.matriculaProfesional,
+            precioConsulta: Number(formData.precioConsulta),
+            ubicacion: formData.ubicacion,
+            descripcion: formData.descripcion || ""
+        };
 
-      login(data.token); 
-      navigate("/")
+        // 2. Crear FormData
+        const formDataToSend = new FormData();
+
+        // 3. Agregar el JSON como string (con el nombre "medico")
+        formDataToSend.append('medico', JSON.stringify(medicoData));
+
+        // 4. Agregar la foto si existe (con el nombre "foto")
+        if (formData.fotoPerfil) {
+            formDataToSend.append('foto', formData.fotoPerfil);
+        }
+
+        // 5. Enviar la solicitud (IMPORTANTE: NO incluir Content-Type header)
+        const response = await fetch("http://localhost:8080/auth/register/medico", {
+            method: "POST",
+            body: formDataToSend
+            // El navegador agregará automáticamente:
+            // Content-Type: multipart/form-data; boundary=...
+        });
+
+        // 6. Manejar la respuesta
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Error al registrar");
+        }
+
+        const data = await response.json();
+        login(data.token);
+        navigate("/");
+
     } catch (error) {
-      setErrors({ general: error.message });
+        setErrors({
+            general: error.message || "Error en el registro. Intente nuevamente."
+        });
     } finally {
-      setIsLoading(false);
+        setIsLoading(false);
     }
-  };
+};
 
   return (
     <div className="registro-medico-card">
@@ -238,6 +272,37 @@ export function RegistroMedico() {
             <p className="form-description">
               Esta información será visible en su perfil público
             </p>
+          </div>
+
+          <div className="form-group">
+              <label className="form-label">Foto de perfil (opcional)</label>
+              <div className="image-upload-container">
+                  {previewImage ? (
+                      <img src={previewImage} alt="Vista previa" className="image-preview" />
+                  ) : (
+                      <div className="image-placeholder">
+
+                      </div>
+                  )}
+                  <input
+                      type="file"
+                      id="fotoPerfil"
+                      name="fotoPerfil"
+                      accept="image/*"
+                      className="image-input"
+                      onChange={(e) => {
+                          if (e.target.files && e.target.files[0]) {
+                              const file = e.target.files[0];
+                              setFormData({...formData, fotoPerfil: file});
+                              setPreviewImage(URL.createObjectURL(file));
+                          }
+                      }}
+                  />
+                  <label htmlFor="fotoPerfil" className="image-upload-button">
+                      Seleccionar imagen
+                  </label>
+              </div>
+              <p className="form-description">Tamaño recomendado: 400x400px</p>
           </div>
 
           <button type="submit" className="submit-button" disabled={isLoading}>
