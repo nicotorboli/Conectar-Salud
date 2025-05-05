@@ -46,13 +46,24 @@
     margin-bottom: 24px;
 }
 
-.avatar-placeholder {
-    width: 60px;
-    height: 60px;
+.avatar-imagen {
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    background: #eee;
+    object-fit: cover;
     margin-right: 16px;
+    /*border: 3px solid; #007bff;*/
 }
+
+.avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #eee url('../../assets/PlaceHolder.png') center/cover no-repeat;
+    margin-right: 16px;
+    border: 3px solid #e0e0e0;
+}
+
 
 .medico-nombre {
     font-size: 22px;
