@@ -94,7 +94,19 @@ const Perfil = () => {
         <img src={TrashIcon} alt='Eliminar cuenta' onClick={handleDelete}/>
       </button>
       <div className='perfil-header'>
-        <div className='perfil-avatar-placeholder'></div>
+        {medico.fotoPerfil ? (
+            <img
+            src={`data:image/jpeg;base64,${medico.fotoPerfil}`}
+            alt={`${medico.nombre} ${medico.apellido}`}
+            className="avatar-imagen"
+            onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = '/images/PlaceHolder.png';
+            }}
+            />
+            ) : (
+            <div className="avatar-placeholder"></div>
+            )}
         <div className='perfil-avatar-nombreCompleto'>
           <h2 className='perfil-medico-nombre' contentEditable={editable} >
             {medico.nombre}
