@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState,useRef } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import { useNavigate, useParams } from 'react-router-dom'
 import WhatsApp from '../../assets/WhatsApp.png'
@@ -14,6 +14,9 @@ const Perfil = () => {
   const { logout } = useContext(AuthContext)
   const [especialidades, setEspecialidades] = useState([])
   const navigate = useNavigate()
+  const fileInputRef = useRef(null)
+
+
 
   const handleLogout = () => {
     logout()
@@ -28,7 +31,8 @@ const Perfil = () => {
               ...medico,
               nombre: document.querySelector(".perfil-medico-nombre").innerHTML,
               apellido:document.querySelector(".perfil-medico-apellido").innerHTML,
-              email:document.querySelector(".perfil-info-item-email").innerHTML
+              email:document.querySelector(".perfil-info-item-email").innerHTML,
+              descripcion:document.querySelector(".perfil-descripcion p").innerHTML
               }
         editarPerfil(medicoABase)
         setEditable(false)
@@ -37,7 +41,40 @@ const Perfil = () => {
       setEditable(true)
     }
   }
-  
+
+const handleImageChange = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+
+  if (!validTypes.includes(file.type)) {
+    alert('Por favor, sube una imagen en formato PNG, JPG, JPEG o GIF');
+    return;
+  }
+
+  if (file.size > 10 * 1024 * 1024) {
+    alert('La imagen no debe superar los 10MB');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    const base64String = reader.result.split(',')[1];
+    setMedico(prev => ({
+      ...prev,
+      fotoPerfil: base64String
+    }));
+  };
+  reader.readAsDataURL(file);
+};
+
+    const triggerFileInput = () => {
+      if (editable) {
+        fileInputRef.current.click()
+      }
+    }
+
   const handleDelete = () => {
     const confirmacion = window.confirm('¿Estás seguro de que querés eliminar tu cuenta?')
     if (confirmacion) {
@@ -94,19 +131,34 @@ const Perfil = () => {
         <img src={TrashIcon} alt='Eliminar cuenta' onClick={handleDelete}/>
       </button>
       <div className='perfil-header'>
-        {medico.fotoPerfil ? (
-            <img
-            src={`data:image/jpeg;base64,${medico.fotoPerfil}`}
-            alt={`${medico.nombre} ${medico.apellido}`}
-            className="avatar-imagen"
-            onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = '/images/PlaceHolder.png';
-            }}
-            />
-            ) : (
-            <div className="avatar-placeholder"></div>
-            )}
+  <div
+    onClick={triggerFileInput}
+    style={{ cursor: editable ? 'pointer' : 'default', position: 'relative' }}
+  >
+    {medico.fotoPerfil ? (
+      <img
+        src={`data:image/jpeg;base64,${medico.fotoPerfil}`}
+        alt={`${medico.nombre} ${medico.apellido}`}
+        className="avatar-imagen"
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = placeholder;
+        }}
+      />
+    ) : (
+      <div className="avatar-placeholder"></div>
+    )}
+    {/* Añade este input */}
+<input
+  type="file"
+  ref={fileInputRef}
+  onChange={handleImageChange}
+  accept=".png,.jpg,.jpeg,.gif"
+  style={{ display: 'none' }}
+/>
+    {/* Overlay para indicar que se puede editar */}
+    {editable}
+  </div>
         <div className='perfil-avatar-nombreCompleto'>
           <h2 className='perfil-medico-nombre' contentEditable={editable} >
             {medico.nombre}
