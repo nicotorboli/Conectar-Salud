@@ -92,8 +92,10 @@ const handleSubmit = async (e) => {
         }
 
         const data = await response.json();
-        login(data.token);
-        navigate("/");
+
+
+      login(data.token, data.matricula);
+      navigate("/")
 
     } catch (error) {
         setErrors({
