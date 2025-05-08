@@ -18,20 +18,39 @@ const Perfil = () => {
 
 
 
+   const validarEmail = (email) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+   };
+
+
   const handleLogout = () => {
     logout()
     navigate('/')
   }
 
-  const handleEdit = () => {
+  const handleEdit = async () => {
     if (editable) {
-      const confirmacion = window.confirm('¿Estás seguro de que querés guardar los cambios?')
+          const nuevoEmail = document.querySelector(".perfil-info-item-email").textContent;
+          const mismoEmail = nuevoEmail === medico.email;
+
+          // Solo validar si el email cambió
+          if (!mismoEmail) {
+            const validacion = await validarEmail(nuevoEmail);
+            if (!validacion.valido) {
+              alert(validacion.mensaje);
+              return;
+            }
+          }
+
+          const confirmacion = window.confirm('¿Estás seguro de que querés guardar los cambios?');
+
       if (confirmacion) {
           const medicoABase = {
               ...medico,
               nombre: document.querySelector(".perfil-medico-nombre").innerHTML,
               apellido:document.querySelector(".perfil-medico-apellido").innerHTML,
-              email:document.querySelector(".perfil-info-item-email").innerHTML,
+              email:nuevoEmail,
               descripcion:document.querySelector(".perfil-descripcion p").innerHTML
               }
         editarPerfil(medicoABase)

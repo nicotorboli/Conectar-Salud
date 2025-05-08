@@ -5,6 +5,7 @@ import com.conectarsalud.backend.model.Usuario;
 import com.conectarsalud.backend.repository.MedicoRepository;
 import com.conectarsalud.backend.repository.UsuarioRepository;
 import com.conectarsalud.backend.service.MedicoService;
+import com.conectarsalud.backend.service.exceptions.EmailYaRegistradoException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +54,7 @@ public class MedicoServiceImpl implements MedicoService {
     }
 
     public  Medico findByEmail(String email){
-        return medicoRepository.findByEmail(email);
+        return medicoRepository.findByEmail(email).orElseThrow(() -> new EmailYaRegistradoException());
     }
 
 }

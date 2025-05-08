@@ -4,6 +4,7 @@ import com.conectarsalud.backend.dtos.MedicoDTO;
 import com.conectarsalud.backend.model.Especialidades;
 import com.conectarsalud.backend.model.Medico;
 import com.conectarsalud.backend.service.MedicoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/medicos")
 public class MedicoController {
 
+    @Autowired
     private final MedicoService medicoService;
 
     public MedicoController(MedicoService medicoService) {
@@ -69,6 +71,21 @@ public class MedicoController {
                 })
                 .collect(Collectors.toList());
          return especialidades;
+    }
+
+    @GetMapping("/verificar-email")
+    public ResponseEntity<?> verificarEmail(
+            @RequestParam String email,
+            @RequestParam String matricula) {
+
+        // Validar formato del email
+        if (!medicoService.validarFormatoEmail(email)) {
+            return ResponseEntity.badRequest().body("Formato de email inválido");
+        }
+
+        boolean emailDisponible = medicoService.verificarEmailDisponible(email, matricula);
+
+        return ResponseEntity.ok().body(emailDisponible);
     }
 
     @DeleteMapping("/matricula/{matricula}")
