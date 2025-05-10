@@ -17,4 +17,8 @@ public interface MedicoService {
     List<Medico> obtenerTodosPorEspecialidad(String especialidad);
     void actualizar(Medico med);
     Medico findByEmail(String email);
+
+    boolean validarFormatoEmail(String email);
+
+    boolean verificarEmailDisponible(String email);
 }

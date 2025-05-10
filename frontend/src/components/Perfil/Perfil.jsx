@@ -17,7 +17,7 @@ const Perfil = () => {
   const fileInputRef = useRef(null)
 
 
-
+        // y verifico que no este sea invalido ni le pertenezca a otro
    const validarEmail = (email) => {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
@@ -31,17 +31,6 @@ const Perfil = () => {
 
   const handleEdit = async () => {
     if (editable) {
-          const nuevoEmail = document.querySelector(".perfil-info-item-email").textContent;
-          const mismoEmail = nuevoEmail === medico.email;
-
-          // Solo validar si el email cambió
-          if (!mismoEmail) {
-            const validacion = await validarEmail(nuevoEmail);
-            if (!validacion.valido) {
-              alert(validacion.mensaje);
-              return;
-            }
-          }
 
           const confirmacion = window.confirm('¿Estás seguro de que querés guardar los cambios?');
 
@@ -50,12 +39,16 @@ const Perfil = () => {
               ...medico,
               nombre: document.querySelector(".perfil-medico-nombre").innerHTML,
               apellido:document.querySelector(".perfil-medico-apellido").innerHTML,
-              email:nuevoEmail,
+              email:document.querySelector(".perfil-info-item-email").textContent.trim(),
               descripcion:document.querySelector(".perfil-descripcion p").innerHTML
               }
-        editarPerfil(medicoABase)
-        setEditable(false)
-      }
+        try {
+                await editarPerfil(medicoABase);
+                setEditable(false);
+              } catch (error) {
+                alert(error.message || "Error al actualizar el perfil");
+              }
+            }
     } else {
       setEditable(true)
     }

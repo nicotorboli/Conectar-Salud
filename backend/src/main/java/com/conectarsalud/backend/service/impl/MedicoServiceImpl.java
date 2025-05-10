@@ -57,4 +57,15 @@ public class MedicoServiceImpl implements MedicoService {
         return medicoRepository.findByEmail(email).orElseThrow(() -> new EmailYaRegistradoException());
     }
 
+    public boolean validarFormatoEmail(String email) {
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        return email.matches(regex);
+    }
+
+    public boolean verificarEmailDisponible(String email) {
+        Medico medicoConEmail = medicoRepository.findByEmail(email).orElseThrow(() -> new EmailYaRegistradoException());
+
+        return medicoConEmail.getMatriculaProfesional().equals(email);
+    }
+
 }

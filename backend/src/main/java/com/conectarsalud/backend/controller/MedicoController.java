@@ -78,12 +78,12 @@ public class MedicoController {
             @RequestParam String email,
             @RequestParam String matricula) {
 
-        // Validar formato del email
+
         if (!medicoService.validarFormatoEmail(email)) {
             return ResponseEntity.badRequest().body("Formato de email inválido");
         }
 
-        boolean emailDisponible = medicoService.verificarEmailDisponible(email, matricula);
+        boolean emailDisponible = medicoService.verificarEmailDisponible(email);
 
         return ResponseEntity.ok().body(emailDisponible);
     }

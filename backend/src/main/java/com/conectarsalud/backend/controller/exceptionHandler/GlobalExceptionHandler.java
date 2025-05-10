@@ -1,5 +1,6 @@
 package com.conectarsalud.backend.controller.exceptionHandler;
 
+import com.conectarsalud.backend.service.exceptions.EmailYaRegistradoException;
 import com.conectarsalud.backend.service.exceptions.UsuarioNoEncontrado;
 import com.conectarsalud.backend.service.exceptions.UsuarioYaExistenteException;
 import org.springframework.http.HttpStatus;
@@ -64,4 +65,15 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
     }
+
+    @ExceptionHandler(EmailYaRegistradoException.class)
+    public ResponseEntity<ErrorResponse> handleEmailYaRegistrado(EmailYaRegistradoException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                "El email ya está registrado",
+                409
+        );
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
 }
