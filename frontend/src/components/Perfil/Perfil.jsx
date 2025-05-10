@@ -17,11 +17,6 @@ const Perfil = () => {
   const fileInputRef = useRef(null)
 
 
-        // y verifico que no este sea invalido ni le pertenezca a otro
-   const validarEmail = (email) => {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-   };
 
 
   const handleLogout = () => {
@@ -42,13 +37,15 @@ const Perfil = () => {
               email:document.querySelector(".perfil-info-item-email").textContent.trim(),
               descripcion:document.querySelector(".perfil-descripcion p").innerHTML
               }
-        try {
-                await editarPerfil(medicoABase);
-                setEditable(false);
-              } catch (error) {
-                alert(error.message || "Error al actualizar el perfil");
-              }
-            }
+            try {
+             await editarPerfil(medicoABase);
+             setEditable(false);
+             alert("Perfil actualizado correctamente");
+           } catch (error) {
+             // El mensaje ya viene del backend (error.message = ErrorResponse.message)
+             alert(`Error: ${error.message}`);
+           }
+         }
     } else {
       setEditable(true)
     }

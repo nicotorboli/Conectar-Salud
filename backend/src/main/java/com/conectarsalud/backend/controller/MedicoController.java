@@ -4,6 +4,8 @@ import com.conectarsalud.backend.dtos.MedicoDTO;
 import com.conectarsalud.backend.model.Especialidades;
 import com.conectarsalud.backend.model.Medico;
 import com.conectarsalud.backend.service.MedicoService;
+import com.conectarsalud.backend.service.exceptions.EmailNoValidoException;
+import com.conectarsalud.backend.service.exceptions.EmailYaRegistradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +37,15 @@ public class MedicoController {
 
     @PutMapping
     public void actualizarMedico(@RequestBody MedicoDTO med){
-        String contra = medicoService.findByMatriculaProfesional(med.matriculaProfesional()).get().getPassword();
-        medicoService.actualizar(med.aModelo(contra));
+        Medico medicoAActualizar = medicoService.findByMatriculaProfesional(med.matriculaProfesional()).get();
+        if (!medicoService.validarFormatoEmail(med.email())){
+            throw new EmailNoValidoException("el email no es valido");
+        }
+        if(!medicoService.verificarEmailDisponible(medicoAActualizar.getEmail(),med.email())){
+            throw new EmailYaRegistradoException();
+        }
+
+        medicoService.actualizar(med.aModelo(medicoAActualizar.getPassword()));
     }
 
 
@@ -73,20 +82,7 @@ public class MedicoController {
          return especialidades;
     }
 
-    @GetMapping("/verificar-email")
-    public ResponseEntity<?> verificarEmail(
-            @RequestParam String email,
-            @RequestParam String matricula) {
 
-
-        if (!medicoService.validarFormatoEmail(email)) {
-            return ResponseEntity.badRequest().body("Formato de email inválido");
-        }
-
-        boolean emailDisponible = medicoService.verificarEmailDisponible(email);
-
-        return ResponseEntity.ok().body(emailDisponible);
-    }
 
     @DeleteMapping("/matricula/{matricula}")
     public void deleteMedico (@PathVariable String matricula){

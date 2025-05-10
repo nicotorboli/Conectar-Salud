@@ -1,5 +1,6 @@
 package com.conectarsalud.backend.controller.exceptionHandler;
 
+import com.conectarsalud.backend.service.exceptions.EmailNoValidoException;
 import com.conectarsalud.backend.service.exceptions.EmailYaRegistradoException;
 import com.conectarsalud.backend.service.exceptions.UsuarioNoEncontrado;
 import com.conectarsalud.backend.service.exceptions.UsuarioYaExistenteException;
@@ -76,4 +77,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(EmailNoValidoException.class)
+    public ResponseEntity<ErrorResponse> handleEmailNoValido(EmailNoValidoException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                "El email no es valido",
+                400
+        );
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
 }

@@ -5,7 +5,7 @@ import com.conectarsalud.backend.model.Usuario;
 import com.conectarsalud.backend.repository.MedicoRepository;
 import com.conectarsalud.backend.repository.UsuarioRepository;
 import com.conectarsalud.backend.service.MedicoService;
-import com.conectarsalud.backend.service.exceptions.EmailYaRegistradoException;
+import com.conectarsalud.backend.service.exceptions.UsuarioNoEncontrado;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +54,7 @@ public class MedicoServiceImpl implements MedicoService {
     }
 
     public  Medico findByEmail(String email){
-        return medicoRepository.findByEmail(email).orElseThrow(() -> new EmailYaRegistradoException());
+        return medicoRepository.findByEmail(email).orElseThrow(() -> new UsuarioNoEncontrado("el email no esta registrado"));
     }
 
     public boolean validarFormatoEmail(String email) {
@@ -62,10 +62,10 @@ public class MedicoServiceImpl implements MedicoService {
         return email.matches(regex);
     }
 
-    public boolean verificarEmailDisponible(String email) {
-        Medico medicoConEmail = medicoRepository.findByEmail(email).orElseThrow(() -> new EmailYaRegistradoException());
+    public boolean verificarEmailDisponible(String emailViejo, String emailAActualizar) {
+        Optional<Medico> medicoConEmail = medicoRepository.findByEmail(emailAActualizar);
 
-        return medicoConEmail.getMatriculaProfesional().equals(email);
+        return medicoConEmail.isEmpty() || emailViejo.equals(medicoConEmail.get().getEmail())  ;
     }
 
 }

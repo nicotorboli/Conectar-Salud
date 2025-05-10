@@ -20,5 +20,5 @@ public interface MedicoService {
 
     boolean validarFormatoEmail(String email);
 
-    boolean verificarEmailDisponible(String email);
+    boolean verificarEmailDisponible(String emailViejo, String emailAActualizar);
 }
