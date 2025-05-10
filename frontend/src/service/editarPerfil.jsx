@@ -6,12 +6,12 @@ const editarPerfil = async (medico) => {
   });
 
   if (!response.ok) {
-    const errorData = await response.json(); // Solo si hay error (backend devuelve ErrorResponse)
-    throw new Error(errorData.message); // Lanza el mensaje del backend
+    const errorData = await response.json();
+    throw new Error(errorData.message);
   }
 
-  // Si la respuesta es exitosa (200) pero no tiene cuerpo:
-  return null; // O devuelve un objeto vacío: return {};
+
+  return null;
 };
 
   export default editarPerfil

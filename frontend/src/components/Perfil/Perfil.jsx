@@ -42,7 +42,6 @@ const Perfil = () => {
              setEditable(false);
              alert("Perfil actualizado correctamente");
            } catch (error) {
-             // El mensaje ya viene del backend (error.message = ErrorResponse.message)
              alert(`Error: ${error.message}`);
            }
          }
