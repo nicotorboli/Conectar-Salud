@@ -24,4 +24,6 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
     List<Medico> findByEspecialidadContainingIgnoreCase(String especialidad);
 
     Optional<Medico> findByEmail(String email);
+
+    List<Medico> findByPrecioConsultaBetween(int precioMin, int precioMax);
 }

@@ -68,4 +68,7 @@ public class MedicoServiceImpl implements MedicoService {
         return medicoConEmail.isEmpty() || emailViejo.equals(medicoConEmail.get().getEmail())  ;
     }
 
+    public List<Medico> medicosPrecioEntre(int min , int max){
+        return  medicoRepository.findByPrecioConsultaBetween(min, max);
+    }
 }

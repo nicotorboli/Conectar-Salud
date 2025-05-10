@@ -95,7 +95,8 @@ const handleSubmit = async (e) => {
 
 
       login(data.token, data.matricula);
-      navigate("/")
+      navigate("/");
+      scrollTo(0,0);
 
     } catch (error) {
         setErrors({

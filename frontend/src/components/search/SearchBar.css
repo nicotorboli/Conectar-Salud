@@ -162,6 +162,10 @@ button:hover .arrow {
   transform: translateX(3px);
 }
 
+button:disabled{
+  opacity: 0.5;
+}
+
 /* Dropdown de especialidades */
 .dropdown-especialidades {
   position: absolute;
@@ -209,6 +213,47 @@ button:hover .arrow {
 .dropdown-item:hover {
   background: #f3f4f6;
   color: #2563eb;
+}
+
+.inputNumber{
+  width: 50%;
+  min-width: 70px;
+}
+
+.contenedorPrecio {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.price-separator {
+  font-weight: bold;
+  color: #666;
+}
+
+.price-error-message {
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  color: #d32f2f;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #ffebee;
+  padding: 4px 8px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.error-icon {
+  font-size: 1rem;
+}
+
+.inputNumber {
+  width: 100px;
 }
 
 /* Animaciones */

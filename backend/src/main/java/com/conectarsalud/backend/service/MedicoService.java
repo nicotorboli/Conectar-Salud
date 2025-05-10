@@ -21,4 +21,5 @@ public interface MedicoService {
     boolean validarFormatoEmail(String email);
 
     boolean verificarEmailDisponible(String emailViejo, String emailAActualizar);
+    List<Medico> medicosPrecioEntre(int min , int max);
 }

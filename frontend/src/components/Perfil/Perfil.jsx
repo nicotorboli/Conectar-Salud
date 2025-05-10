@@ -43,6 +43,7 @@ const Perfil = () => {
              alert("Perfil actualizado correctamente");
            } catch (error) {
              alert(`Error: ${error.message}`);
+             document.querySelector(".perfil-info-item-email").textContent = medico.email;
            }
          }
     } else {
