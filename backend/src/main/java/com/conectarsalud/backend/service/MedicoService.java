@@ -17,5 +17,9 @@ public interface MedicoService {
     List<Medico> obtenerTodosPorEspecialidad(String especialidad);
     void actualizar(Medico med);
     Medico findByEmail(String email);
+
+    boolean validarFormatoEmail(String email);
+
+    boolean verificarEmailDisponible(String emailViejo, String emailAActualizar);
     List<Medico> medicosPrecioEntre(int min , int max);
 }

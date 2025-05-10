@@ -18,25 +18,33 @@ const Perfil = () => {
 
 
 
+
   const handleLogout = () => {
     logout()
     navigate('/')
   }
 
-  const handleEdit = () => {
+  const handleEdit = async () => {
     if (editable) {
-      const confirmacion = window.confirm('¿Estás seguro de que querés guardar los cambios?')
+
+          const confirmacion = window.confirm('¿Estás seguro de que querés guardar los cambios?');
+
       if (confirmacion) {
           const medicoABase = {
               ...medico,
               nombre: document.querySelector(".perfil-medico-nombre").innerHTML,
               apellido:document.querySelector(".perfil-medico-apellido").innerHTML,
-              email:document.querySelector(".perfil-info-item-email").innerHTML,
+              email:document.querySelector(".perfil-info-item-email").textContent.trim(),
               descripcion:document.querySelector(".perfil-descripcion p").innerHTML
               }
-        editarPerfil(medicoABase)
-        setEditable(false)
-      }
+            try {
+             await editarPerfil(medicoABase);
+             setEditable(false);
+             alert("Perfil actualizado correctamente");
+           } catch (error) {
+             alert(`Error: ${error.message}`);
+           }
+         }
     } else {
       setEditable(true)
     }
