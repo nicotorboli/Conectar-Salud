@@ -17,4 +17,5 @@ public interface MedicoService {
     List<Medico> obtenerTodosPorEspecialidad(String especialidad);
     void actualizar(Medico med);
     Medico findByEmail(String email);
+    List<Medico> medicosPrecioEntre(int min , int max);
 }

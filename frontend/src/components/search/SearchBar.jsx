@@ -1,12 +1,16 @@
 import "./SearchBar.css"
-import { useState, useEffect } from "react";
+import { useState, useEffect, use, useSyncExternalStore } from "react";
 
 const SearchBar = ({ onSearch }) => {
+  const maxValor = 10000
   const [searchText, setSearchText] = useState("");
   const [searchOption, setSearchOption] = useState("Nombre");
   const [especialidades, setEspecialidades] = useState([]);
   const [especialidadSeleccionada, setEspecialidadSeleccionada] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
+  const [priceError , setPriceError] = useState("");
+  const [minPrice , setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(maxValor);
 
   useEffect(() => {
     fetch("http://localhost:8080/medicos/especialidades")
@@ -18,7 +22,11 @@ const SearchBar = ({ onSearch }) => {
   const handleSearch = () => {
     if (searchOption === "Especialidad" && especialidadSeleccionada) {
       onSearch({ searchText: especialidadSeleccionada, searchOption });
-    } else {
+    } else if(searchOption === "Precio"){
+      onSearch({
+        searchOption,searchText:[minPrice,maxPrice]
+      })
+    }else{
       onSearch({ searchText, searchOption });
     }
   };
@@ -42,10 +50,47 @@ const SearchBar = ({ onSearch }) => {
     }
   };
 
+ const handlePriceChange = (e, type) => {
+  const inputValue = e.target.value;
+  const numericValue = inputValue === '' ? '' : Math.max(0, parseInt(inputValue)) || 0; // Fuerza números positivos
+
+  // Actualizamos el estado y luego validamos
+  if (type === 'min') {
+    setMinPrice(numericValue);
+    // Usamos el callback para asegurarnos de tener el último valor
+    setMaxPrice(prevMax => {
+      const newError = checkPriceErrors(numericValue, prevMax);
+      setPriceError(newError);
+      return prevMax; // No modificamos maxPrice
+    });
+  } else {
+    setMaxPrice(numericValue);
+    // Usamos el callback para asegurarnos de tener el último valor
+    setMinPrice(prevMin => {
+      const newError = checkPriceErrors(prevMin, numericValue);
+      setPriceError(newError);
+      return prevMin; // No modificamos minPrice
+    });
+  }
+};
+
+// Función auxiliar para validaciones
+const checkPriceErrors = (min, max) => {
+  if (min === '' || max === '') return ''; // No hay error si algún campo está vacío
+  
+  if (min < 0 || max < 0) return 'Ningún valor puede ser negativo';
+  if (min > max) return 'El mínimo no puede ser mayor que el máximo';
+  
+  return '';
+};
+
+
   const handleOptionChange = (option) => {
     setSearchOption(option);
     setSearchText("");
     setEspecialidadSeleccionada("");
+    setMinPrice(0);
+    setMaxPrice(maxValor);
     if (option === "Especialidad") {
       setShowDropdown(true);
     } else {
@@ -68,32 +113,65 @@ const SearchBar = ({ onSearch }) => {
             <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
           </g>
         </svg>
-        <input
-          placeholder={searchOption === "Especialidad" ? "Seleccionar especialidad" : "Search"}
-          type="search"
-          className="input"
-          value={searchText}
-          onChange={handleInputChange}
-          onFocus={handleInputFocus}
-          onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
-        />
-        {searchOption === "Especialidad" && showDropdown && especialidades.length > 0 && (
-          <div className="dropdown-especialidades">
-            {especialidadesFiltradas.length > 0 ? (
-              especialidadesFiltradas.map((especialidad, index) => (
-                <div 
-                  key={index} 
-                  className="dropdown-item"
-                  onClick={() => handleEspecialidadClick(especialidad)}
-                >
-                  {especialidad.display || especialidad.nombreDisplay || ""}
-                </div>
-              ))
-            ) : (
-              <div className="dropdown-item">No hay resultados</div>
-            )}
-          </div>
-        )}
+        {
+  searchOption === "Precio" ? (
+  <div className="contenedorPrecio">
+    <input 
+      type="number" 
+      min={0} 
+      value={minPrice === '' ? '' : minPrice} 
+      placeholder="Ingrese precio mínimo" 
+      onChange={(e) => handlePriceChange(e, "min")} 
+      className="input inputNumber" 
+    />
+    <span className="price-separator">-</span>
+    <input 
+      type="number" 
+      min={minPrice !== '' ? minPrice : 0} 
+      value={maxPrice === '' ? '' : maxPrice} 
+      placeholder="Ingrese precio máximo" 
+      onChange={(e) => handlePriceChange(e, "max")} 
+      className="input inputNumber"
+    />
+    {priceError && (
+      <div className="price-error-message">
+        <span className="error-icon">⚠️</span>
+        {priceError}
+      </div>
+    )}
+  </div>
+) : (
+    <>
+      <input
+        placeholder={searchOption === "Especialidad" ? "Seleccionar especialidad" : "Search"}
+        type="search"
+        className="input"
+        value={searchText}
+        onChange={handleInputChange}
+        onFocus={handleInputFocus}
+        onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
+      />
+      {searchOption === "Especialidad" && showDropdown && especialidades.length > 0 && (
+        <div className="dropdown-especialidades">
+          {especialidadesFiltradas.length > 0 ? (
+            especialidadesFiltradas.map((especialidad, index) => (
+              <div 
+                key={index} 
+                className="dropdown-item"
+                onClick={() => handleEspecialidadClick(especialidad)}
+              >
+                {especialidad.display || especialidad.nombreDisplay || ""}
+              </div>
+            ))
+          ) : (
+            <div className="dropdown-item">No hay resultados</div>
+          )}
+        </div>
+      )}
+    </>
+  )
+}
+        
       </div>
       <div className="radio-inputs">
         <label className="radio">
@@ -116,8 +194,18 @@ const SearchBar = ({ onSearch }) => {
           />
           <span className="name">Especialidad</span>
         </label>
+        <label className="radio">
+          <input
+            type="radio"
+            name="radio"
+            value="Precio"
+            checked={searchOption === "Precio"}
+            onChange={(e) => handleOptionChange(e.target.value)}
+          />
+          <span className="name">Precio</span>
+        </label>
       </div>
-      <button onClick={handleSearch}>
+      <button onClick={handleSearch}  disabled={priceError && searchOption === "Precio"}>
         Buscar
         <div className="arrow-wrapper">
           <div className="arrow"></div>

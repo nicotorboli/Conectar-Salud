@@ -56,4 +56,7 @@ public class MedicoServiceImpl implements MedicoService {
         return medicoRepository.findByEmail(email);
     }
 
+    public List<Medico> medicosPrecioEntre(int min , int max){
+        return  medicoRepository.findByPrecioConsultaBetween(min, max);
+    }
 }

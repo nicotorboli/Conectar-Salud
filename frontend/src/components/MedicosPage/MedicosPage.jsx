@@ -21,7 +21,14 @@ const MedicosPage = () => {
                 try {
                     let url = "http://localhost:8080/medicos";
                     if (caracteristica) {
-                        url += `/${encodeURIComponent(caracteristica)}/${encodeURIComponent(filter)}`;
+                        if(caracteristica==="precio"){
+                            const valores = filter.split(",")
+                           url += `/${encodeURIComponent(caracteristica)}/${encodeURIComponent(parseInt(valores[0]))}/${encodeURIComponent(parseInt(valores[1]))}`;
+                            console.log(url)
+                        }else{
+                             url += `/${encodeURIComponent(caracteristica)}/${encodeURIComponent(filter)}`;
+                        }
+                       
                     }
                     const response = await fetch(url);
                     if (!response.ok) throw new Error("Error al obtener los médicos");

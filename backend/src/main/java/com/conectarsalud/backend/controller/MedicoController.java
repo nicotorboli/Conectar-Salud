@@ -71,6 +71,14 @@ public class MedicoController {
          return especialidades;
     }
 
+    @GetMapping("/precio/{min}/{max}")
+    public List<Medico> buscarMedicoPorPrecio(@PathVariable int min, @PathVariable int max ){
+        if(min > max){
+            throw  new RuntimeException("El valor minimo debe ser menor que el maximo");
+        }
+        return medicoService.medicosPrecioEntre(min,  max);
+    }
+
     @DeleteMapping("/matricula/{matricula}")
     public void deleteMedico (@PathVariable String matricula){
         medicoService.deleteByMatriculaProfesional(matricula);
