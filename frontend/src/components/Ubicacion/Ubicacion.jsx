@@ -4,13 +4,39 @@ import { useState, useRef, useEffect } from 'react';
 const LIBRARIES = ['places'];
 
 const Ubicacion = ({ value, onChange }) => {
-  const [address, setAddress] = useState(value || '');
+  const [address, setAddress] = useState(value );
   const [center, setCenter] = useState({ lat: -34.6037, lng: -58.3816 });
   const [markerPosition, setMarkerPosition] = useState(null);
   const [loadError, setLoadError] = useState(null);
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const inputRef = useRef(null);
 
+   useEffect(() => {
+    if (scriptLoaded && value) {
+      const geocoder = new window.google.maps.Geocoder();
+      const timeout = setTimeout(() => {
+        setGeocodingError('Tiempo de espera agotado para geolocalización');
+      }, 10000); // Timeout después de 10 segundos
+      console.log(value);
+      geocoder.geocode({ address: value }, (results, status) => {
+        clearTimeout(timeout);
+        if (status === 'OK' && results[0]) {
+          const location = results[0].geometry.location;
+          const newCenter = { 
+            lat: location.lat(), 
+            lng: location.lng() 
+          };
+          setCenter(newCenter);
+          setMarkerPosition(newCenter);
+          setIsMapsApiLoaded(true);
+        } else {
+          console.error('Error en geocoding:', status);
+          setGeocodingError(`Error al geolocalizar: ${status}`);
+        }
+      });
+    }
+  }, [scriptLoaded,value]);
+  
   useEffect(() => {
     if (!scriptLoaded || !window.google || !inputRef.current) return;
 
@@ -18,14 +44,15 @@ const Ubicacion = ({ value, onChange }) => {
       inputRef.current,
       {
         fields: ['formatted_address', 'geometry'],
-        types: ['establishment']
+        types: ['address']
       }
     );
-
+    console.log(value)
     const placeChangedListener = autocomplete.addListener('place_changed', () => {
       const place = autocomplete.getPlace();
+      console.log(place)
       if (!place.geometry) return;
-
+      
       const location = place.formatted_address;
       setAddress(location);
       setCenter({

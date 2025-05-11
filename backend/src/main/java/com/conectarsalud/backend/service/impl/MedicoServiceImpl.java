@@ -71,4 +71,8 @@ public class MedicoServiceImpl implements MedicoService {
     public List<Medico> medicosPrecioEntre(int min , int max){
         return  medicoRepository.findByPrecioConsultaBetween(min, max);
     }
+
+    public List<Medico> medicosPorUbicacion(String ubicacion){
+        return medicoRepository.findByUbicacionContainingIgnoreCase(ubicacion);
+    }
 }

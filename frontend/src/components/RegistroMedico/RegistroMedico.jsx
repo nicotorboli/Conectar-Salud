@@ -300,8 +300,9 @@ const handleSubmit = async (e) => {
 
             <div className="form-group">
                         <label className="form-label">Ubicación</label>
+                     
                         <Ubicacion
-                          value={formData.ubicacion}
+                          
                           onChange={(value) => setFormData({...formData, ubicacion: value})}
                         />
                       </div>

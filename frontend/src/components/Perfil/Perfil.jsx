@@ -5,6 +5,8 @@ import WhatsApp from '../../assets/WhatsApp.png'
 import TrashIcon from '../../assets/trash.png'
 import './Perfil.css'
 import editarPerfil from '../../service/editarPerfil'
+import Ubicacion from '../Ubicacion/Ubicacion'
+import UbicacionViewer from '../Ubicacion/UbicacionViewer'
 
 const Perfil = () => {
   const { matricula } = useParams()
@@ -12,6 +14,7 @@ const Perfil = () => {
   const [error, setError] = useState(null)
   const [editable, setEditable] = useState(false)
   const { logout } = useContext(AuthContext)
+  const[ubiNew, setUbiNew] = useState(null) 
   const [especialidades, setEspecialidades] = useState([])
   const navigate = useNavigate()
   const fileInputRef = useRef(null)
@@ -35,8 +38,10 @@ const Perfil = () => {
               nombre: document.querySelector(".perfil-medico-nombre").innerHTML,
               apellido:document.querySelector(".perfil-medico-apellido").innerHTML,
               email:document.querySelector(".perfil-info-item-email").textContent.trim(),
-              descripcion:document.querySelector(".perfil-descripcion p").innerHTML
+              descripcion:document.querySelector(".perfil-descripcion p").innerHTML,
+              ubicacion:ubiNew
               }
+              medico.ubicacion = ubiNew;
             try {
              await editarPerfil(medicoABase);
              setEditable(false);
@@ -124,6 +129,7 @@ const handleImageChange = (e) => {
         )
         const medicoData = await resp.json()
         setMedico(medicoData)
+        setUbiNew(medicoData.ubicacion)
       } catch (err) {
         setError(err.message)
       }
@@ -198,15 +204,13 @@ const handleImageChange = (e) => {
           <p className='perfil-medico-especialidad'>{medico.especialidad}</p>
         )}
       </div>
+      <div className='perfil-info-content'>
       <div className='perfil-body'>
         <div className='perfil-info-item'>
           <span>🩺</span>
           <p>{medico.matriculaProfesional}</p>
         </div>
-        <div className='perfil-info-item'>
-          <span>📍</span>
-          <p>{medico.ubicacion}</p>
-        </div>
+        
         <div className='perfil-info-item'>
           <span>$</span>
           <p>{medico.precioConsulta}</p>
@@ -232,6 +236,11 @@ const handleImageChange = (e) => {
             Cerrar Sesión
           </button>
         </div>
+      </div>
+      <div className='perfil-ubicacion'>
+          {editable ? <Ubicacion value={medico.ubicacion} onChange={(value) => {setUbiNew(value)}}> </Ubicacion>:
+          <UbicacionViewer direccion={medico.ubicacion} ></UbicacionViewer>}
+      </div>
       </div>
     </div>
   )

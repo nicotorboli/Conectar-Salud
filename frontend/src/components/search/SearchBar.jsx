@@ -26,7 +26,11 @@ const SearchBar = ({ onSearch }) => {
       onSearch({
         searchOption,searchText:[minPrice,maxPrice]
       })
-    }else{
+    }else if(searchOption === "Ubicacion"){
+         onSearch({ searchText, searchOption });
+    }
+    
+    else{
       onSearch({ searchText, searchOption });
     }
   };
@@ -203,6 +207,16 @@ const checkPriceErrors = (min, max) => {
             onChange={(e) => handleOptionChange(e.target.value)}
           />
           <span className="name">Precio</span>
+        </label>
+        <label className="radio">
+          <input
+            type="radio"
+            name="radio"
+            value="Ubicacion"
+            checked={searchOption === "Ubicacion"}
+            onChange={(e) => handleOptionChange(e.target.value)}
+          />
+          <span className="name">Ubicacion</span>
         </label>
       </div>
       <button onClick={handleSearch}  disabled={priceError && searchOption === "Precio"}>

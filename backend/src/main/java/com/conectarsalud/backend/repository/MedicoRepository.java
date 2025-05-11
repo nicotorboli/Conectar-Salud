@@ -13,7 +13,7 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
 
     Optional<Medico> findByMatriculaProfesional(String matriculaProfesional);
 
-    List<Medico> findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(String nombre, String apellido);
+    List<Medico> findByUbicacionContainingIgnoreCase(String ubicacion);
 
     @Query("SELECT m FROM Medico m WHERE " +
             "LOWER(CONCAT(m.nombre, ' ', m.apellido)) LIKE LOWER(CONCAT('%', :textoBusqueda, '%')) OR " +

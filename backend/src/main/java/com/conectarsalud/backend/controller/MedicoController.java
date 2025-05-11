@@ -90,6 +90,11 @@ public class MedicoController {
         return medicoService.medicosPrecioEntre(min,  max);
     }
 
+    @GetMapping("/ubicacion/{ubicacion}")
+    public  List<Medico> buscarMedicosPorUbicacion(@PathVariable String ubicacion){
+        return  medicoService.medicosPorUbicacion(ubicacion);
+    }
+
     @DeleteMapping("/matricula/{matricula}")
     public void deleteMedico (@PathVariable String matricula){
         medicoService.deleteByMatriculaProfesional(matricula);
