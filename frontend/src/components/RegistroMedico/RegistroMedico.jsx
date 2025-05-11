@@ -5,6 +5,7 @@ import "./RegistroMedico.css";
 import { useNavigate } from "react-router-dom";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { AuthContext } from "../../context/AuthContext";
+import Ubicacion from "../Ubicacion/Ubicacion";
 
 export function RegistroMedico() {
   const [isLoading, setIsLoading] = useState(false);
@@ -247,18 +248,7 @@ const handleSubmit = async (e) => {
                 required
               />
             </div>
-            <div className="form-group">
-              <label className="form-label">Ubicación</label>
-              <input
-                type="text"
-                name="ubicacion"
-                placeholder="Dirección de consultorio"
-                className="form-input"
-                value={formData.ubicacion}
-                onChange={handleChange}
-                required
-              />
-            </div>
+
           </div>
 
           <div className="form-group">
@@ -307,6 +297,14 @@ const handleSubmit = async (e) => {
               </div>
               <p className="form-description">Tamaño recomendado: 400x400px</p>
           </div>
+
+            <div className="form-group">
+                        <label className="form-label">Ubicación</label>
+                        <Ubicacion
+                          value={formData.ubicacion}
+                          onChange={(value) => setFormData({...formData, ubicacion: value})}
+                        />
+                      </div>
 
           <button type="submit" className="submit-button" disabled={isLoading}>
             {isLoading ? "Procesando..." : "Crear cuenta"}
