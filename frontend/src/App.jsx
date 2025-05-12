@@ -6,9 +6,11 @@ import MedicosPage from "./components/MedicosPage/MedicosPage.jsx"
 import LoginForm from "./components/LoginForm/LoginForm.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import Perfil from "./components/Perfil/Perfil.jsx";
+import { GoogleMapsProvider } from "./context/GoogleMapsProvider.jsx";
 
 const App = () => {
   return (
+    <GoogleMapsProvider>
     <AuthProvider> 
       <BrowserRouter>
           <Routes>
@@ -22,6 +24,7 @@ const App = () => {
           </Routes>
       </BrowserRouter>
     </AuthProvider>
+    </GoogleMapsProvider>
   );
 }
 

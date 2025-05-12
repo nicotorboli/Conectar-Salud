@@ -1,42 +1,44 @@
-import { LoadScript, GoogleMap, Marker } from '@react-google-maps/api';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 import { useState, useRef, useEffect } from 'react';
-
-const LIBRARIES = ['places'];
+import { useGoogleMaps } from '../../context/GoogleMapsProvider';
 
 const Ubicacion = ({ value, onChange }) => {
-  const [address, setAddress] = useState(value );
+  const [address, setAddress] = useState(value || '');
   const [center, setCenter] = useState({ lat: -34.6037, lng: -58.3816 });
   const [markerPosition, setMarkerPosition] = useState(null);
-  const [loadError, setLoadError] = useState(null);
-  const [scriptLoaded, setScriptLoaded] = useState(false);
+  const [geocodingError, setGeocodingError] = useState(null);
+  const { scriptLoaded, loadError } = useGoogleMaps();
   const inputRef = useRef(null);
 
-   useEffect(() => {
+  // Efecto para geocodificar el valor inicial
+  useEffect(() => {
     if (scriptLoaded && value) {
       const geocoder = new window.google.maps.Geocoder();
       const timeout = setTimeout(() => {
         setGeocodingError('Tiempo de espera agotado para geolocalización');
-      }, 10000); // Timeout después de 10 segundos
-      console.log(value);
+      }, 10000);
+
       geocoder.geocode({ address: value }, (results, status) => {
         clearTimeout(timeout);
         if (status === 'OK' && results[0]) {
           const location = results[0].geometry.location;
-          const newCenter = { 
-            lat: location.lat(), 
-            lng: location.lng() 
-          };
-          setCenter(newCenter);
-          setMarkerPosition(newCenter);
-          setIsMapsApiLoaded(true);
+          setCenter({
+            lat: location.lat(),
+            lng: location.lng()
+          });
+          setMarkerPosition({
+            lat: location.lat(),
+            lng: location.lng()
+          });
         } else {
           console.error('Error en geocoding:', status);
           setGeocodingError(`Error al geolocalizar: ${status}`);
         }
       });
     }
-  }, [scriptLoaded,value]);
-  
+  }, [scriptLoaded, value]);
+
+  // Configurar autocomplete
   useEffect(() => {
     if (!scriptLoaded || !window.google || !inputRef.current) return;
 
@@ -47,14 +49,13 @@ const Ubicacion = ({ value, onChange }) => {
         types: ['address']
       }
     );
-    console.log(value)
+
     const placeChangedListener = autocomplete.addListener('place_changed', () => {
       const place = autocomplete.getPlace();
-      console.log(place)
       if (!place.geometry) return;
       
-      const location = place.formatted_address;
-      setAddress(location);
+      const newAddress = place.formatted_address;
+      setAddress(newAddress);
       setCenter({
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng()
@@ -63,7 +64,7 @@ const Ubicacion = ({ value, onChange }) => {
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng()
       });
-      onChange(location);
+      onChange(newAddress);
     });
 
     return () => {
@@ -79,64 +80,65 @@ const Ubicacion = ({ value, onChange }) => {
       { location: { lat: e.latLng.lat(), lng: e.latLng.lng() } },
       (results, status) => {
         if (status === "OK" && results[0]) {
-          const location = results[0].formatted_address;
-          setAddress(location);
+          const newAddress = results[0].formatted_address;
+          setAddress(newAddress);
           setMarkerPosition({ lat: e.latLng.lat(), lng: e.latLng.lng() });
-          onChange(location);
+          onChange(newAddress);
         }
       }
     );
   };
 
-  if (loadError) {
+  if (loadError || geocodingError) {
     return (
       <div className="error">
-        Error al cargar Google Maps: {loadError}
-        <br />
-        Verifica tu conexión a internet y que la API Key sea correcta
+        {loadError || geocodingError}
+        <div className="direccion-fallback">
+          <strong>Dirección registrada:</strong> {value}
+        </div>
       </div>
     );
   }
 
   return (
     <div className="location-picker">
-      <LoadScript
-        googleMapsApiKey="AIzaSyCksGGki7sjyE9YFsGVa7CClYRsCuuitIQ"
-        libraries={LIBRARIES}
-        onError={(err) => {
-          console.error("Google Maps error:", err);
-          setLoadError(err.message);
-        }}
-        onLoad={() => setScriptLoaded(true)}
-      >
-        {scriptLoaded && (
-          <>
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder="Buscar dirección del consultorio"
-              className="form-input"
-              value={address}
-              onChange={(e) => {
-                setAddress(e.target.value);
-                onChange(e.target.value);
-              }}
-              required
-            />
+      {scriptLoaded ? (
+        <>
+          <input
+            ref={inputRef}
+            type="text"
+            placeholder="Buscar dirección del consultorio"
+            className="form-input"
+            value={address}
+            onChange={(e) => {
+              setAddress(e.target.value);
+              onChange(e.target.value);
+            }}
+            required
+          />
 
-            <div style={{ marginTop: '10px', height: '300px', width: '100%' }}>
-              <GoogleMap
-                mapContainerStyle={{ height: '100%', width: '100%' }}
-                center={center}
-                zoom={15}
-                onClick={handleMapClick}
-              >
-                {markerPosition && <Marker position={markerPosition} />}
-              </GoogleMap>
-            </div>
-          </>
-        )}
-      </LoadScript>
+          <div style={{ marginTop: '10px', height: '300px', width: '100%' }}>
+            <GoogleMap
+              mapContainerStyle={{ height: '100%', width: '100%' }}
+              center={center}
+              zoom={15}
+              onClick={handleMapClick}
+              options={{
+                gestureHandling: 'greedy',
+                draggable: true,
+                zoomControl: true
+              }}
+            >
+              {markerPosition && <Marker position={markerPosition} />}
+            </GoogleMap>
+          </div>
+        </>
+      ) : (
+        <div className="map-loading">
+          Cargando Google Maps...
+          <div className="loading-spinner"></div>
+        </div>
+      )}
     </div>
   );
 };

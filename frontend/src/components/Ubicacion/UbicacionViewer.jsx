@@ -1,46 +1,40 @@
-import { LoadScript, GoogleMap, Marker } from '@react-google-maps/api';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 import { useState, useEffect } from 'react';
-
-const LIBRARIES = ['places'];
+import { useGoogleMaps } from '../../context/GoogleMapsProvider'; // Ajusta la ruta según tu estructura
 
 const UbicacionViewer = ({ direccion }) => {
+  const { scriptLoaded, loadError } = useGoogleMaps(); // Usamos el contexto
   const [center, setCenter] = useState({ lat: -34.6037, lng: -58.3816 });
   const [markerPosition, setMarkerPosition] = useState(null);
-  const [loadError, setLoadError] = useState(null);
-  const [scriptLoaded, setScriptLoaded] = useState(false);
-  const [geocodingError, setGeocodingError] = useState(null);
-  const [isMapsApiLoaded, setIsMapsApiLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
 
+  // Geocodificación cuando cambia la dirección o se carga el script
   useEffect(() => {
-    if (scriptLoaded && direccion) {
-      const geocoder = new window.google.maps.Geocoder();
-      const timeout = setTimeout(() => {
-        setGeocodingError('Tiempo de espera agotado para geolocalización');
-      }, 10000); // Timeout después de 10 segundos
+    if (!scriptLoaded || !direccion) return;
 
-      geocoder.geocode({ address: direccion }, (results, status) => {
-        clearTimeout(timeout);
-        if (status === 'OK' && results[0]) {
-          const location = results[0].geometry.location;
-          const newCenter = { 
-            lat: location.lat(), 
-            lng: location.lng() 
-          };
-          setCenter(newCenter);
-          setMarkerPosition(newCenter);
-          setIsMapsApiLoaded(true);
-        } else {
-          console.error('Error en geocoding:', status);
-          setGeocodingError(`Error al geolocalizar: ${status}`);
-        }
-      });
-    }
+    const geocoder = new window.google.maps.Geocoder();
+    setLoading(true);
+    
+    geocoder.geocode({ address: direccion }, (results, status) => {
+      setLoading(false);
+      if (status === 'OK' && results[0]) {
+        const location = results[0].geometry.location;
+        const newCenter = { 
+          lat: location.lat(), 
+          lng: location.lng() 
+        };
+        setCenter(newCenter);
+        setMarkerPosition(newCenter);
+      } else {
+        console.error('Geocoding error:', status);
+      }
+    });
   }, [scriptLoaded, direccion]);
 
-  if (loadError || geocodingError) {
+  if (loadError) {
     return (
       <div className="error">
-        {loadError || geocodingError}
+        Error al cargar Google Maps: {loadError}
         <div className="direccion-fallback">
           <strong>Dirección registrada:</strong> {direccion}
         </div>
@@ -50,49 +44,45 @@ const UbicacionViewer = ({ direccion }) => {
 
   return (
     <div className="ubicacion-viewer">
-      <LoadScript
-        googleMapsApiKey="AIzaSyCksGGki7sjyE9YFsGVa7CClYRsCuuitIQ"
-        libraries={LIBRARIES}
-        onError={(err) => setLoadError(err.message)}
-        onLoad={() => setScriptLoaded(true)}
-      >
-        <div className='perfil-info-item'>
-          <span>📍</span>
-          <p>{direccion}</p>
-        </div>
+      <div className='perfil-info-item'>
+        <span>📍</span>
+        <p>{direccion}</p>
+      </div>
 
-        {!isMapsApiLoaded ? (
-          <div className="map-loading">
-            Cargando mapa...
-            <div className="loading-spinner"></div>
-          </div>
-        ) : (
-          <div style={{ marginTop: '10px', height: '300px', width: '100%' }}>
-            <GoogleMap
-              mapContainerStyle={{ height: '100%', width: '100%' }}
-              center={center}
-              zoom={15}
-              options={{
-                disableDefaultUI: true,
-                zoomControl: true,
-              }}
-            >
-              {markerPosition && <Marker position={markerPosition} />}
-            </GoogleMap>
-          </div>
-        )}
-      </LoadScript>
+      {!scriptLoaded || loading ? (
+        <div className="map-loading">
+          Cargando mapa...
+          <div className="loading-spinner"></div>
+        </div>
+      ) : (
+        <div style={{ marginTop: '10px', height: '300px', width: '100%' }}>
+          <GoogleMap
+            mapContainerStyle={{ height: '100%', width: '100%' }}
+            center={center}
+            zoom={15}
+            options={{
+              disableDefaultUI: true,
+              zoomControl: true,
+              gestureHandling: 'cooperative'
+            }}
+          >
+            {markerPosition && <Marker position={markerPosition} />}
+          </GoogleMap>
+        </div>
+      )}
 
       <style jsx>{`
         .ubicacion-viewer {
           margin-bottom: 20px;
         }
-        .direccion-display {
-          padding: 12px;
-          background: #f8f9fa;
-          border-radius: 6px;
-          margin-bottom: 15px;
-          font-size: 0.9em;
+        .perfil-info-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-bottom: 10px;
+        }
+        .perfil-info-item span {
+          font-size: 1.2em;
         }
         .map-loading {
           height: 300px;
@@ -132,4 +122,5 @@ const UbicacionViewer = ({ direccion }) => {
     </div>
   );
 };
+
 export default UbicacionViewer;

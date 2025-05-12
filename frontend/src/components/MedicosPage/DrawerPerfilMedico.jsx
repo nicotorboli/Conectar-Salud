@@ -2,6 +2,8 @@ import React from "react";
 import WhatsApp from '../../assets/WhatsApp.png';
 import placeholder from '../../assets/PlaceHolder.png';
 import "./DrawerPerfilMedico.css";
+import Ubicacion from "../Ubicacion/Ubicacion";
+import UbicacionViewer from "../Ubicacion/UbicacionViewer";
 
 const DrawerPerfilMedico = ({ medico, onClose }) => {
     if (!medico) return null;
@@ -64,6 +66,10 @@ const DrawerPerfilMedico = ({ medico, onClose }) => {
                     <div className="descripcion">
                         <h4>Sobre el médico</h4>
                         <p>{medico.descripcion || "Este médico aún no agregó una descripción."}</p>
+                    </div>
+
+                    <div>
+                        <UbicacionViewer direccion={medico.ubicacion}></UbicacionViewer>
                     </div>
                 </div>
             </div>
