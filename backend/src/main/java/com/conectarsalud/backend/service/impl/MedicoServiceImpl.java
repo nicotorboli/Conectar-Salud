@@ -37,7 +37,7 @@ public class MedicoServiceImpl implements MedicoService {
     @Override
     public void deleteByMatriculaProfesional(String matriculaProfesional) {
         Medico medico = medicoRepository.findByMatriculaProfesional(matriculaProfesional).get();
-        Usuario usuario = usuarioRepository.findByEmail(medico.getEmail()).get();
+        Usuario usuario = usuarioRepository.findByEmail(medico.getEmail()).orElseThrow(() -> new UsuarioNoEncontrado("no se encontro el usuario"));
         medicoRepository.delete(medico);
         usuarioRepository.delete(usuario);
     }
@@ -58,7 +58,7 @@ public class MedicoServiceImpl implements MedicoService {
     }
 
     public boolean validarFormatoEmail(String email) {
-        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         return email.matches(regex);
     }
 

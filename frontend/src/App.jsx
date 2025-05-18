@@ -1,7 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css"
 import Layout from "./components/Layoutt/Layout.jsx";
-import RegistroMedico from "./components/RegistroMedico/RegistroMedico";
+import RegistroMedico from "./components/Registro/RegistroMedico";
+import RegistroUsuario from "./components/Registro/RegistroUsuario";
+import SeleccionTipoRegistro from "./components/Registro/SeleccionTipoRegistro";
 import MedicosPage from "./components/MedicosPage/MedicosPage.jsx"
 import LoginForm from "./components/LoginForm/LoginForm.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
@@ -18,7 +20,9 @@ const App = () => {
               {/* <Route index element={<HomePage />} /> */}
               <Route path="/medicos" element={<MedicosPage />} />
               <Route path="/login" element={<LoginForm />} />
-              <Route path="/registro" element={<RegistroMedico/>} />
+              <Route path="/registro" element={<SeleccionTipoRegistro />} />
+              <Route path="/registro/usuario" element={<RegistroUsuario />} />
+              <Route path="/registro/medico" element={<RegistroMedico />} />
               <Route path="/perfil/:matricula" element={<Perfil />} />
             </Route>
           </Routes>
