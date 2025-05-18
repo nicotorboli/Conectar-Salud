@@ -1,11 +1,10 @@
-import CSLogo from '../../assets/CSLogo(mini).png'
+import CSLogo from '../../assets/CSLogo-mini.png'
 import { useEffect, useState, useContext } from 'react'
 import './Header.css'
 import { Link, useLocation } from 'react-router-dom'
 import SearchBar from '../search/SearchBar.jsx'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext.jsx'
-import useGetMatricula from '../hooks/useGetMatricula.jsx'
 
 function Header() {
   const [pathname, setPathname] = useState()
