@@ -1,5 +1,5 @@
 import "./SearchBar.css"
-import { useState, useEffect, use, useSyncExternalStore } from "react";
+import { useState, useEffect } from "react";
 
 const SearchBar = ({ onSearch }) => {
   const maxValor = 10000
