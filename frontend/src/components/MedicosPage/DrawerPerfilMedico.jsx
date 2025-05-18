@@ -17,53 +17,53 @@ const DrawerPerfilMedico = ({ medico, onClose }) => {
                                             <img
                                                 src={`data:image/jpeg;base64,${medico.fotoPerfil}`}
                                                 alt={`${medico.nombre} ${medico.apellido}`}
-                                                className="avatar-imagen"
+                                                className="avatar-imagen-drawer"
                                                 onError={(e) => {
                                                     e.target.onerror = null;
                                                     e.target.src = '/images/PlaceHolder.png';
                                                 }}
                                             />
                                         ) : (
-                                            <div className="avatar-placeholder"></div>
+                                            <div className="avatar-placeholder-drawer"></div>
                                         )}
                     <div>
-                        <h2 className="medico-nombre">{medico.nombre} {medico.apellido}</h2>
-                        <p className="medico-especialidad">{medico.especialidad}</p>
+                        <h2 className="medico-nombre-drawer">{medico.nombre} {medico.apellido}</h2>
+                        <p className="medico-especialidad-drawer">{medico.especialidad}</p>
                     </div>
                 </div>
                 <div className="drawer-body">
-                    <div className="info-item">
+                    <div className="info-item-drawer">
                         <span>🩺</span>
                         <p>{medico.matriculaProfesional}</p>
                     </div>
-                    <div className="info-item">
+                    <div className="info-item-drawer">
                         <span>📍</span>
                         <p>{medico.ubicacion}</p>
                     </div>
-                    <div className="info-item">
+                    <div className="info-item-drawer">
                         <span>$</span>
                         <p>{medico.precioConsulta}</p>
                     </div>
-                    <div className="info-item">
+                    <div className="info-item-drawer">
                         <span>📩</span>
                         <p>{medico.email}</p>
                     </div>
-                    <div className="info-item">
+                    <div className="info-item-drawer">
                         <span>📞</span>
                         <p>{medico.nroLinea || "no hay numero de linea."}</p>
                     </div>
-                    <div className="contact-buttons">
+                    <div className="contact-buttons-drawer">
                         <a
                           href={`https://wa.me/${medico.nroWhatsapp}?text=${encodeURIComponent('Hola, te encontré en Conectar Salud y me gustaría más información')}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="whatsapp-link"
                         >
-                            <img src={WhatsApp} alt="WhatsApp" className="contact-icon" />
+                            <img src={WhatsApp} alt="WhatsApp" className="contact-icon-drawer" />
                             {medico.nroWhatsapp}
                         </a>
                     </div>
-                    <div className="descripcion">
+                    <div className="descripcion-drawer">
                         <h4>Sobre el médico</h4>
                         <p>{medico.descripcion || "Este médico aún no agregó una descripción."}</p>
                     </div>

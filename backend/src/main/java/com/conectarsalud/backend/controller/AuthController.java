@@ -28,15 +28,11 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/login/usuario")
-    public ResponseEntity<AuthResponse> logearUsuario(@RequestBody @Valid LoginRequestDTO request) {
-        return ResponseEntity.ok(authService.loginUsuario(request));
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody @Valid LoginRequestDTO request) {
+        return ResponseEntity.ok(authService.login(request));
     }
 
-    @PostMapping("/login/medico")
-    public ResponseEntity<AuthResponse> logearMedico(@RequestBody @Valid LoginRequestDTO request) {
-        return ResponseEntity.ok(authService.loginMedico(request));
-    }
 
     @PostMapping("/register/usuario")
     public ResponseEntity<AuthResponse> registerUsuario(@RequestBody @Valid RegisterUsuarioDTO request) {

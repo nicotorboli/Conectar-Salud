@@ -37,8 +37,9 @@ const Perfil = () => {
               ...medico,
               nombre: document.querySelector(".perfil-medico-nombre").innerHTML,
               apellido:document.querySelector(".perfil-medico-apellido").innerHTML,
+              precioConsulta:document.querySelector(".perfil-info-item-precio").innerHTML,
               email:document.querySelector(".perfil-info-item-email").textContent.trim(),
-              descripcion:document.querySelector(".perfil-descripcion p").innerHTML,
+              descripcion:document.querySelector(".perfil-descripcion-d").innerHTML,
               ubicacion:ubiNew
               }
               medico.ubicacion = ubiNew;
@@ -213,7 +214,7 @@ const handleImageChange = (e) => {
         
         <div className='perfil-info-item'>
           <span>$</span>
-          <p>{medico.precioConsulta}</p>
+          <p className="perfil-info-item-precio" contentEditable={editable}>{medico.precioConsulta}</p>
         </div>
         <div className='perfil-info-item'>
           <span>📩</span>
@@ -229,7 +230,7 @@ const handleImageChange = (e) => {
         </div>
         <div className='perfil-descripcion'>
           <h4>Descripción</h4>
-          <p contentEditable={editable}>
+          <p className='perfil-descripcion-d' contentEditable={editable}>
             {medico.descripcion || 'Este médico aún no agregó una descripción.'}
           </p>
           <button className='perfil-logout-button' onClick={handleLogout}>

@@ -60,16 +60,27 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public AuthResponse loginMedico(LoginRequestDTO request) {
+    public AuthResponse login(LoginRequestDTO request) {
+        // Buscar usuario sin discriminar por rol primero
+        Usuario usuario = usuarioRepository.findByEmail(request.email())
+                .orElseThrow(() -> new UsuarioNoEncontrado("Credenciales inválidas"));
 
-        usuarioRepository.findByEmailAndRol(request.email(),MEDICO)
-                .orElseThrow(()-> new UsuarioNoEncontrado("Este mail no se encuentra registrado"));
+        // Autenticar credenciales
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.email(), request.password()));
 
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
-        UserDetails user = usuarioRepository.findByEmail(request.email()).orElseThrow();
-        String token = jwtService.getToken(user);
-        Medico med = medicoService.findByEmail(request.email());
-        return AuthResponse.builder().token(token).matricula(med.getMatriculaProfesional()).build();
+        // Determinar si es médico para incluir matrícula
+        String matricula = null;
+        if(usuario.getRol() == Rol.MEDICO) {
+            Medico medico = medicoService.findByEmail(request.email());
+            matricula = medico.getMatriculaProfesional();
+        }
+
+        return AuthResponse.builder()
+                .token(jwtService.getToken(usuario))
+                .matricula(matricula)
+                .rol(usuario.getRol())
+                .build();
     }
 
     @Override
@@ -80,8 +91,6 @@ public class AuthServiceImpl implements AuthService {
                 });
 
         UsuarioCS usuario = new UsuarioCS(
-                request.nombre(),
-                request.apellido(),
                 request.email(),
                 passwordEncoder.encode(request.contraseña())
         );
@@ -90,14 +99,5 @@ public class AuthServiceImpl implements AuthService {
         return new AuthResponse(jwtService.getToken(usuario), null, USUARIO);
     }
 
-    @Override
-    public AuthResponse loginUsuario(LoginRequestDTO request) {
-        Usuario usuario = usuarioRepository.findByEmailAndRol(request.email(), USUARIO)
-                .orElseThrow(() -> new UsuarioNoEncontrado("Este mail no se encuentra registrado como usuario"));
 
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
-        UserDetails user = usuarioRepository.findByEmail(request.email()).orElseThrow();
-        String token = jwtService.getToken(user);
-        return AuthResponse.builder().token(token).matricula(null).rol(usuario.getRol()).build();
-    }
 }

@@ -37,7 +37,7 @@
     color: #007bff;
     cursor: pointer;
     border-left:5px;
-    padding:0.9em;
+    padding:0.5em;
 }
 
 .drawer-header {
@@ -46,7 +46,7 @@
     margin-bottom: 24px;
 }
 
-.avatar-imagen {
+.avatar-imagen-drawer {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -55,7 +55,7 @@
     /*border: 3px solid; #007bff;*/
 }
 
-.avatar-placeholder {
+.avatar-placeholder-drawer {
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -65,12 +65,12 @@
 }
 
 
-.medico-nombre {
+.medico-nombre-drawer {
     font-size: 22px;
     margin: 0;
 }
 
-.medico-especialidad {
+.medico-especialidad-drawer {
     font-size: 16px;
     color: #007bff;
     margin-top: 4px;
@@ -83,7 +83,7 @@
     overflow-y: scroll;
 }
 
-.info-item {
+.info-item-drawer {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -91,19 +91,19 @@
     color: #333;
 }
 
-.descripcion h4 {
+.descripcion-drawer h4 {
     margin-bottom: 8px;
     font-size: 18px;
     color: #007bff;
 }
 
-.descripcion p {
+.descripcion-drawer p {
     font-size: 15px;
     line-height: 1.4;
     color: #555;
 }
 
-.contact-buttons {
+.contact-buttons-drawer {
     margin-top: 24px;
     display: flex;
     flex-direction: column;
@@ -131,7 +131,7 @@
     color: white;
 }
 
-.contact-icon {
+.contact-icon-drawer {
     width: 24px;
     height: 24px;
 }

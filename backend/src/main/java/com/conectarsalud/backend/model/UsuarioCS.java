@@ -9,16 +9,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UsuarioCS extends Usuario{
-    private String nombre;
-    private String apellido;
 
     public UsuarioCS() {}
 
-    public UsuarioCS(String nombre, String apellido, String email, String contraseña) {
-        this.nombre = nombre;
-        this.apellido = apellido;
+    public UsuarioCS( String email, String contraseña) {
+
         this.email = email;
-        this.contraseña = contraseña;
+        this.password = contraseña;
         this.rol = Rol.USUARIO;
     }
 }

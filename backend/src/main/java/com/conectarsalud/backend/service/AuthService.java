@@ -10,9 +10,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public interface AuthService {
 
     public AuthResponse registrarMedico(Medico medico);
-    public AuthResponse loginMedico(LoginRequestDTO request);
+
+    AuthResponse login(LoginRequestDTO request);
 
     AuthResponse registrarUsuario(RegisterUsuarioDTO request, PasswordEncoder passwordEncoder);
 
-    AuthResponse loginUsuario(LoginRequestDTO request);
+
 }
