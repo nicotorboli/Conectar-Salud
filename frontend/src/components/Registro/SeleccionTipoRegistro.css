@@ -1,0 +1,93 @@
+.registro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.registro-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.registro-titulo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.registro-subtitulo {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+.registro-opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.registro-tarjeta {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  transition: transform 0.2s ease;
+}
+
+.registro-tarjeta:hover {
+  transform: translateY(-5px);
+}
+
+.tarjeta-titulo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.tarjeta-descripcion {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.boton-lleno {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.boton-lleno:hover {
+  background-color: #005fcc;
+}
+
+.boton-borde {
+  background-color: white;
+  color: #007bff;
+  border: 2px solid #007bff;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.boton-borde:hover {
+  background-color: #e6f0ff;
+}

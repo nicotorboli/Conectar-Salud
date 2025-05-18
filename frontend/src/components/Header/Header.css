@@ -85,6 +85,21 @@
   border-radius: 2px;
 }
 
+.logout-button {
+  color: #dc2626; /* rojo suave */
+  font-weight: 600;
+  border: 1px solid transparent;
+  padding: 0px 4px;
+  border-radius: 6px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #fee2e2; /* fondo rojo muy suave al pasar el mouse */
+  border-color: #dc2626;
+  color: #b91c1c; /* rojo más fuerte al hacer hover */
+}
 /* Responsive */
 @media (max-width: 900px) {
   .header {

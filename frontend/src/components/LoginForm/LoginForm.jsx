@@ -22,7 +22,7 @@ const LoginForm = () => {
       
       try {
 
-        const response = await fetch("http://localhost:8080/auth/login/medico", {
+        const response = await fetch("http://localhost:8080/auth/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -37,7 +37,7 @@ const LoginForm = () => {
         }
         console.log(data)
 
-        login(data.token, data.matricula);
+        login(data.token, data.matricula, data.rol);
 
         navigate("/")
       } catch (error) {

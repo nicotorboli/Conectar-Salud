@@ -12,7 +12,7 @@ function Header() {
   const navigate = useNavigate()
 
 
-  const { isAuthenticated } = useContext(AuthContext)
+  const { isAuthenticated, rol, logout } = useContext(AuthContext)
 
   useEffect(() => {
     setPathname(location.pathname)
@@ -55,13 +55,24 @@ function Header() {
           </Link>
 
           {isAuthenticated ? (
-
-            <Link
-              to={`/perfil/${localStorage.matricula}`}
-              className={`nav-link ${pathname === '/perfil' ? 'active' : ''}`}
-            >
-              Mi Perfil
-            </Link>
+            rol === 'MEDICO' ? (
+              <Link
+                to={`/perfil/${localStorage.matricula}`}
+                className={`nav-link ${pathname === '/perfil' ? 'active' : ''}`}
+              >
+                Mi Perfil
+              </Link>
+            ) : (
+              <button
+                onClick={() => {
+                  logout()
+                  navigate("/")
+                }}
+                className="nav-link logout-button"
+              >
+                Cerrar sesión
+              </button>
+            )
           ) : (
             <Link
               to={'/login'}
