@@ -1,7 +1,28 @@
 .medicos-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  gap: 16px;
+}
+
+.ordenar-btn {
+  padding: 8px 16px;
+  margin-bottom: 20px;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.contenedor-button {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ordenar-btn.activo {
+  background-color: #4caf50;
+  color: white;
+  border-color: #4caf50;
 }
