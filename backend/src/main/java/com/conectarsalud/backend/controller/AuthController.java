@@ -3,6 +3,7 @@ package com.conectarsalud.backend.controller;
 import com.conectarsalud.backend.dtos.AuthResponse;
 import com.conectarsalud.backend.dtos.LoginRequestDTO;
 import com.conectarsalud.backend.dtos.RegisterMedicoDTO;
+import com.conectarsalud.backend.dtos.RegisterUsuarioDTO;
 import com.conectarsalud.backend.model.Medico;
 import com.conectarsalud.backend.service.AuthService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,9 +28,19 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/login")
-    public  ResponseEntity<AuthResponse> logearMedico(@RequestBody @Valid LoginRequestDTO request) {
+    @PostMapping("/login/usuario")
+    public ResponseEntity<AuthResponse> logearUsuario(@RequestBody @Valid LoginRequestDTO request) {
+        return ResponseEntity.ok(authService.loginUsuario(request));
+    }
+
+    @PostMapping("/login/medico")
+    public ResponseEntity<AuthResponse> logearMedico(@RequestBody @Valid LoginRequestDTO request) {
         return ResponseEntity.ok(authService.loginMedico(request));
+    }
+
+    @PostMapping("/register/usuario")
+    public ResponseEntity<AuthResponse> registerUsuario(@RequestBody @Valid RegisterUsuarioDTO request) {
+        return ResponseEntity.ok(authService.registrarUsuario(request, passwordEncoder));
     }
 
     @PostMapping(value = "/register/medico", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
