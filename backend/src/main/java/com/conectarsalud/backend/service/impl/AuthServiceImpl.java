@@ -12,6 +12,7 @@ import com.conectarsalud.backend.service.AuthService;
 import com.conectarsalud.backend.service.JwtService;
 import com.conectarsalud.backend.service.MedicoService;
 import com.conectarsalud.backend.service.UsuarioCSService;
+import com.conectarsalud.backend.service.exceptions.EmailNoValidoException;
 import com.conectarsalud.backend.service.exceptions.UsuarioNoEncontrado;
 import com.conectarsalud.backend.service.exceptions.UsuarioYaExistenteException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -92,9 +93,11 @@ public class AuthServiceImpl implements AuthService {
 
         UsuarioCS usuario = new UsuarioCS(
                 request.email(),
-                passwordEncoder.encode(request.contraseña())
+                passwordEncoder.encode(request.password())
         );
-
+        if (usuarioCSService.validarFormatoEmail(request.email())){
+            throw new EmailNoValidoException("mail invalido");
+        };
         usuarioRepository.save(usuario);
         return new AuthResponse(jwtService.getToken(usuario), null, USUARIO);
     }

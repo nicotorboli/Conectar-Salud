@@ -8,7 +8,7 @@ const RegistroUsuario = () => {
   const [formData, setFormData] = useState({
 
     email: "",
-    contraseña: "",
+    password: "",
 
   });
   const [errors, setErrors] = useState({ general: null });
@@ -69,7 +69,7 @@ const RegistroUsuario = () => {
             <label className="form-label">Contraseña</label>
             <input
               type="password"
-              name="contraseña"
+              name="password"
               className="form-input"
               value={formData.contraseña}
               onChange={handleChange}

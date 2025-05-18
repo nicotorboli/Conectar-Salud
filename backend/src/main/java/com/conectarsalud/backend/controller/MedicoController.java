@@ -39,7 +39,7 @@ public class MedicoController {
     public void actualizarMedico(@RequestBody MedicoDTO med){
         Medico medicoAActualizar = medicoService.findByMatriculaProfesional(med.matriculaProfesional()).get();
         if (!medicoService.validarFormatoEmail(med.email())){
-            throw new EmailNoValidoException("el email no es valido");
+            throw new EmailNoValidoException("mail invalido");
         }
         if(!medicoService.verificarEmailDisponible(medicoAActualizar.getEmail(),med.email())){
             throw new EmailYaRegistradoException();

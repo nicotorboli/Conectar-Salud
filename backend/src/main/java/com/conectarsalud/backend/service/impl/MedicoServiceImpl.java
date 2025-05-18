@@ -58,7 +58,7 @@ public class MedicoServiceImpl implements MedicoService {
     }
 
     public boolean validarFormatoEmail(String email) {
-        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         return email.matches(regex);
     }
 

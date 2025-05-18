@@ -15,7 +15,7 @@ public class UsuarioCS extends Usuario{
     public UsuarioCS( String email, String contraseña) {
 
         this.email = email;
-        this.password = contraseña;
+        this.contraseña = contraseña;
         this.rol = Rol.USUARIO;
     }
 }
