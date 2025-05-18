@@ -80,6 +80,7 @@ const UbicacionViewer = ({ direccion }) => {
           align-items: center;
           gap: 8px;
           margin-bottom: 10px;
+          font-size: 0.9rem;
         }
         .perfil-info-item span {
           font-size: 1.2em;
