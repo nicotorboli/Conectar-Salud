@@ -1,0 +1,230 @@
+.imagen-tipo-usuario {
+    height: 7cm;
+    border-radius: 25px;
+    object-fit: cover;
+    padding: 6px;
+}
+
+#container-tipos-de-usuarios {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.seccion-tipo-usuario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 8px;
+    padding: 1.5rem;
+    border-radius: 24px;
+    background: #f8f8f8e8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 660px;
+    text-align: center;
+    margin-bottom: 6rem;
+}
+
+.accion-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.ocultador {
+    font-size: 0.9rem;
+    color: #ffffff;
+    background-color: #277dabb5;
+    
+    border-radius: 12px;
+    padding: 0.5rem;
+}
+
+.titulo {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    
+}
+
+#CS-titulo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #0a3d62;
+    text-align: center;
+    justify-content: center;
+}
+
+#texto {
+    font-size: 1rem;
+    color: #444;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 1rem;
+    line-height: 1.5;
+}
+#banner {
+    background: linear-gradient(to top, #128aa200, #128aa24c);
+}
+
+#subtexto {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 0.4rem;
+    text-align: center;
+}
+
+#logo {
+    height: 6rem;
+}
+
+#brand-container {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to top, #128aa24c, #116e755b);
+    
+}
+
+#main-container {
+    background: linear-gradient(to top, #1d5d9d40, #f1fbff);
+    margin-top: -2rem;
+    margin-bottom: -6rem;
+}
+
+.accion-container {
+  position: relative;
+  margin-top: 1rem;
+}
+
+.btn {
+  width: 270px;
+  height: 50px;
+  background: linear-gradient(to top, #00154c, #12376e, #23487f);
+  color: #fff;
+  border-radius: 15px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.btn span {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: top 0.5s;
+}
+
+.btn-text-one {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.btn-text-two {
+  position: absolute;
+  width: 100%;
+  top: 150%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.btn:hover .btn-text-one {
+  top: -100%;
+}
+
+.btn:hover .btn-text-two {
+  top: 50%;
+}
+
+.btn-tooltip-container {
+  margin-bottom: 6rem;
+  display: flex;
+  padding: 12px;
+}
+.gestionar-user {
+  margin-top: 12px;
+  margin-bottom: 6rem;
+  display: flex;
+  padding: 12px;
+  margin-left: 8px;
+}
+
+.tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  padding: 6px 8px;
+  border-radius: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: -3%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.btn-tooltip-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.seccion-tipo-usuario {
+  position: relative; /* Para posicionar el tooltip */
+  transition: transform 0.3s ease;
+}
+
+
+.seccion-tipo-usuario:hover .medico-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Para el hover effect en la tarjeta */
+.seccion-tipo-usuario:hover {
+  transform: translateY(-5px);
+}
+
+.seccion-tipo-usuario:hover .paciente-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+}
+
+.texto-datos{
+    font-size: 17px;
+    color: #444;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 1rem;
+    line-height: 1.5;
+}
+
+.info-container {
+ display: flex;
+}
+#a {
+  display: flex;
+  background-color: #6b9cb680;
+  height: 70px;
+  border-radius: 12px;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
