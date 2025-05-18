@@ -37,6 +37,7 @@ const Perfil = () => {
               ...medico,
               nombre: document.querySelector(".perfil-medico-nombre").innerHTML,
               apellido:document.querySelector(".perfil-medico-apellido").innerHTML,
+              precioConsulta:document.querySelector(".perfil-info-item-precio").innerHTML,
               email:document.querySelector(".perfil-info-item-email").textContent.trim(),
               descripcion:document.querySelector(".perfil-descripcion p").innerHTML,
               ubicacion:ubiNew
@@ -213,7 +214,7 @@ const handleImageChange = (e) => {
         
         <div className='perfil-info-item'>
           <span>$</span>
-          <p>{medico.precioConsulta}</p>
+          <p className="perfil-info-item-precio" contentEditable={editable}>{medico.precioConsulta}</p>
         </div>
         <div className='perfil-info-item'>
           <span>📩</span>
