@@ -82,7 +82,7 @@ function HomePage() {
                 🩹 Sistema de calificaciones transparente<br/>
                 🩹 elegi la zona donde queres atenderte<br/>
                 🩹 encontra a los mejores medicos<br/>
-                🩹 Disposición 27/7 desde tu casa<br/>
+                🩹 Disposición 24/7 desde tu casa<br/>
               </div>
             </div>
           </div>
