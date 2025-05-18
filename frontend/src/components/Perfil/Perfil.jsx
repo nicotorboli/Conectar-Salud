@@ -13,7 +13,7 @@ const Perfil = () => {
   const [medico, setMedico] = useState({})
   const [error, setError] = useState(null)
   const [editable, setEditable] = useState(false)
-  const { logout } = useContext(AuthContext)
+  const { isAuthenticated, getRole, logout } = useContext(AuthContext);
   const[ubiNew, setUbiNew] = useState(null) 
   const [especialidades, setEspecialidades] = useState([])
   const navigate = useNavigate()
@@ -114,6 +114,7 @@ const handleImageChange = (e) => {
       .then((res) => res.json())
       .then((data) => setEspecialidades(data))
   }, [])
+
 
   const handleChange = (e) => {
     setMedico({

@@ -10,9 +10,11 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
     const matriculaSaved = localStorage.getItem("matricula");
+    const rolSaved = localStorage.getItem("rol")
     if (savedToken) {
       setToken(savedToken);
       setMatricula(matriculaSaved)
+      setRol(rolSaved)
     }
   }, []);
 
