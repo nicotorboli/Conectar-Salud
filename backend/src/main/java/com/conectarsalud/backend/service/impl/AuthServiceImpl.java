@@ -95,7 +95,7 @@ public class AuthServiceImpl implements AuthService {
                 request.email(),
                 passwordEncoder.encode(request.password())
         );
-        if (usuarioCSService.validarFormatoEmail(request.email())){
+        if (!usuarioCSService.validarFormatoEmail(request.email())){
             throw new EmailNoValidoException("mail invalido");
         };
         usuarioRepository.save(usuario);

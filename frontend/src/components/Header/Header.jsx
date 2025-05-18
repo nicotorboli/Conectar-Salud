@@ -1,4 +1,4 @@
-import CSLogo from '../../assets/CSLogo(mini).png'
+import CSLogo from '../../assets/CSLogo-mini.png'
 import { useEffect, useState, useContext } from 'react'
 import './Header.css'
 import { Link, useLocation } from 'react-router-dom'
