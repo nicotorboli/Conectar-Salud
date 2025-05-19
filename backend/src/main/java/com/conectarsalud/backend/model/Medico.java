@@ -3,6 +3,9 @@ package com.conectarsalud.backend.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Getter @Setter
 public class Medico extends Usuario{
@@ -10,6 +13,9 @@ public class Medico extends Usuario{
     @Lob
     @Column(name = "foto_perfil", columnDefinition="LONGBLOB")
     private byte[] fotoPerfil;
+
+    @ManyToMany(mappedBy = "medicosLikeados")
+    private Set<Usuario> usuariosQueDieronLike = new HashSet<>();
 
     private String nombre;
 
@@ -30,10 +36,11 @@ public class Medico extends Usuario{
 
     private String descripcion; // opcional
 
-    private  Long id;
+    private Number likes = 0;
 
     public Medico(String nombre, String apellido, String email, String nroWhatsapp, String nroLinea, String especialidad,
-                  String matriculaProfesional, Double precioConsulta, String ubicacion, String descripcion, String contraseña, byte[] fotoPerfil) {
+                  String matriculaProfesional, Double precioConsulta, String ubicacion, String descripcion,
+                  String contraseña, byte[] fotoPerfil) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;

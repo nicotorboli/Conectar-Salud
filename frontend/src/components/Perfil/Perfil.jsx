@@ -19,9 +19,6 @@ const Perfil = () => {
   const navigate = useNavigate()
   const fileInputRef = useRef(null)
 
-
-
-
   const handleLogout = () => {
     logout()
     navigate('/')

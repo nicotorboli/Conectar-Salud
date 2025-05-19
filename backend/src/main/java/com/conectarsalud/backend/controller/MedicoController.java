@@ -48,8 +48,6 @@ public class MedicoController {
         medicoService.actualizar(med.aModelo(medicoAActualizar.getPassword()));
     }
 
-
-
     @GetMapping("/matricula/{matricula}")
     public MedicoDTO medicoDeMatricula(@PathVariable String matricula){
         return  MedicoDTO.desdeModelo(medicoService.findByMatriculaProfesional(matricula).get());
@@ -93,6 +91,18 @@ public class MedicoController {
     @GetMapping("/ubicacion/{ubicacion}")
     public  List<Medico> buscarMedicosPorUbicacion(@PathVariable String ubicacion){
         return  medicoService.medicosPorUbicacion(ubicacion);
+    }
+
+    @PostMapping("/{medicoId}/like")
+    public ResponseEntity<?> toggleLike(
+            @PathVariable Long medicoId,
+            @RequestBody Map<String, Object> body
+    ) {
+        String mail = String.valueOf(body.get("usuarioEmail"));
+        Long usuarioId = medicoService.idDeUsuarioPorMail(mail);
+        boolean dioLike = medicoService.toggleLike(medicoId, usuarioId);
+        String mensaje = dioLike ? "Like agregado" : "Like removido";
+        return ResponseEntity.ok().body(Map.of("mensaje", mensaje));
     }
 
     @DeleteMapping("/matricula/{matricula}")
