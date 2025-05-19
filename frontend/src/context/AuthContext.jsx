@@ -6,6 +6,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [matricula, setMatricula] = useState(null);
   const [rol, setRol] = useState(null);
+  const [email, setEmail] = useState(null);
 
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
@@ -16,10 +17,12 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const login = (newToken,matricula,rol) => {
+  const login = (newToken,matricula,rol, email) => {
     localStorage.setItem("token", newToken);
     localStorage.setItem('matricula', matricula);
     localStorage.setItem('rol', rol);
+    localStorage.setItem('rol', email);
+    setEmail(email);
     setRol(rol);
     setToken(newToken);
     setMatricula(matricula);

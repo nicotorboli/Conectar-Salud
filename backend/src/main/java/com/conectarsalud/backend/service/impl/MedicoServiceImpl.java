@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -75,4 +76,30 @@ public class MedicoServiceImpl implements MedicoService {
     public List<Medico> medicosPorUbicacion(String ubicacion){
         return medicoRepository.findByUbicacionContainingIgnoreCase(ubicacion);
     }
+
+    public Long idDeUsuarioPorMail(String email){
+        Optional<Medico> medicoConEmail = medicoRepository.findByEmail(email);
+        return medicoConEmail.orElseThrow().getId();
+    }
+
+    public boolean toggleLike(Long medicoId, Long usuarioId) {
+        Medico medico = medicoRepository.findById(medicoId)
+                .orElseThrow(() -> new RuntimeException("Médico no encontrado"));
+
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        Set<Usuario> usuariosQueDieronLike = medico.getUsuariosQueDieronLike();
+
+        boolean yaDioLike = usuariosQueDieronLike.contains(usuario);
+        if (yaDioLike) {
+            usuariosQueDieronLike.remove(usuario);
+        } else {
+            usuariosQueDieronLike.add(usuario);
+        }
+
+        medicoRepository.save(medico);
+        return !yaDioLike;
+    }
+
 }

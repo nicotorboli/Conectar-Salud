@@ -19,8 +19,9 @@ public interface MedicoService {
     Medico findByEmail(String email);
 
     boolean validarFormatoEmail(String email);
-
+    Long idDeUsuarioPorMail(String email);
     boolean verificarEmailDisponible(String emailViejo, String emailAActualizar);
     List<Medico> medicosPrecioEntre(int min , int max);
     List<Medico> medicosPorUbicacion(String ubicacion);
+    boolean toggleLike(Long medicoId, Long usuarioId);
 }

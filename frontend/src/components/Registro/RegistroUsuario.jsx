@@ -37,7 +37,7 @@ const RegistroUsuario = () => {
         throw new Error(data.message || "Error al registrar");
       }
 
-      login(data.token, data.matricula); // o ID, según lo que devuelva tu backend
+      login(data.token, data.matricula, data.email); // o ID, según lo que devuelva tu backend
       navigate("/");
     } catch (error) {
       setErrors({ general: error.message });

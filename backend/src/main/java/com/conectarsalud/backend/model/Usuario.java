@@ -7,7 +7,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -63,4 +65,12 @@ public abstract class Usuario implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    @ManyToMany
+    @JoinTable(
+            name = "usuario_like_medico",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "medico_id")
+    )
+    private Set<Medico> medicosLikeados = new HashSet<>();
 }

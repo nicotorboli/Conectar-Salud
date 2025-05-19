@@ -37,7 +37,7 @@ const LoginForm = () => {
         }
         console.log(data)
 
-        login(data.token, data.matricula, data.rol);
+        login(data.token, data.matricula, data.rol, data.email);
 
         navigate("/")
       } catch (error) {
