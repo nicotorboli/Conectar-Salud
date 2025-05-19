@@ -41,7 +41,7 @@ function HomePage() {
          <span id="a">
             <button class="btn gestionar-user" onClick={irAGestionDeUsuario}>
                 <span class="btn-text-one">Gestionar mi usuario</span>
-                <span class="btn-text-two">Crear o inicia con tu cuenta</span>
+                <span class="btn-text-two">Crear o iniciar tu cuenta</span>
             </button>
             <span className="btn-tooltip-container">
               <button class="btn" onClick={irAMedicos}>
@@ -64,7 +64,7 @@ function HomePage() {
                 💊 Amplía tu cartera de pacientes de forma segura<br/>
                 💊 Consultas presenciales y virtuales integradas<br/>
                 💊 Perfil profesional verificado y destacado<br/>
-                💊 Cobros automáticos y transparentes
+                {/*💊 Cobros automáticos y transparentes */}
               </div>
             </div>
           </div>
@@ -80,8 +80,8 @@ function HomePage() {
               <div class="texto-datos">
                 🩹 Acceso a profesionales certificados<br/>
                 🩹 Sistema de calificaciones transparente<br/>
-                🩹 elegi la zona donde queres atenderte<br/>
-                🩹 encontra a los mejores medicos<br/>
+                🩹 Elegí la zona donde queres atenderte<br/>
+                🩹 Encontrá a los mejores medicos<br/>
                 🩹 Disposición 24/7 desde tu casa<br/>
               </div>
             </div>
