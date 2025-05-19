@@ -8,6 +8,7 @@ import MedicosPage from "./components/MedicosPage/MedicosPage.jsx"
 import LoginForm from "./components/LoginForm/LoginForm.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import Perfil from "./components/Perfil/Perfil.jsx";
+import HomePage from "./components/HomePage/HomePage.jsx";
 import { GoogleMapsProvider } from "./context/GoogleMapsProvider.jsx";
 
 const App = () => {
@@ -17,7 +18,7 @@ const App = () => {
       <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
-              {/* <Route index element={<HomePage />} /> */}
+              {<Route index element={<HomePage />} />}
               <Route path="/medicos" element={<MedicosPage />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/registro" element={<SeleccionTipoRegistro />} />

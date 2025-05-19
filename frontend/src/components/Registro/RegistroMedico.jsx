@@ -28,7 +28,7 @@ export function RegistroMedico() {
   });
   const [especialidades, setEspecialidades] = useState([]);
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { isAuthenticated, getRole, logout, login } = useContext(AuthContext);
   const [previewImage, setPreviewImage] = useState(null);
 
 
@@ -94,8 +94,8 @@ const handleSubmit = async (e) => {
 
         const data = await response.json();
 
-
       login(data.token, data.matricula, data.email);
+      //login(data.token, data.matricula,`MEDICO`);
       navigate("/");
       scrollTo(0,0);
 
