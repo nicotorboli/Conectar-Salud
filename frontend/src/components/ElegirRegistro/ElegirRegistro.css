@@ -1,0 +1,125 @@
+.elegir-registro-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.elegir-registro-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.elegir-registro-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 12px;
+}
+
+.elegir-registro-description {
+  font-size: 1.125rem;
+  color: #6b7280;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.elegir-registro-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.registro-option {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.registro-option:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.option-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.doctor-icon {
+  background-color: #e6f2ff;
+  color: #2563eb;
+}
+
+.patient-icon {
+  background-color: #f0f9ff;
+  color: #0284c7;
+}
+
+.option-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.option-description {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.option-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.doctor-button {
+  background-color: #2563eb;
+  color: white;
+}
+
+.doctor-button:hover {
+  background-color: #1d4ed8;
+}
+
+.patient-button {
+  background-color: white;
+  color: #2563eb;
+  border: 1px solid #2563eb;
+}
+
+.patient-button:hover {
+  background-color: #f0f7ff;
+}
+
+@media (max-width: 768px) {
+  .elegir-registro-options {
+    grid-template-columns: 1fr;
+  }
+
+  .elegir-registro-title {
+    font-size: 1.5rem;
+  }
+
+  .elegir-registro-description {
+    font-size: 1rem;
+  }
+}

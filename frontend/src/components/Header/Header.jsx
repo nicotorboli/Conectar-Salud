@@ -39,6 +39,7 @@ function Header() {
           />
         </div>
         <nav className='main-nav'>
+
           <Link
             to={'/'}
             href='/'
@@ -75,10 +76,10 @@ function Header() {
             )
           ) : (
             <Link
-              to={'/login'}
-              className={`nav-link ${pathname === '/login' ? 'active' : ''}`}
+              to={'/elegirRegistro'}
+              className={`nav-link ${pathname === '/elegirRegistro' ? 'active' : ''}`}
             >
-              Iniciar Sesión
+              Ingresá
             </Link>
           )}
         </nav>

@@ -10,6 +10,8 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import Perfil from "./components/Perfil/Perfil.jsx";
 import HomePage from "./components/HomePage/HomePage.jsx";
 import { GoogleMapsProvider } from "./context/GoogleMapsProvider.jsx";
+import { ElegirRegistro } from "./components/ElegirRegistro/ElegirRegistro.jsx";
+import RegisterFormPaciente from "./components/RegisterFormPaciente/RegisterFormPaciente.jsx";
 
 const App = () => {
   return (
@@ -25,6 +27,8 @@ const App = () => {
               <Route path="/registro/usuario" element={<RegistroUsuario />} />
               <Route path="/registro/medico" element={<RegistroMedico />} />
               <Route path="/perfil/:matricula" element={<Perfil />} />
+              <Route path="/elegirRegistro" element={<ElegirRegistro/>} />
+              <Route path="/registroPaciente" element = {<RegisterFormPaciente/>} />
             </Route>
           </Routes>
       </BrowserRouter>

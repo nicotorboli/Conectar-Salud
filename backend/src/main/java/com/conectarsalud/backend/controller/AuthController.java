@@ -52,6 +52,11 @@ public class AuthController {
         return ResponseEntity.ok(authService.registrarMedico(medicoNuevo));
     }
 
-
+    @PostMapping(value = "/register/paciente")
+    public ResponseEntity<AuthResponse> registerPaciente (
+            @RequestBody @Valid LoginRequestDTO request) {
+        return ResponseEntity.ok(authService.registerPaciente(request));
+    }
+    )
 
 }

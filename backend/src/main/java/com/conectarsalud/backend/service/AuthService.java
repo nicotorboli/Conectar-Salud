@@ -4,6 +4,7 @@ import com.conectarsalud.backend.dtos.AuthResponse;
 import com.conectarsalud.backend.dtos.LoginRequestDTO;
 import com.conectarsalud.backend.dtos.RegisterUsuarioDTO;
 import com.conectarsalud.backend.model.Medico;
+import jakarta.validation.Valid;
 import org.apache.coyote.Request;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -16,4 +17,5 @@ public interface AuthService {
     AuthResponse registrarUsuario(RegisterUsuarioDTO request, PasswordEncoder passwordEncoder);
 
 
+    public AuthResponse registerPaciente(LoginRequestDTO request);
 }
