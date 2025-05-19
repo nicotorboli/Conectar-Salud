@@ -68,3 +68,20 @@
     object-position: center; /* Enfoca el centro de la imagen */
 }
 
+
+.likes-container {
+    display: flex;
+}
+.heart {
+    font-size: 24px;
+    color:#4f4d4d97;
+}
+
+.liked {
+    color:#ff0000;
+}
+.likes-info {
+    margin-left: 5px;
+    font-size: 18px;
+    font-weight: 500;
+}

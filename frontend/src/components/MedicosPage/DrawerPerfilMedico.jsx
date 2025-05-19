@@ -2,7 +2,6 @@ import React from "react";
 import WhatsApp from '../../assets/WhatsApp.png';
 import placeholder from '../../assets/PlaceHolder.png';
 import "./DrawerPerfilMedico.css";
-import Ubicacion from "../Ubicacion/Ubicacion";
 import UbicacionViewer from "../Ubicacion/UbicacionViewer";
 
 const DrawerPerfilMedico = ({ medico, onClose }) => {
@@ -14,18 +13,18 @@ const DrawerPerfilMedico = ({ medico, onClose }) => {
                 <button className="close-button" onClick={onClose}>×</button>
                 <div className="drawer-header">
                     {medico.fotoPerfil ? (
-                                            <img
-                                                src={`data:image/jpeg;base64,${medico.fotoPerfil}`}
-                                                alt={`${medico.nombre} ${medico.apellido}`}
-                                                className="avatar-imagen-drawer"
-                                                onError={(e) => {
-                                                    e.target.onerror = null;
-                                                    e.target.src = '/images/PlaceHolder.png';
-                                                }}
-                                            />
-                                        ) : (
-                                            <div className="avatar-placeholder-drawer"></div>
-                                        )}
+                        <img
+                            src={`data:image/jpeg;base64,${medico.fotoPerfil}`}
+                            alt={`${medico.nombre} ${medico.apellido}`}
+                            className="avatar-imagen-drawer"
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = '/images/PlaceHolder.png';
+                            }}
+                        />
+                    ) : (
+                        <div className="avatar-placeholder-drawer"></div>
+                    )}
                     <div>
                         <h2 className="medico-nombre-drawer">{medico.nombre} {medico.apellido}</h2>
                         <p className="medico-especialidad-drawer">{medico.especialidad}</p>

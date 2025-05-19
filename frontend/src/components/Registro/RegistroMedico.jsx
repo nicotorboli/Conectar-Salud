@@ -94,8 +94,8 @@ const handleSubmit = async (e) => {
 
         const data = await response.json();
 
-
-      login(data.token, data.matricula,`MEDICO`);
+      login(data.token, data.matricula, data.email);
+      //login(data.token, data.matricula,`MEDICO`);
       navigate("/");
       scrollTo(0,0);
 
