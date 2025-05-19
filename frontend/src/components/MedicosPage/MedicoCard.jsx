@@ -8,7 +8,7 @@ const MedicoCard = ({ medico, onVerPerfil }) => {
     const [isLiked, setIsLiked] = useState(false);
     const [cantLikes, setCantLikes] = useState(medico.cantidadLikes || 0);
     const { email } = useContext(AuthContext)
-    console.log(email) // EL MAIL ES UNDEFINED
+    console.log(localStorage.getItem("email")); // EL MAIL ES UNDEFINED
     const handleImageError = (e) => {
         e.target.src = placeholder;
     };
@@ -20,7 +20,7 @@ const MedicoCard = ({ medico, onVerPerfil }) => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ usuarioEmail: email }),
+                body: JSON.stringify({ usuarioEmail: localStorage.getItem("email") }),
             });
 
             if (response.ok) {

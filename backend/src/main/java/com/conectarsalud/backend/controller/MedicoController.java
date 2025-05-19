@@ -4,6 +4,7 @@ import com.conectarsalud.backend.dtos.MedicoDTO;
 import com.conectarsalud.backend.model.Especialidades;
 import com.conectarsalud.backend.model.Medico;
 import com.conectarsalud.backend.service.MedicoService;
+import com.conectarsalud.backend.service.UsuarioCSService;
 import com.conectarsalud.backend.service.exceptions.EmailNoValidoException;
 import com.conectarsalud.backend.service.exceptions.EmailYaRegistradoException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,12 @@ public class MedicoController {
 
     @Autowired
     private final MedicoService medicoService;
+    @Autowired
+    private final UsuarioCSService usuarioService;
 
-    public MedicoController(MedicoService medicoService) {
+    public MedicoController(MedicoService medicoService, UsuarioCSService usuarioService) {
         this.medicoService = medicoService;
+        this.usuarioService = usuarioService;
     }
 
     @GetMapping
@@ -99,7 +103,7 @@ public class MedicoController {
             @RequestBody Map<String, Object> body
     ) {
         String mail = String.valueOf(body.get("usuarioEmail"));
-        Long usuarioId = medicoService.idDeUsuarioPorMail(mail);
+        Long usuarioId = usuarioService.findByEmail(mail).getId();
         boolean dioLike = medicoService.toggleLike(medicoId, usuarioId);
         String mensaje = dioLike ? "Like agregado" : "Like removido";
         return ResponseEntity.ok().body(Map.of("mensaje", mensaje));
