@@ -24,4 +24,7 @@ public interface MedicoService {
     List<Medico> medicosPrecioEntre(int min , int max);
     List<Medico> medicosPorUbicacion(String ubicacion);
     boolean toggleLike(Long medicoId, Long usuarioId);
+    boolean usuarioDioLike(Long medicoId, Long usuarioId);
+
+    int cantidadDeLikes(Long medicoId);
 }

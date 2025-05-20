@@ -31,7 +31,7 @@ public record MedicoDTO(
                 medico.getUbicacion(),
                 medico.getDescripcion(),
                 medico.getFotoPerfil(),
-                medico.getUsuariosQueDieronLike().size()
+                medico.getLikes()
         );
     }
 

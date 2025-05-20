@@ -10,6 +10,8 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import Perfil from "./components/Perfil/Perfil.jsx";
 import HomePage from "./components/HomePage/HomePage.jsx";
 import { GoogleMapsProvider } from "./context/GoogleMapsProvider.jsx";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
@@ -29,6 +31,7 @@ const App = () => {
           </Routes>
       </BrowserRouter>
     </AuthProvider>
+    <ToastContainer />
     </GoogleMapsProvider>
   );
 }

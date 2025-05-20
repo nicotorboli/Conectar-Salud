@@ -109,4 +109,16 @@ public class MedicoController {
     public void deleteMedico (@PathVariable String matricula){
         medicoService.deleteByMatriculaProfesional(matricula);
     }
+
+    @GetMapping("/{medicoId}/liked-by")
+    public ResponseEntity<Boolean> fueLikeadoPorUsuario(@PathVariable Long medicoId, @RequestParam String email) {
+        Long usuarioId = medicoService.idDeUsuarioPorMail(email);
+        boolean fueLikeado = medicoService.usuarioDioLike(medicoId, usuarioId);
+        return ResponseEntity.ok(fueLikeado);
+    }
+
+    @GetMapping("/{medicoId}/likes-count")
+    public ResponseEntity<Integer> cantidadDeLikes(@PathVariable Long medicoId) {
+        return ResponseEntity.ok(medicoService.cantidadDeLikes(medicoId));
+    }
 }

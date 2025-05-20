@@ -78,8 +78,9 @@ public class MedicoServiceImpl implements MedicoService {
     }
 
     public Long idDeUsuarioPorMail(String email){
-        Optional<Medico> medicoConEmail = medicoRepository.findByEmail(email);
-        return medicoConEmail.orElseThrow().getId();
+
+        Optional<Usuario> usuarioConMail = usuarioRepository.findByEmail(email);
+        return usuarioConMail.orElseThrow().getId();
     }
 
     public boolean toggleLike(Long medicoId, Long usuarioId) {
@@ -94,12 +95,37 @@ public class MedicoServiceImpl implements MedicoService {
         boolean yaDioLike = usuariosQueDieronLike.contains(usuario);
         if (yaDioLike) {
             usuariosQueDieronLike.remove(usuario);
+            medico.actualizarLike();
         } else {
             usuariosQueDieronLike.add(usuario);
+            medico.actualizarLike();
         }
 
         medicoRepository.save(medico);
         return !yaDioLike;
+    }
+
+    @Override
+    public boolean usuarioDioLike(Long medicoId, Long usuarioId) {
+        Medico medico = medicoRepository.findById(medicoId)
+                .orElseThrow(() -> new RuntimeException("Médico no encontrado"));
+
+        Usuario usuario = usuarioRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        Set<Usuario> usuariosQueDieronLike = medico.getUsuariosQueDieronLike();
+
+        return usuariosQueDieronLike.contains(usuario);
+    }
+
+    @Override
+    public int cantidadDeLikes(Long medicoId) {
+        Medico medico = medicoRepository.findById(medicoId)
+                .orElseThrow(() -> new RuntimeException("Médico no encontrado"));
+
+        Set<Usuario> usuariosQueDieronLike = medico.getUsuariosQueDieronLike();
+
+        return usuariosQueDieronLike.size();
     }
 
 }

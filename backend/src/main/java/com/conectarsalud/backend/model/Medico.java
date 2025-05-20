@@ -36,7 +36,7 @@ public class Medico extends Usuario{
 
     private String descripcion; // opcional
 
-    private Number likes = 0;
+    private int likes = 0;
 
     public Medico(String nombre, String apellido, String email, String nroWhatsapp, String nroLinea, String especialidad,
                   String matriculaProfesional, Double precioConsulta, String ubicacion, String descripcion,
@@ -59,6 +59,8 @@ public class Medico extends Usuario{
     public Medico() {}
 
 
-
+    public void actualizarLike() {
+        this.likes = usuariosQueDieronLike.size();
+    }
 }
 

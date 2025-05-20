@@ -37,7 +37,7 @@ const RegistroUsuario = () => {
         throw new Error(data.message || "Error al registrar");
       }
 
-      login(data.token, data.matricula, data.email); // o ID, según lo que devuelva tu backend
+      login(data.token, data.matricula, data.rol, data.email);
       navigate("/");
     } catch (error) {
       setErrors({ general: error.message });
@@ -71,7 +71,7 @@ const RegistroUsuario = () => {
               type="password"
               name="password"
               className="form-input"
-              value={formData.contraseña}
+              value={formData.password}
               onChange={handleChange}
               required
             />

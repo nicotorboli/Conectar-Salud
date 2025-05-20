@@ -7,6 +7,7 @@ import lombok.Builder;
 public record AuthResponse(
         String token,
         String matricula,
-        Rol rol
+        Rol rol,
+        String email
 ) {
 }
