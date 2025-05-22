@@ -95,13 +95,17 @@ public class MedicoServiceImpl implements MedicoService {
         boolean yaDioLike = usuariosQueDieronLike.contains(usuario);
         if (yaDioLike) {
             usuariosQueDieronLike.remove(usuario);
-            medico.actualizarLike();
+            usuario.getMedicosLikeados().remove(medico);
         } else {
             usuariosQueDieronLike.add(usuario);
-            medico.actualizarLike();
+            usuario.getMedicosLikeados().add(medico);
         }
 
+        medico.actualizarLike();
+
+        usuarioRepository.save(usuario);
         medicoRepository.save(medico);
+
         return !yaDioLike;
     }
 

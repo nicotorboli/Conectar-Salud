@@ -8,35 +8,34 @@ import { toast } from 'react-toastify';
 const MedicoCard = ({ medico, onVerPerfil }) => {
     const [isLiked, setIsLiked] = useState(false);
     const [cantLikes, setCantLikes] = useState(medico.cantidadLikes || 0);
+    console.log(medico)
     const { email } = useContext(AuthContext)
     const handleImageError = (e) => {
         e.target.src = placeholder;
     };
 
     useEffect(() => {
-    const fetchLikeStatus = async () => {
-        if (!email) return;
+        const fetchLikeStatusAndCount = async () => {
+            if (!email) return;
 
-        try {
-            const response = await fetch(`http://localhost:8080/medicos/${medico.id}/liked-by`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ usuarioEmail: email }),
-        });
-            if (response.ok) {
-                const liked = await response.json(); 
-                setIsLiked(liked);
+            try {
+                const likeStatusResponse = await fetch(`http://localhost:8080/medicos/${medico.id}/liked-by?email=${email}`);
+                if (likeStatusResponse.ok) {
+                    const liked = await likeStatusResponse.json();
+                    setIsLiked(liked);
+                }
+
+                const likeCountResponse = await fetch(`http://localhost:8080/medicos/${medico.id}/likes-count`);
+                if (likeCountResponse.ok) {
+                    const count = await likeCountResponse.json();
+                    setCantLikes(count);
+                }
+            } catch (error) {
+                console.error("Error al obtener información del like:", error);
             }
-        } catch (error) {
-            console.error("Error al obtener el estado del like:", error);
-        }
-    };
+        };
 
-    
-
-    fetchLikeStatus();
+        fetchLikeStatusAndCount();
     }, [email, medico.id]);
 
     const handleLike = async () => {
