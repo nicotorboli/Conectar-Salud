@@ -8,8 +8,9 @@ import { toast } from 'react-toastify';
 const MedicoCard = ({ medico, onVerPerfil }) => {
     const [isLiked, setIsLiked] = useState(false);
     const [cantLikes, setCantLikes] = useState(medico.cantidadLikes || 0);
-    console.log(medico)
     const { email } = useContext(AuthContext)
+    const { rol } = useContext(AuthContext)
+    console.log(email + rol)
     const handleImageError = (e) => {
         e.target.src = placeholder;
     };
@@ -41,6 +42,11 @@ const MedicoCard = ({ medico, onVerPerfil }) => {
     const handleLike = async () => {
     if (!email) {
         toast.info('🔒 Debés iniciar sesión para dar like.');
+        return;
+    }
+
+    if (rol == 'MEDICO') {
+        toast.info('🔒 Solo los pacientes pueden calificar');
         return;
     }
 
