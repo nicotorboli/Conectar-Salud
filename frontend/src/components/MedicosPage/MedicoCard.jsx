@@ -1,38 +1,75 @@
-import React, { useState, useContext} from "react";
+import React, { useState, useContext, useEffect} from "react";
 import "./MedicoCard.css";
 import placeholder from '../../assets/PlaceHolder.png';
 import { FaHeart } from "react-icons/fa";
 import { AuthContext } from '../../context/AuthContext.jsx'
+import { toast } from 'react-toastify';
 
 const MedicoCard = ({ medico, onVerPerfil }) => {
     const [isLiked, setIsLiked] = useState(false);
     const [cantLikes, setCantLikes] = useState(medico.cantidadLikes || 0);
     const { email } = useContext(AuthContext)
-    console.log(email) // EL MAIL ES UNDEFINED
+    const { rol } = useContext(AuthContext)
+    console.log(email + rol)
     const handleImageError = (e) => {
         e.target.src = placeholder;
     };
 
-    const handleLike = async () => {
-        try {
-            const response = await fetch(`http://localhost:8080/medicos/${medico.id}/like`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ usuarioEmail: email }),
-            });
+    useEffect(() => {
+        const fetchLikeStatusAndCount = async () => {
+            if (!email) return;
 
-            if (response.ok) {
-                setIsLiked(!isLiked);
-                setCantLikes(prev => prev + (isLiked ? -1 : 1));
-            } else {
-                console.error("Error al enviar el like");
+            try {
+                const likeStatusResponse = await fetch(`http://localhost:8080/medicos/${medico.id}/liked-by?email=${email}`);
+                if (likeStatusResponse.ok) {
+                    const liked = await likeStatusResponse.json();
+                    setIsLiked(liked);
+                }
+
+                const likeCountResponse = await fetch(`http://localhost:8080/medicos/${medico.id}/likes-count`);
+                if (likeCountResponse.ok) {
+                    const count = await likeCountResponse.json();
+                    setCantLikes(count);
+                }
+            } catch (error) {
+                console.error("Error al obtener información del like:", error);
             }
-        } catch (error) {
-            console.error("Error en la conexión con la API:", error);
+        };
+
+        fetchLikeStatusAndCount();
+    }, [email, medico.id]);
+
+    const handleLike = async () => {
+    if (!email) {
+        toast.info('🔒 Debés iniciar sesión para dar like.');
+        return;
+    }
+
+    if (rol == 'MEDICO') {
+        toast.info('🔒 Solo los pacientes pueden calificar');
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:8080/medicos/${medico.id}/like`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ usuarioEmail: email }),
+        });
+
+        if (response.ok) {
+            const nuevoEstado = !isLiked;
+            setIsLiked(nuevoEstado);
+            setCantLikes(prev => prev + (nuevoEstado ? 1 : -1));
+        } else {
+            toast.error('Error al procesar el like.');
         }
-    };
+    } catch (error) {
+        console.error("Error en la conexión con la API:", error);
+    }
+};
 
     return (
         <div className="medico-card">
@@ -55,7 +92,7 @@ const MedicoCard = ({ medico, onVerPerfil }) => {
                     onClick={handleLike}
                     style={{ cursor: "pointer" }}
                 />
-                <p className="likes-info"> - {cantLikes} Like(s) </p>
+                <p className="likes-info">  {cantLikes} Like(s) </p>
             </div>
             <button className="boton-perfil" onClick={onVerPerfil}>
                 Ver perfil completo

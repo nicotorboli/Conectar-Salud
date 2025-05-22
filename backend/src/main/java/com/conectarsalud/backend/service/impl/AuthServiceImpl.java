@@ -57,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
                 });
 
         usuarioRepository.save(medico);
-        return new AuthResponse(jwtService.getToken(medico), medico.getMatriculaProfesional(), MEDICO);
+        return new AuthResponse(jwtService.getToken(medico), medico.getMatriculaProfesional(), MEDICO, medico.getEmail());
     }
 
     @Override
@@ -81,6 +81,7 @@ public class AuthServiceImpl implements AuthService {
                 .token(jwtService.getToken(usuario))
                 .matricula(matricula)
                 .rol(usuario.getRol())
+                .email(request.email())
                 .build();
     }
 
@@ -99,7 +100,7 @@ public class AuthServiceImpl implements AuthService {
             throw new EmailNoValidoException("mail invalido");
         };
         usuarioRepository.save(usuario);
-        return new AuthResponse(jwtService.getToken(usuario), null, USUARIO);
+        return new AuthResponse(jwtService.getToken(usuario), null, USUARIO, request.email());
     }
 
 

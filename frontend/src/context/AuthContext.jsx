@@ -11,11 +11,14 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
     const matriculaSaved = localStorage.getItem("matricula");
-    const rolSaved = localStorage.getItem("rol")
+    const rolSaved = localStorage.getItem("rol");
+    const emailSaved = localStorage.getItem("email"); 
+
     if (savedToken) {
       setToken(savedToken);
-      setMatricula(matriculaSaved)
-      setRol(rolSaved)
+      setMatricula(matriculaSaved);
+      setRol(rolSaved);
+      setEmail(emailSaved); 
     }
   }, []);
 
@@ -23,7 +26,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("token", newToken);
     localStorage.setItem('matricula', matricula);
     localStorage.setItem('rol', rol);
-    localStorage.setItem('rol', email);
+    localStorage.setItem('email', email);
     setEmail(email);
     setRol(rol);
     setToken(newToken);
@@ -36,15 +39,19 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("matricula");
     localStorage.removeItem("rol")
+    localStorage.removeItem("email"); 
+
     setRol(null);
     setToken(null);
     setMatricula(null);
+    setEmail(null); 
+
   };
 
   const isAuthenticated = !!token;
 
   return (
-    <AuthContext.Provider value={{ token, isAuthenticated, login, logout, rol }}>
+    <AuthContext.Provider value={{ token, isAuthenticated, login, logout, rol, email }}>
       {children}
     </AuthContext.Provider>
   );

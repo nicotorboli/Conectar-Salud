@@ -17,6 +17,7 @@ public class UsuarioCS extends Usuario{
         this.email = email;
         this.contraseña = contraseña;
         this.rol = Rol.USUARIO;
+
     }
 }
 
