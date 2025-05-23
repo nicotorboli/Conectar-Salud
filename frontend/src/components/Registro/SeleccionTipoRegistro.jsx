@@ -18,15 +18,15 @@ const SeleccionTipoRegistro = () => {
       <div className="registro-opciones">
         <div className="registro-tarjeta">
             <FaUser size={48} color="#007bff" style={{ marginBottom: "1rem" }} />
-          <h3 className="tarjeta-titulo">Soy Usuario</h3>
+          <h3 className="tarjeta-titulo">Soy Paciente</h3>
           <p className="tarjeta-descripcion">
-            Registrate como usuario para buscar médicos, precios, opiniones y mas.
+            Registrate como paciente para buscar médicos, precios, opiniones y mas.
           </p>
           <button
             className="boton-borde"
             onClick={() => navigate("/registro/usuario")}
           >
-            Registrarme como Usuario
+            Registrarme como Paciente
           </button>
         </div>
 

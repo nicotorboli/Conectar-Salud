@@ -5,7 +5,7 @@ import { FaHeart } from "react-icons/fa";
 import { AuthContext } from '../../context/AuthContext.jsx'
 import { toast } from 'react-toastify';
 
-const MedicoCard = ({ medico, onVerPerfil }) => {
+const MedicoCard = ({ medico, onVerPerfil, onLikeUpdate }) => {
     const [isLiked, setIsLiked] = useState(false);
     const [cantLikes, setCantLikes] = useState(medico.cantidadLikes || 0);
     const { email } = useContext(AuthContext)
@@ -62,7 +62,9 @@ const MedicoCard = ({ medico, onVerPerfil }) => {
         if (response.ok) {
             const nuevoEstado = !isLiked;
             setIsLiked(nuevoEstado);
-            setCantLikes(prev => prev + (nuevoEstado ? 1 : -1));
+            const nuevoConteo = cantLikes +(nuevoEstado ? 1 : -1);
+            setCantLikes(nuevoConteo);
+            onLikeUpdate(medico.id, nuevoConteo)
         } else {
             toast.error('Error al procesar el like.');
         }

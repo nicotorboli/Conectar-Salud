@@ -47,7 +47,7 @@ const RegistroUsuario = () => {
   return (
     <div className="registro-medico-card">
       <div className="registro-medico-header">
-        <h2 className="registro-medico-title">Crear cuenta de usuario</h2>
+        <h2 className="registro-medico-title">Crear cuenta de paciente</h2>
         <p className="registro-medico-description">
           Completá tus datos personales para registrarte.
         </p>
