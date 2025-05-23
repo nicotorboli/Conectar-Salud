@@ -18,11 +18,21 @@ const MedicosPage = () => {
   const medicosOrdenados = useMemo(() => {
     if (!ordenarPorLikes) return medicos;
 
-    return [...medicos].sort((a, b) => b.likes - a.likes);
+    return [...medicos].sort((a, b) => b.cantidadLikes - a.cantidadLikes);
   }, [medicos, ordenarPorLikes]);
 
   const handlerOrdenar = () => {
     setOrdenarPorLikes(!ordenarPorLikes); // Alternar entre activado/desactivado
+  };
+
+  const handleActualizarLikes = (medicoId, nuevoLikeCount) => {
+    setMedicos(prevMedicos =>
+      prevMedicos.map(medico =>
+        medico.id === medicoId
+          ? { ...medico, cantidadLikes: nuevoLikeCount }
+          : medico
+      )
+  );
   };
 
   useEffect(() => {
@@ -84,9 +94,10 @@ const MedicosPage = () => {
 
       {medicosOrdenados.map((medico, index) => (
         <MedicoCard
-          key={index}
+          key={medico.id}
           medico={medico}
           onVerPerfil={() => setMedicoSeleccionado(medico)}
+           onLikeUpdate={handleActualizarLikes}
         />
       ))}
 
