@@ -35,6 +35,8 @@ public class SecurityConfig {
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/medicos").permitAll()
                                 .requestMatchers("/medicos/**").permitAll()
+                                .requestMatchers("/comentarios/medico/**").permitAll() // Permite acceso público
+                                .requestMatchers("/comentarios/**").authenticated()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManager ->
