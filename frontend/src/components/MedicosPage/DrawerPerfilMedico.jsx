@@ -72,7 +72,7 @@ const DrawerPerfilMedico = ({ medico, onClose }) => {
                         <UbicacionViewer direccion={medico.ubicacion}></UbicacionViewer>
                     </div>
                     <div>
-                        <Comentario medico={medico} />
+                        <Comentario medico={medico.id} />
                     </div>
                 </div>
             </div>
