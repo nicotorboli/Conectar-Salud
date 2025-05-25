@@ -62,13 +62,16 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse login(LoginRequestDTO request) {
-        // Buscar usuario sin discriminar por rol primero
-        Usuario usuario = usuarioRepository.findByEmail(request.email())
-                .orElseThrow(() -> new UsuarioNoEncontrado("Credenciales inválidas"));
 
         // Autenticar credenciales
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.email(), request.password()));
+
+
+        // Buscar usuario sin discriminar por rol primero
+        Usuario usuario = usuarioRepository.findByEmail(request.email())
+                .orElseThrow(() -> new UsuarioNoEncontrado("Credenciales inválidas"));
+
 
         // Determinar si es médico para incluir matrícula
         String matricula = null;

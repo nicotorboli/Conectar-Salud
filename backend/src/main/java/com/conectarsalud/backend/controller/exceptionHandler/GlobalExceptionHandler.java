@@ -1,9 +1,6 @@
 package com.conectarsalud.backend.controller.exceptionHandler;
 
-import com.conectarsalud.backend.service.exceptions.EmailNoValidoException;
-import com.conectarsalud.backend.service.exceptions.EmailYaRegistradoException;
-import com.conectarsalud.backend.service.exceptions.UsuarioNoEncontrado;
-import com.conectarsalud.backend.service.exceptions.UsuarioYaExistenteException;
+import com.conectarsalud.backend.service.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -86,4 +83,15 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(value = {ComentarioDuplicadoException.class})
+    public ResponseEntity<ErrorResponse> handleComentarioDuplicadoException(BadCredentialsException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                "Solo se puede comentarle a un medico una vez",
+                401
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
 }
+
