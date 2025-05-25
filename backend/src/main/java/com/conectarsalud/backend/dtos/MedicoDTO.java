@@ -15,7 +15,7 @@ public record MedicoDTO(
         String ubicacion,
         String descripcion,
         byte[] fotoPerfil,
-        int cantidadLikes
+        Integer cantidadLikes
 ) {
     public static MedicoDTO desdeModelo(Medico medico) {
         return new MedicoDTO(

@@ -29,9 +29,16 @@ public class ComentarioServiceImpl implements ComentarioService {
 
         Medico medico = medicoRepository.findById(comentarioDTO.medicoId())
                 .orElseThrow(() ->  new UsuarioNoEncontrado("Usuario no encontrado"));
+
+        if (medicoRepository.findByEmail(usuarioEmail).isPresent()) {
+            throw new MedicoComentarException("Los Medicos no pueden comentar");
+        }
+
         if(comentarioRepository.existsByAutorAndMedico(autor, medico)) {
             throw new ComentarioDuplicadoException("Solo podes comentar una vez a este médico");
         }
+
+
 
         Comentario comentario = new Comentario(
                 comentarioDTO.contenido(),

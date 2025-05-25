@@ -135,3 +135,25 @@
     width: 24px;
     height: 24px;
 }
+
+
+.seccion-ubicacion {
+  margin: 1.5rem 0;
+}
+
+.seccion-comentarios{
+  margin-top: 0.5rem;
+  /*padding-top: 1.5rem;
+  border-top: 1px solid #eee;*/
+}
+
+
+@media (max-width: 768px) {
+  .drawer {
+    width: 90%;
+  }
+
+  .seccion-comentarios {
+    padding: 0.5rem;
+  }
+}

@@ -3,7 +3,7 @@ import WhatsApp from '../../assets/WhatsApp.png';
 import placeholder from '../../assets/PlaceHolder.png';
 import "./DrawerPerfilMedico.css";
 import UbicacionViewer from "../Ubicacion/UbicacionViewer";
-import Comentario from "./Comentario"
+import Comentario from "../Comentario/Comentario";
 
 const DrawerPerfilMedico = ({ medico, onClose }) => {
     if (!medico) return null;
@@ -71,8 +71,8 @@ const DrawerPerfilMedico = ({ medico, onClose }) => {
                     <div>
                         <UbicacionViewer direccion={medico.ubicacion}></UbicacionViewer>
                     </div>
-                    <div>
-                        <Comentario medico={medico.id} />
+                    <div className="seccion-comentarios-drawer">
+                        <Comentario medicoId={medico.id} ></Comentario>
                     </div>
                 </div>
             </div>
