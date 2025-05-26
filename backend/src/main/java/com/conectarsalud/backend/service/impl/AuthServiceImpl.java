@@ -13,6 +13,7 @@ import com.conectarsalud.backend.service.JwtService;
 import com.conectarsalud.backend.service.MedicoService;
 import com.conectarsalud.backend.service.UsuarioCSService;
 import com.conectarsalud.backend.service.exceptions.EmailNoValidoException;
+import com.conectarsalud.backend.service.exceptions.MatriculaInvalidaException;
 import com.conectarsalud.backend.service.exceptions.UsuarioNoEncontrado;
 import com.conectarsalud.backend.service.exceptions.UsuarioYaExistenteException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -55,6 +56,9 @@ public class AuthServiceImpl implements AuthService {
                 .ifPresent(existingUsuario -> {
                     throw new UsuarioYaExistenteException();
                 });
+        if (!medico.getMatriculaProfesional().startsWith("MP-\\d+")){
+            throw new MatriculaInvalidaException("La matricula debe empezar con 'MP-'  seguida de numeros");
+        }
 
         usuarioRepository.save(medico);
         return new AuthResponse(jwtService.getToken(medico), medico.getMatriculaProfesional(), MEDICO, medico.getEmail());

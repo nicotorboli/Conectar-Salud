@@ -19,6 +19,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:5173")
                 .allowedMethods("*")
                 .allowedHeaders("*")
+
+                .exposedHeaders("Authorization") // Asegúrate de exponer este header
                 .allowCredentials(true);
     }
 
