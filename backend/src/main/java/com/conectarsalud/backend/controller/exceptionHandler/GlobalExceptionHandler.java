@@ -93,6 +93,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(MatriculaInvalidaException.class)
+    public ResponseEntity<ErrorResponse> handleMatriculaInvalidaException(MatriculaInvalidaException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                ex.getMessage(),
+                400
+        );
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
     @ExceptionHandler(MedicoComentarException.class)
     public ResponseEntity<ErrorResponse> handleMedicoComentarException(MedicoComentarException ex) {
         ErrorResponse errorResponse = new ErrorResponse(

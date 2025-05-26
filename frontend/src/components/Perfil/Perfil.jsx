@@ -7,6 +7,7 @@ import './Perfil.css'
 import editarPerfil from '../../service/editarPerfil'
 import Ubicacion from '../Ubicacion/Ubicacion'
 import UbicacionViewer from '../Ubicacion/UbicacionViewer'
+import Comentario from '../Comentario/VisualizarComentarios'
 
 const Perfil = () => {
   const { matricula } = useParams()
@@ -239,6 +240,9 @@ const handleImageChange = (e) => {
       <div className='perfil-ubicacion'>
           {editable ? <Ubicacion value={medico.ubicacion} onChange={(value) => {setUbiNew(value)}}> </Ubicacion>:
           <UbicacionViewer direccion={medico.ubicacion} ></UbicacionViewer>}
+      </div>
+      <div className="seccion-comentarios-drawer">
+       <Comentario medicoId={medico.id} ></Comentario>
       </div>
       </div>
     </div>

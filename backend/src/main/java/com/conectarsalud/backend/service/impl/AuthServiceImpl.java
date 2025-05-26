@@ -55,6 +55,9 @@ public class AuthServiceImpl implements AuthService {
                 .ifPresent(existingUsuario -> {
                     throw new UsuarioYaExistenteException();
                 });
+        if (!medico.getMatriculaProfesional().startsWith("MP-")){
+            throw new MatriculaInvalidaException("La matricula debe empezar con 'MP-' ");
+        }
 
         usuarioRepository.save(medico);
         return new AuthResponse(jwtService.getToken(medico), medico.getMatriculaProfesional(), MEDICO, medico.getEmail());
