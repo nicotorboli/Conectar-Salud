@@ -7,7 +7,7 @@ import './Perfil.css'
 import editarPerfil from '../../service/editarPerfil'
 import Ubicacion from '../Ubicacion/Ubicacion'
 import UbicacionViewer from '../Ubicacion/UbicacionViewer'
-import Comentario from '../Comentario/VisualizarComentarios'
+import Comentario from "../Comentario/Comentario";
 
 const Perfil = () => {
   const { matricula } = useParams()
@@ -43,6 +43,7 @@ const Perfil = () => {
               medico.ubicacion = ubiNew;
             try {
              await editarPerfil(medicoABase);
+
              setEditable(false);
              alert("Perfil actualizado correctamente");
            } catch (error) {
@@ -129,6 +130,7 @@ const handleImageChange = (e) => {
         )
         const medicoData = await resp.json()
         setMedico(medicoData)
+
         setUbiNew(medicoData.ubicacion)
       } catch (err) {
         setError(err.message)
@@ -232,17 +234,16 @@ const handleImageChange = (e) => {
           <p className='perfil-descripcion-d' contentEditable={editable}>
             {medico.descripcion || 'Este médico aún no agregó una descripción.'}
           </p>
+           {medico.id && <Comentario medicoId={medico.id} mostrarCreacion={false} />}
           <button className='perfil-logout-button' onClick={handleLogout}>
             Cerrar Sesión
           </button>
         </div>
+
       </div>
       <div className='perfil-ubicacion'>
           {editable ? <Ubicacion value={medico.ubicacion} onChange={(value) => {setUbiNew(value)}}> </Ubicacion>:
           <UbicacionViewer direccion={medico.ubicacion} ></UbicacionViewer>}
-      </div>
-      <div className="seccion-comentarios-drawer">
-       <Comentario medicoId={medico.id} ></Comentario>
       </div>
       </div>
     </div>

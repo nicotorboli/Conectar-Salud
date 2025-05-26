@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import "./Comentario.css";
 import { AuthContext } from "../../context/AuthContext";
 
-const Comentario = ({ medicoId }) => {
+const Comentario = ({ medicoId , mostrarCreacion = false}) => {
   const [comentarios, setComentarios] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
@@ -31,7 +31,7 @@ const Comentario = ({ medicoId }) => {
         console.log(token);
       const response = await fetch("http://localhost:8080/comentarios", {
         method: "POST",
-
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`
@@ -85,53 +85,48 @@ const Comentario = ({ medicoId }) => {
   if (error) return <div className="error-comentarios">Error: {error}</div>;
 
   return (
-    <div className="seccion-comentarios">
-      <h3>Comentarios</h3>
+     <div className="seccion-comentarios">
+                                <h3>Comentarios</h3>
 
-      {/* Formulario para nuevo comentario */}
-      {token && (
-        <div className="formulario-comentario">
-          <textarea
-            value={nuevoComentario}
-            onChange={(e) => setNuevoComentario(e.target.value)}
-            placeholder="Escribe tu comentario..."
-            rows="3"
-          />
-          <button onClick={crearComentario} className="boton-enviar-comentario">
-            Enviar Comentario
-          </button>
-        </div>
-      )}
+
+                                { mostrarCreacion  && token && (
+                                  <div className="formulario-comentario">
+                                    <textarea
+                                      value={nuevoComentario}
+                                      onChange={(e) => setNuevoComentario(e.target.value)}
+                                      placeholder="Escribe tu comentario..."
+                                      rows="3"
+                                    />
+                                    <button onClick={crearComentario} className="boton-enviar-comentario">
+                                      Enviar Comentario
+                                    </button>
+                                  </div>
+                                )}
+
 
       {/* Lista de comentarios */}
       {comentarios.length === 0 ? (
         <p className="sin-comentarios">No hay comentarios aún</p>
       ) : (
-        <div className="lista-comentarios">
-          {comentarios.map((comentario) => (
-            <div key={comentario.id} className="comentario-individual">
-              <div className="cabecera-comentario">
-                <span className="autor-comentario">
-                  {comentario.autor || "Anónimo"}
-                </span>
-                <span className="fecha-comentario">
-                  {formatDate(comentario.fecha)}
-                </span>
-              </div>
-              <p className="contenido-comentario">{comentario.contenido}</p>
+       <div className="casillaComentarios">
+         {comentarios.map((comentario , index) => (
+           <div key={comentario.id} className="comentario">
+             <p>{"Paciente Anónimo " + index} </p>
+             <p className="contenido-comentario">{comentario.contenido}</p>
+             <p className="fecha-comentario">{formatDate(comentario.fecha)}</p>
 
-              {/* Botón para eliminar (solo para el autor) */}
-              {email === comentario.autorEmail && (
-                <button
-                  onClick={() => eliminarComentario(comentario.id)}
-                  className="boton-eliminar-comentario"
-                >
-                  Eliminar
-                </button>
-              )}
-            </div>
-          ))}
-        </div>
+             {/* Botón para eliminar (solo para el autor) */}
+             {email === comentario.autorEmail && (
+               <button
+                 onClick={() => eliminarComentario(comentario.id)}
+                 className="boton-eliminar-comentario"
+               >
+                 Eliminar
+               </button>
+             )}
+           </div>
+         ))}
+       </div>
       )}
     </div>
   );
