@@ -13,6 +13,7 @@ import com.conectarsalud.backend.service.JwtService;
 import com.conectarsalud.backend.service.MedicoService;
 import com.conectarsalud.backend.service.UsuarioCSService;
 import com.conectarsalud.backend.service.exceptions.EmailNoValidoException;
+import com.conectarsalud.backend.service.exceptions.MatriculaInvalidaException;
 import com.conectarsalud.backend.service.exceptions.UsuarioNoEncontrado;
 import com.conectarsalud.backend.service.exceptions.UsuarioYaExistenteException;
 import org.springframework.security.authentication.AuthenticationManager;
