@@ -27,11 +27,9 @@ const Comentario = ({ medicoId , mostrarCreacion = false}) => {
   const crearComentario = async () => {
     if (!nuevoComentario.trim()) return;
 
-
-
     try {
-            if (nuevoComentario.length > 255) {
-              throw new Error("El comentario no puede superar los 255 caracteres");
+            if (nuevoComentario.length > 250) {
+              throw new Error("El comentario no puede superar los 250 caracteres");
             }
 
       const response = await fetch("http://localhost:8080/comentarios", {
@@ -46,7 +44,6 @@ const Comentario = ({ medicoId , mostrarCreacion = false}) => {
           medicoId: medicoId
         })
       });
-
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Error al crear comentario");
