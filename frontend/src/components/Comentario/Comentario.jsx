@@ -7,13 +7,12 @@ const Comentario = ({ medicoId }) => {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const [nuevoComentario, setNuevoComentario] = useState("");
-  const { token } = useContext(AuthContext);
-    if (!medicoId) {
-      return <div className="error-comentarios">Error: No se cargó el médico correctamente</div>;
-    }
+  const { token, email } = useContext(AuthContext);
+
 
   const fetchComentarios = async () => {
     try {
+
       const response = await fetch(`http://localhost:8080/comentarios/medico/${medicoId}`);
       if (!response.ok) throw new Error("Error al obtener los comentarios");
       const data = await response.json();
@@ -29,8 +28,10 @@ const Comentario = ({ medicoId }) => {
     if (!nuevoComentario.trim()) return;
 
     try {
+        console.log(token);
       const response = await fetch("http://localhost:8080/comentarios", {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`

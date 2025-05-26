@@ -37,12 +37,17 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authRequest ->
                         authRequest
+
                                 .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/medicos").permitAll()
                                 .requestMatchers("/medicos/**").permitAll()
                                 .requestMatchers("/comentarios/medico/**").permitAll() // Permite acceso público
-                                .requestMatchers("/comentarios/**").authenticated()
+                                .requestMatchers("/comentarios").authenticated()
                                 .anyRequest().authenticated()
+
+                                /*.anyRequest().permitAll()*/
+
+
                 )
                 .sessionManagement(sessionManager ->
                         sessionManager
