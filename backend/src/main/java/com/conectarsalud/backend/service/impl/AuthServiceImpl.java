@@ -56,7 +56,7 @@ public class AuthServiceImpl implements AuthService {
                 .ifPresent(existingUsuario -> {
                     throw new UsuarioYaExistenteException();
                 });
-        if (!medico.getMatriculaProfesional().startsWith("MP-\\d+")){
+        if (!medico.getMatriculaProfesional().matches("^MP-\\d+$")) {
             throw new MatriculaInvalidaException("La matricula debe empezar con 'MP-'  seguida de numeros");
         }
 
