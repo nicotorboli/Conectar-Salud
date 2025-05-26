@@ -57,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
                     throw new UsuarioYaExistenteException();
                 });
         if (!medico.getMatriculaProfesional().startsWith("MP-\\d+")){
-            throw new MatriculaInvalidaException("La matricula debe empezar con 'MP-' ");
+            throw new MatriculaInvalidaException("La matricula debe empezar con 'MP-'  seguida de numeros");
         }
 
         usuarioRepository.save(medico);
