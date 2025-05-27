@@ -777,7 +777,7 @@
 @media (min-width: 1024px) {
   .hero-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 400px;
     justify-items: stretch;
   }
 
