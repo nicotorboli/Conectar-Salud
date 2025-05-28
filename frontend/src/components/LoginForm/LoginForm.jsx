@@ -33,7 +33,7 @@ const LoginForm = () => {
         
 
         if (!response.ok) {
-        throw new Error(data.message || "Error al registrar");
+        throw new Error(data.message || "Error al iniciar sesion");
         }
         console.log(data)
 

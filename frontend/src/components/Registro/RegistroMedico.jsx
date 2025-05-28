@@ -52,7 +52,6 @@ const handleSubmit = async (e) => {
     try {
         setIsLoading(true);
 
-        // 1. Preparar los datos del médico como JSON
         const medicoData = {
             nombre: formData.nombre,
             apellido: formData.apellido,
@@ -67,26 +66,19 @@ const handleSubmit = async (e) => {
             descripcion: formData.descripcion || ""
         };
 
-        // 2. Crear FormData
         const formDataToSend = new FormData();
 
-        // 3. Agregar el JSON como string (con el nombre "medico")
         formDataToSend.append('medico', JSON.stringify(medicoData));
 
-        // 4. Agregar la foto si existe (con el nombre "foto")
         if (formData.fotoPerfil) {
             formDataToSend.append('foto', formData.fotoPerfil);
         }
 
-        // 5. Enviar la solicitud (IMPORTANTE: NO incluir Content-Type header)
         const response = await fetch("http://localhost:8080/auth/register/medico", {
             method: "POST",
             body: formDataToSend
-            // El navegador agregará automáticamente:
-            // Content-Type: multipart/form-data; boundary=...
         });
 
-        // 6. Manejar la respuesta
         if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.message || "Error al registrar");

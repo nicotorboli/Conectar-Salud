@@ -56,31 +56,26 @@ const SearchBar = ({ onSearch }) => {
 
  const handlePriceChange = (e, type) => {
   const inputValue = e.target.value;
-  const numericValue = inputValue === '' ? '' : Math.max(0, parseInt(inputValue)) || 0; // Fuerza números positivos
+  const numericValue = inputValue === '' ? '' : Math.max(0, parseInt(inputValue)) || 0; 
 
-  // Actualizamos el estado y luego validamos
   if (type === 'min') {
     setMinPrice(numericValue);
-    // Usamos el callback para asegurarnos de tener el último valor
     setMaxPrice(prevMax => {
       const newError = checkPriceErrors(numericValue, prevMax);
       setPriceError(newError);
-      return prevMax; // No modificamos maxPrice
+      return prevMax;
     });
   } else {
     setMaxPrice(numericValue);
-    // Usamos el callback para asegurarnos de tener el último valor
     setMinPrice(prevMin => {
       const newError = checkPriceErrors(prevMin, numericValue);
       setPriceError(newError);
-      return prevMin; // No modificamos minPrice
     });
   }
 };
 
-// Función auxiliar para validaciones
 const checkPriceErrors = (min, max) => {
-  if (min === '' || max === '') return ''; // No hay error si algún campo está vacío
+  if (min === '' || max === '') return '';
   
   if (min < 0 || max < 0) return 'Ningún valor puede ser negativo';
   if (min > max) return 'El mínimo no puede ser mayor que el máximo';
