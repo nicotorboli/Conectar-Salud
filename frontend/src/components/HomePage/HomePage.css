@@ -119,7 +119,11 @@
 }
 
 #banner {
-  background: linear-gradient(to top, rgba(18, 138, 162, 0), rgba(18, 138, 162, 0.3));
+  background: linear-gradient(
+    to top,
+    rgba(18, 138, 162, 0),
+    rgba(18, 138, 162, 0.3)
+  );
   padding: 20px;
   text-align: center;
 }
@@ -135,7 +139,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to top, rgba(18, 138, 162, 0.3), rgba(17, 110, 117, 0.36));
+  background: linear-gradient(
+    to top,
+    rgba(18, 138, 162, 0.3),
+    rgba(17, 110, 117, 0.36)
+  );
   padding: 20px;
 }
 
@@ -145,7 +153,6 @@
   margin-bottom: -6rem;
   min-height: 100vh;
 }
-
 
 .btn {
   display: inline-flex;
@@ -160,7 +167,8 @@
   border: none;
   cursor: pointer;
   min-width: 160px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .btn:hover {
@@ -286,7 +294,6 @@
   text-align: center;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .info-container {
     flex-direction: column;
@@ -366,8 +373,6 @@
   }
 }
 
-/* ===== DISEÑO PRO HOMEPAGE ===== */
-
 .homepage-container {
   display: flex;
   min-height: 100vh;
@@ -383,14 +388,12 @@
   padding: 0 24px;
 }
 
-/* Main Content - Sin espacios innecesarios */
 .homepage-main {
   flex: 1;
   margin: 0;
   padding: 0;
 }
 
-/* Hero Section - Conecta perfectamente con header */
 .hero-section {
   padding: 80px 0 120px;
   background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 50%, #e2e8f0 100%);
@@ -406,7 +409,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 75% 25%, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+  background: radial-gradient(
+    circle at 75% 25%,
+    rgba(59, 130, 246, 0.05) 0%,
+    transparent 50%
+  );
   pointer-events: none;
 }
 
@@ -476,7 +483,8 @@
 .btn-primary:hover {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .btn-secondary {
@@ -490,10 +498,10 @@
   border-color: #3b82f6;
   color: #3b82f6;
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-/* ===== LOGO SECTION - DISEÑO ELEGANTE ===== */
 .hero-logo {
   display: flex;
   align-items: center;
@@ -509,58 +517,50 @@
   justify-content: center;
 }
 
-/* Efecto de resplandor sutil en el fondo */
 .large-logo-container::before {
   content: "";
   position: absolute;
   width: 140%;
   height: 140%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.08) 0%,
+    transparent 60%
+  );
   border-radius: 50%;
   animation: gentle-pulse 6s ease-in-out infinite;
   z-index: 0;
 }
 
-/* Contenedor del logo - MINIMALISTA */
 .large-logo {
   width: 280px;
   height: 280px;
   border-radius: 50%;
-  /* Fondo sutil y elegante */
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.9) 0%,
     rgba(248, 250, 252, 0.8) 50%,
     rgba(241, 245, 249, 0.7) 100%
   );
-
-  /* Borde sutil */
   border: 1px solid rgba(226, 232, 240, 0.6);
-
-  /* Sombra elegante y suave */
-  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08), 0 8px 16px -4px rgba(0, 0, 0, 0.04), inset 0 1px 0
-    rgba(255, 255, 255, 0.6);
-
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08),
+    0 8px 16px -4px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 50px;
   position: relative;
   z-index: 2;
-
-  /* Animación suave */
   animation: elegant-float 8s ease-in-out infinite;
   transition: all 0.4s ease;
 }
 
-/* Hover effect elegante */
 .large-logo:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.12), 0 12px 24px -4px rgba(0, 0, 0, 0.06), inset 0 1px 0
-    rgba(255, 255, 255, 0.8);
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.12),
+    0 12px 24px -4px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-/* Logo image - perfectamente contenida */
 .logo-image {
   width: 100%;
   height: 100%;
@@ -573,7 +573,6 @@
   filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
 }
 
-/* Texto de marca elegante */
 .brand-text-container {
   margin-top: 32px;
   text-align: center;
@@ -587,16 +586,11 @@
   color: #1e293b;
   margin: 0;
   letter-spacing: -0.01em;
-
-  /* Gradiente sutil en el texto */
   background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-
-  /* Sombra de texto muy sutil */
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-
   transition: all 0.3s ease;
 }
 
@@ -607,7 +601,6 @@
   background-clip: text;
 }
 
-/* Animaciones elegantes */
 @keyframes elegant-float {
   0%,
   100% {
@@ -636,7 +629,6 @@
   }
 }
 
-/* ===== SERVICES SECTION ===== */
 .services-section {
   padding: 100px 0;
   background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
@@ -668,9 +660,7 @@
   font-weight: 600;
   color: #1d4ed8;
   border: 1px solid rgba(59, 130, 246, 0.2);
-
-
-
+  margin-right: 24px;
 }
 
 .services-title {
@@ -678,7 +668,7 @@
   font-weight: 800;
   line-height: 1.1;
   color: #1e293b;
-  margin: 0;
+  margin-right: 24px;
   letter-spacing: -0.02em;
 }
 
@@ -686,7 +676,7 @@
   max-width: 700px;
   color: #64748b;
   font-size: 1.25rem;
-  margin: 0;
+  margin-right: 24px;
   line-height: 1.6;
   font-weight: 400;
 }
@@ -708,7 +698,8 @@
   border: 1px solid #e2e8f0;
   padding: 40px 32px;
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   text-align: center;
   transition: all 0.3s ease;
   position: relative;
@@ -729,7 +720,8 @@
 
 .service-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
   border-color: #3b82f6;
 }
 
@@ -767,7 +759,6 @@
   font-size: 1rem;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
 @media (min-width: 640px) {
   .services-grid {
     grid-template-columns: repeat(3, 1fr);

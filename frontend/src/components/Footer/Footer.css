@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start; 
-  width: 100%; /* ← se asegura de ocupar todo el ancho */
+  width: 100%;
 }
 .copyright {
   font-size: 0.875rem;
@@ -36,7 +36,6 @@
   .footer-container {
     flex-direction: row;
     justify-content: space-between;
-    /* padding: 16px 0;
-    align-items: center;  */
+    padding: 0px;
   }
 }
