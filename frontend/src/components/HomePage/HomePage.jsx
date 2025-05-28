@@ -97,7 +97,7 @@ function HomePage() {
                   <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                   <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
-                <h3 className="service-card-title">Encuentra especialistas</h3>
+                <h3 className="service-card-title">Encontrá especialistas</h3>
                 <p className="service-card-description">
                   Accede a una amplia red de médicos especialistas en diferentes áreas.
                 </p>
@@ -126,9 +126,9 @@ function HomePage() {
                   <path d="M12 18h.01" />
                   <path d="M16 18h.01" />
                 </svg>
-                <h3 className="service-card-title">Gestiona tus citas</h3>
+                <h3 className="service-card-title">Coordiná tus turnos</h3>
                 <p className="service-card-description">
-                  Programa, reprograma y cancela citas médicas de forma sencilla.
+                  Contactá directamente con el médico para programar, modificar o cancelar una cita.
                 </p>
               </div>
               <div className="service-card">
@@ -147,9 +147,9 @@ function HomePage() {
                   <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
                   <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
                 </svg>
-                <h3 className="service-card-title">Historial médico</h3>
+                <h3 className="service-card-title">Manejá tu perfil como médico</h3>
                 <p className="service-card-description">
-                  Accede a tu historial médico y compártelo con tus médicos de forma segura.
+                  Actualizá tu información profesional, y formas de contacto para estar siempre disponible para tus pacientes.
                 </p>
               </div>
             </div>
