@@ -49,9 +49,10 @@ export const AuthProvider = ({ children }) => {
   };
 
   const isAuthenticated = !!token;
-
+  const isMedico = rol === 'MEDICO'; 
+  
   return (
-    <AuthContext.Provider value={{ token, isAuthenticated, login, logout, rol, email,matricula  }}>
+    <AuthContext.Provider value={{ token, isAuthenticated, isMedico, login, logout, rol, email,matricula  }}>
       {children}
     </AuthContext.Provider>
   );

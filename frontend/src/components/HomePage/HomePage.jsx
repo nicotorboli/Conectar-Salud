@@ -7,15 +7,16 @@ import "./HomePage.css"
 import CSLogo from '../../assets/CSLogo-mini.png';
 
 function HomePage() {
-  const { isAuthenticated } = useContext(AuthContext)
+  const { isMedico, isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate()
+  console.log(isMedico);
 
   const irAMedicos = () => {
     navigate("/medicos")
   }
 
   const irAGestionDeUsuario = () => {
-    const destino = isAuthenticated ? `/perfil/${localStorage.matricula}` : `/login`
+    const destino = isAuthenticated ? `/perfil/${localStorage.matricula}` : `/registro`
     navigate(destino)
   }
 
@@ -34,12 +35,24 @@ function HomePage() {
                   </p>
                 </div>
                 <div className="hero-buttons">
+                  {/* Siempre mostrar "Ver médicos" */}
                   <button className="btn btn-primary" onClick={irAMedicos}>
                     Ver médicos
                   </button>
-                  <button className="btn btn-secondary" onClick={irAGestionDeUsuario}>
-                    {isAuthenticated ? "Mi perfil" : "Registrarse"}
-                  </button>
+
+                  {/* Si es médico → mostrar "Mi perfil" */}
+                  {isMedico && (
+                    <button className="btn btn-secondary" onClick={irAGestionDeUsuario}>
+                      Mi perfil
+                    </button>
+                  )}
+
+                  {/* Si NO está autenticado → mostrar "Registrarse" */}
+                  {!isAuthenticated && (
+                    <button className="btn btn-secondary" onClick={irAGestionDeUsuario}>
+                      Registrarse
+                    </button>
+                  )}
                 </div>
               </div>
               <div className="hero-logo">
