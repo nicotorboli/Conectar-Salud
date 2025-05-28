@@ -21,7 +21,7 @@ public class ComentarioController {
 
     @PostMapping
     public ResponseEntity<ComentarioResponse> crearComentario(
-            @RequestBody ComentarioDTO comentarioDTO,
+            @RequestBody @Valid ComentarioDTO comentarioDTO,
             @RequestHeader("Authorization") String authHeader) {
         String token = extractToken(authHeader);
         String email = jwtService.getUsernameFromToken(token);

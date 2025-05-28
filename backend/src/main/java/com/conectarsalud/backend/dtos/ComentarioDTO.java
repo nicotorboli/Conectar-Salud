@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 
 public record ComentarioDTO(
         @NotBlank(message = "El contenido no puede estar vacío")
+        @Size(max = 250, message = "El comentario no puede superar los 250 caracteres")
         String contenido,
 
 

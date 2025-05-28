@@ -103,6 +103,7 @@ public class MedicoServiceImpl implements MedicoService {
 
         medico.actualizarLike();
 
+
         usuarioRepository.save(usuario);
         medicoRepository.save(medico);
 

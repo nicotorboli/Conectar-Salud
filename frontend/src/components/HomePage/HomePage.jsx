@@ -1,97 +1,164 @@
-import "./HomePage.css";
-import medicoInicioImagen from '../../assets/medico-inicio.jpg';
-import usuarioImagen from '../../assets/cliente.jpg';
-import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react'
+"use client"
+
+import { useNavigate } from "react-router-dom"
+import { useContext } from "react"
+import { AuthContext } from "../../context/AuthContext.jsx"
+import "./HomePage.css"
 import CSLogo from '../../assets/CSLogo-mini.png';
-import { AuthContext } from '../../context/AuthContext.jsx'
 
 function HomePage() {
-  const { isAuthenticated } = useContext(AuthContext)
-  const navigate = useNavigate();
+  const { isMedico, isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate()
+  console.log(isMedico);
+
   const irAMedicos = () => {
-    navigate('/medicos');
-  };
+    navigate("/medicos")
+  }
+
   const irAGestionDeUsuario = () => {
-    const destino = isAuthenticated ? `/perfil/${localStorage.matricula}` : `/login`
+    const destino = isAuthenticated ? `/perfil/${localStorage.matricula}` : `/registro`
     navigate(destino)
   }
-  return (
-    <div id="main-container">
-      <div id="brand-container">
-        <img
-          src={CSLogo}
-          alt="logo"
-          id="logo"
-        />
-        <div>
-          <h2 id="CS-titulo">CONECTAR</h2>
-          <h2 id="CS-titulo">SALUD</h2>
-        </div>
-      </div>
-      <div id="banner">
-      <h4 className="titulo">Tu acceso directo a médicos confiables y especializados.</h4>
-        <p id="texto">
-          Conectar Salud es una plataforma innovadora que conecta a pacientes con profesionales de la salud matriculados, de forma rápida, segura y sin intermediarios.
-          Olvidate de largas esperas o procesos engorrosos: encontrá al médico ideal según tu necesidad y accedé a atención de calidad en el momento justo. 
-        </p> <br />
-      </div>
-      <div id="call-to-action">
-        <h4 className="titulo"> ¿Por donde comenzamos?</h4>
-         <span id="a">
-            <button class="btn gestionar-user" onClick={irAGestionDeUsuario}>
-                <span class="btn-text-one">Gestionar mi usuario</span>
-                <span class="btn-text-two">Crear o iniciar tu cuenta</span>
-            </button>
-            <span className="btn-tooltip-container">
-              <button class="btn" onClick={irAMedicos}>
-                  <span class="btn-text-one">Solo quiero ver</span>
-                  <span class="btn-text-two">Ver médicos</span>
-              </button>
-               <div class="tooltip">❗ Algunas acciones como conectar con un médico requerirán un inicio de sesión</div>
-            </span>
-          </span>
-        <div id="container-tipos-de-usuarios">
-          <div className="seccion-tipo-usuario">
-            <p className="titulo">¡Impulsa tu carrera con nosotros!</p>
-            <div className="info-container">
-              <img
-                src={medicoInicioImagen}
-                alt="Médico"
-                className="imagen-tipo-usuario"
-              />
-              <div class="texto-datos">
-                💊 Amplía tu cartera de pacientes de forma segura<br/>
-                💊 Consultas presenciales y virtuales integradas<br/>
-                💊 Perfil profesional verificado y destacado<br/>
-                {/*💊 Cobros automáticos y transparentes */}
-              </div>
-            </div>
-          </div>
 
-          <div className="seccion-tipo-usuario">
-            <p className="titulo">Tu salud en buenas manos</p>
-            <div className="info-container">
-              <img
-                src={usuarioImagen}
-                alt="Médico"
-                className="imagen-tipo-usuario"
-              />
-              <div class="texto-datos">
-                🩹 Acceso a profesionales certificados<br/>
-                🩹 Sistema de calificaciones transparente<br/>
-                🩹 Elegí la zona donde queres atenderte<br/>
-                🩹 Encontrá a los mejores medicos<br/>
-                🩹 Disposición 24/7 desde tu casa<br/>
+  return (
+    <div className="homepage-container">
+      
+      <main className="homepage-main">
+        <section className="hero-section">
+          <div className="container hero-content">
+            <div className="hero-grid">
+              <div className="hero-text">
+                <div className="hero-title-section">
+                  <h1 className="hero-title">Conectando médicos y pacientes</h1>
+                  <p className="hero-description">
+                    La plataforma que facilita el acceso a servicios médicos de calidad de forma rápida, segura y sin intermediarios.
+                  </p>
+                </div>
+                <div className="hero-buttons">
+                  {/* Siempre mostrar "Ver médicos" */}
+                  <button className="btn btn-primary" onClick={irAMedicos}>
+                    Ver médicos
+                  </button>
+
+                  {/* Si es médico → mostrar "Mi perfil" */}
+                  {isMedico && (
+                    <button className="btn btn-secondary" onClick={irAGestionDeUsuario}>
+                      Mi perfil
+                    </button>
+                  )}
+
+                  {/* Si NO está autenticado → mostrar "Registrarse" */}
+                  {!isAuthenticated && (
+                    <button className="btn btn-secondary" onClick={irAGestionDeUsuario}>
+                      Registrarse
+                    </button>
+                  )}
+                </div>
+              </div>
+              <div className="hero-logo">
+                <div className="large-logo-container">
+                  <div className="large-logo">
+                    <img src={CSLogo || "/placeholder.svg"} alt="ConectarSalud Logo" className="logo-image" />
+                  </div>
+                  <div className="brand-text-container">
+                    <h2 className="brand-text">ConectarSalud</h2>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-           
-        </div>
-      </div>
+        </section>
+
+        <section className="services-section">
+          <div className="container services-content">
+            <div className="services-header">
+              <div className="services-badge">Nuestros servicios</div>
+              <h2 className="services-title">Todo lo que necesitas</h2>
+              <p className="services-description">
+                ConectarSalud ofrece soluciones tanto para pacientes como para profesionales médicos.
+              </p>
+            </div>
+            <div className="services-grid">
+              <div className="service-card">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="service-icon"
+                >
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <h3 className="service-card-title">Encontrá especialistas</h3>
+                <p className="service-card-description">
+                  Accede a una amplia red de médicos especialistas en diferentes áreas.
+                </p>
+              </div>
+              <div className="service-card">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="service-icon"
+                >
+                  <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                  <line x1="16" x2="16" y1="2" y2="6" />
+                  <line x1="8" x2="8" y1="2" y2="6" />
+                  <line x1="3" x2="21" y1="10" y2="10" />
+                  <path d="M8 14h.01" />
+                  <path d="M12 14h.01" />
+                  <path d="M16 14h.01" />
+                  <path d="M8 18h.01" />
+                  <path d="M12 18h.01" />
+                  <path d="M16 18h.01" />
+                </svg>
+                <h3 className="service-card-title">Coordiná tus turnos</h3>
+                <p className="service-card-description">
+                  Contactá directamente con el médico para programar, modificar o cancelar una cita.
+                </p>
+              </div>
+              <div className="service-card">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="service-icon"
+                >
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                </svg>
+                <h3 className="service-card-title">Manejá tu perfil como médico</h3>
+                <p className="service-card-description">
+                  Actualizá tu información profesional, y formas de contacto para estar siempre disponible para tus pacientes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
 
     </div>
-  );
+  )
 }
 
-export default HomePage;
+export default HomePage

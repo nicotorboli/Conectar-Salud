@@ -85,13 +85,32 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(value = {ComentarioDuplicadoException.class})
-    public ResponseEntity<ErrorResponse> handleComentarioDuplicadoException(BadCredentialsException ex) {
+    public ResponseEntity<ErrorResponse> handleComentarioDuplicadoException(ComentarioDuplicadoException ex) {
         ErrorResponse errorResponse = new ErrorResponse(
                 "Solo se puede comentarle a un medico una vez",
-                401
+                409
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(MatriculaInvalidaException.class)
+    public ResponseEntity<ErrorResponse> handleMatriculaInvalidaException(MatriculaInvalidaException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                ex.getMessage(),
+                400
+        );
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(MedicoComentarException.class)
+    public ResponseEntity<ErrorResponse> handleMedicoComentarException(MedicoComentarException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                "Los Medicos no pueden comentar",
+                409
+        );
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
 }
 

@@ -12,13 +12,13 @@ export const AuthProvider = ({ children }) => {
     const savedToken = localStorage.getItem("token");
     const matriculaSaved = localStorage.getItem("matricula");
     const rolSaved = localStorage.getItem("rol");
-    const emailSaved = localStorage.getItem("email"); 
+    const emailSaved = localStorage.getItem("email");
 
     if (savedToken) {
       setToken(savedToken);
       setMatricula(matriculaSaved);
       setRol(rolSaved);
-      setEmail(emailSaved); 
+      setEmail(emailSaved);
     }
   }, []);
 
@@ -39,19 +39,20 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("matricula");
     localStorage.removeItem("rol")
-    localStorage.removeItem("email"); 
+    localStorage.removeItem("email");
 
     setRol(null);
     setToken(null);
     setMatricula(null);
-    setEmail(null); 
+    setEmail(null);
 
   };
 
   const isAuthenticated = !!token;
-
+  const isMedico = rol === 'MEDICO'; 
+  
   return (
-    <AuthContext.Provider value={{ token, isAuthenticated, login, logout, rol, email }}>
+    <AuthContext.Provider value={{ token, isAuthenticated, isMedico, login, logout, rol, email,matricula  }}>
       {children}
     </AuthContext.Provider>
   );

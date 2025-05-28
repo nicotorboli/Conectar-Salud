@@ -1,16 +1,17 @@
 .footer {
   background-color: white;
   border-top: 1px solid #e5e7eb;
+  height: 64px;
+  display: flex;
+  padding: 0 24px; 
 }
 
 .footer-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 24px 0;
-  gap: 16px;
+  justify-content: flex-start; 
+  width: 100%; /* ← se asegura de ocupar todo el ancho */
 }
-
 .copyright {
   font-size: 0.875rem;
   color: #6b7280;
@@ -35,5 +36,7 @@
   .footer-container {
     flex-direction: row;
     justify-content: space-between;
+    /* padding: 16px 0;
+    align-items: center;  */
   }
 }
