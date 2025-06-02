@@ -8,6 +8,7 @@ import editarPerfil from '../../service/editarPerfil'
 import Ubicacion from '../Ubicacion/Ubicacion'
 import UbicacionViewer from '../Ubicacion/UbicacionViewer'
 import Comentario from "../Comentario/Comentario";
+import placeholder from  "../../assets/PlaceHolder.png";
 
 const Perfil = () => {
   const { matricula } = useParams()
@@ -163,7 +164,15 @@ const handleImageChange = (e) => {
         }}
       />
     ) : (
-      <div className="avatar-placeholder"></div>
+     <img
+             src={`data:image/jpeg;base64,${medico.fotoPerfil}`}
+             alt={`${medico.nombre} ${medico.apellido}`}
+             className="avatar-imagen"
+             onError={(e) => {
+               e.target.onerror = null;
+               e.target.src = placeholder;
+             }}
+           />
     )}
     {/* Añade este input */}
 <input

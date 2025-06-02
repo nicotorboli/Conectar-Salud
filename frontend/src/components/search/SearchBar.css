@@ -19,9 +19,9 @@
 }
 
 .input {
-  width: 100%;
+  width: 300px;
   height: 40px;
-  padding: 0 12px 0 36px;
+  padding: 0 12px 0 12px;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   outline: none;
@@ -29,6 +29,10 @@
   color: #1f2937;
   font-size: 14px;
   transition: all 0.2s ease;
+}
+
+.input-container {
+    margin-left: -182px;
 }
 
 .input:focus {
@@ -42,18 +46,7 @@
   opacity: 1;
 }
 
-.icon {
-  position: absolute;
-  left: 12px;
-  width: 16px;
-  height: 16px;
-  fill: #6b7280;
-  transition: fill 0.2s ease;
-}
 
-.input:focus + .icon {
-  fill: #2563eb;
-}
 
 /* Radios elegantes */
 .radio-inputs {
