@@ -81,16 +81,23 @@ public class MedicoController {
     }
 
     @GetMapping("/precio/{min}/{max}")
-    public List<Medico> buscarMedicoPorPrecio(@PathVariable int min, @PathVariable int max ){
-        if(min > max){
-            throw  new RuntimeException("El valor minimo debe ser menor que el maximo");
+    public List<MedicoDTO> buscarMedicoPorPrecio(@PathVariable int min, @PathVariable int max) {
+        if (min > max) {
+            throw new RuntimeException("El valor mínimo debe ser menor que el máximo");
         }
-        return medicoService.medicosPrecioEntre(min,  max);
+
+        return medicoService.medicosPrecioEntre(min, max)
+                .stream()
+                .map(MedicoDTO::desdeModelo)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/ubicacion/{ubicacion}")
-    public  List<Medico> buscarMedicosPorUbicacion(@PathVariable String ubicacion){
-        return  medicoService.medicosPorUbicacion(ubicacion);
+    public List<MedicoDTO> buscarMedicosPorUbicacion(@PathVariable String ubicacion) {
+        List<Medico> medicos = medicoService.medicosPorUbicacion(ubicacion);
+        return medicos.stream()
+                .map(MedicoDTO::desdeModelo)
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/{medicoId}/like")
