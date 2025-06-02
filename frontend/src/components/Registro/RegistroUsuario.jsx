@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./RegistroMedico.css";
 import { AuthContext } from "../../context/AuthContext";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { toast } from 'react-toastify';
 
 const RegistroUsuario = () => {
   const [formData, setFormData] = useState({
@@ -38,6 +39,7 @@ const RegistroUsuario = () => {
       }
 
       login(data.token, data.matricula, data.rol, data.email);
+      toast.success('🔒 Debés iniciar sesión para dar like.');
       navigate("/");
     } catch (error) {
       setErrors({ general: error.message });

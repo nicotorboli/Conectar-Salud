@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { AuthContext } from "../../context/AuthContext";
 import Ubicacion from "../Ubicacion/Ubicacion";
+import { toast } from 'react-toastify';
 
 export function RegistroMedico() {
   const [isLoading, setIsLoading] = useState(false);
@@ -88,6 +89,7 @@ const handleSubmit = async (e) => {
 
       login(data.token, data.matricula, data.rol, data.email);
       //login(data.token, data.matricula,`MEDICO`);
+      toast.success('🔒 Debés iniciar sesión para dar like.');
       navigate("/");
       scrollTo(0,0);
 
