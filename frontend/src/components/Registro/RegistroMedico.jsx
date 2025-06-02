@@ -89,7 +89,7 @@ const handleSubmit = async (e) => {
 
       login(data.token, data.matricula, data.rol, data.email);
       //login(data.token, data.matricula,`MEDICO`);
-      toast.success('🔒 Debés iniciar sesión para dar like.');
+      toast.success('🔒 Cuenta creada exitosamente');
       navigate("/");
       scrollTo(0,0);
 

@@ -39,7 +39,7 @@ const RegistroUsuario = () => {
       }
 
       login(data.token, data.matricula, data.rol, data.email);
-      toast.success('🔒 Debés iniciar sesión para dar like.');
+      toast.success('🔒 Cuenta creada exitosamente');
       navigate("/");
     } catch (error) {
       setErrors({ general: error.message });
