@@ -4,17 +4,15 @@
   align-items: center;
   gap: 10px;
   width: 100%;
-  height: auto; /* Cambiar de 40px a auto */
-  position: relative; /* Añadir para contexto de posicionamiento */
+  height: auto;
+  position: relative;
 }
 
-/* Grupo de búsqueda */
 .group {
   display: flex;
   align-items: center;
   position: relative;
   flex: 1;
-  min-width: 0;
   height: 40px;
 }
 
@@ -28,11 +26,6 @@
   background: #f9fafb;
   color: #1f2937;
   font-size: 14px;
-  transition: all 0.2s ease;
-}
-
-.input-container {
-    margin-left: -182px;
 }
 
 .input:focus {
@@ -46,9 +39,6 @@
   opacity: 1;
 }
 
-
-
-/* Radios elegantes */
 .radio-inputs {
   display: flex;
   padding: 2px;
@@ -58,8 +48,8 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   font-size: 13px;
   border: 1px solid #e5e7eb;
-  flex-shrink: 0; /* Evitar que se encojan */
-  min-width: 300px; /* Ancho mínimo para los radios */
+  flex-shrink: 0;
+  min-width: 300px;
 }
 
 .radio {
@@ -97,7 +87,6 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Botón principal */
 button {
   height: 40px;
   padding: 0 16px;
@@ -161,7 +150,6 @@ button:disabled{
   opacity: 0.5;
 }
 
-/* Dropdown de especialidades */
 .dropdown-especialidades {
   position: absolute;
   top: calc(100% + 4px);
@@ -211,22 +199,25 @@ button:disabled{
 }
 
 .inputNumber {
-  width: 100%; 
-  min-width: 120px; 
+  width: 138.5px; 
+  height: 40px;
+  padding: 0 12px 0 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  outline: none;
+  background: #f9fafb;
+  color: #1f2937;
+  font-size: 14px;
   flex: 1;
 }
 
 .contenedorPrecio {
-  width: max-content;
+  /* width: max-content; */
   display: flex;
   align-items: center;
   gap: 8px;
   background-color: white;
-  position: relative; /* Mantén relative solo si es necesario para elementos hijos absolutos */
-  margin-top: 100px; /* Espacio superior con margen */
-  padding: 12px; /* Espacio interno para que el fondo sea visible */
-  border-radius: 8px; /* Opcional: para mejor apariencia */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Opcional: para destacar el contenedor */
+  position: relative; 
 }
 
 .price-separator {
@@ -253,15 +244,11 @@ button:disabled{
   font-size: 1rem;
 }
 
-
-
-/* Animaciones */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .container {
     flex-wrap: wrap;
