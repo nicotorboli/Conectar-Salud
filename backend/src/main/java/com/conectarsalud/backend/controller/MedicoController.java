@@ -72,7 +72,7 @@ public class MedicoController {
          List<Map<String, String>> especialidades = Arrays.stream(Especialidades.values())
                 .map(esp -> {
                     Map<String, String> espMap = new HashMap<>();
-                    espMap.put("valor", esp.name()); // Ej: "CARDIOLOGIA"
+                    espMap.put("valor", esp.getNombreDisplay()); // Ej: "CARDIOLOGIA"
                     espMap.put("display", esp.getNombreDisplay()); // Ej: "Cardiología"
                     return espMap;
                 })
